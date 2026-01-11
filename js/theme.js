@@ -4,29 +4,32 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   const themeToggleButton = document.getElementById("themeToggle");
-  const currentTheme = localStorage.getItem("theme") || "light";
+  const logoLight = document.querySelector(".logo-light");
+  const logoDark = document.querySelector(".logo-dark");
 
-  // Apply the saved theme
-  document.body.classList.add(currentTheme);
+  // Check the current theme
+  let currentTheme = localStorage.getItem("theme") || "light";
+  applyTheme(currentTheme);
 
-  // Update the toggle button icon
-  updateThemeIcon(currentTheme);
-
-  // Event listener for the toggle button
+  // Theme toggle event
   themeToggleButton.addEventListener("click", () => {
-    const newTheme = document.body.classList.contains("light") ? "dark" : "light";
-    document.body.classList.remove("light", "dark");
-    document.body.classList.add(newTheme);
-    localStorage.setItem("theme", newTheme);
-    updateThemeIcon(newTheme);
+    currentTheme = currentTheme === "light" ? "dark" : "light";
+    localStorage.setItem("theme", currentTheme);
+    applyTheme(currentTheme);
   });
 
-  // Function to update the theme toggle icon
-  function updateThemeIcon(theme) {
+  // Function to apply the theme and switch logos
+  function applyTheme(theme) {
     if (theme === "light") {
-      themeToggleButton.textContent = "🌙"; // Moon icon for dark mode
+      document.body.classList.add("light");
+      document.body.classList.remove("dark");
+      logoLight.style.display = "block";
+      logoDark.style.display = "none";
     } else {
-      themeToggleButton.textContent = "☀️"; // Sun icon for light mode
+      document.body.classList.add("dark");
+      document.body.classList.remove("light");
+      logoLight.style.display = "none";
+      logoDark.style.display = "block";
     }
   }
 });
