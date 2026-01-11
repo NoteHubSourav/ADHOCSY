@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About ADHOCSY</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="light">
+
+<!-- Header -->
+<header class="navbar">
+  <div class="container nav-content">
+    <div class="logo">
+      <img src="assets/logos/logo-light.png" class="logo-light" alt="ADHOCSY">
+      <img src="assets/logos/logo-dark.png" class="logo-dark" alt="ADHOCSY">
+    </div>
+    <div class="nav-actions">
+      <select id="languageSwitcher">
+        <option value="en">EN</option>
+        <option value="hi">हिंदी</option>
+        <option value="mr">मराठी</option>
+      </select>
+      <button id="themeToggle" class="icon-btn">🌙</button>
+      <button class="icon-btn">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <h1 data-i18n="about_hero_title">About ADHOCSY</h1>
+      <p data-i18n="about_hero_desc">Learn about our mission, vision, and leadership at ADHOCSY.</p>
+    </div>
+    <div class="hero-image">
+      <picture>
+        <source srcset="assets/images/hero/hero-about-dark.png" media="(prefers-color-scheme: dark)">
+        <img src="assets/images/hero/hero-about-light.png" alt="About ADHOCSY" loading="lazy">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<!-- Vision & Mission Section -->
+<section class="section bg-light">
+  <div class="container">
+    <h2 class="section-title" data-i18n="about_vision_title">Our Vision & Mission</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h4 data-i18n="about_vision">Vision</h4>
+        <p data-i18n="about_vision_desc">To create a dignified and transparent gig workforce ecosystem.</p>
+      </div>
+      <div class="card">
+        <h4 data-i18n="about_mission">Mission</h4>
+        <p data-i18n="about_mission_desc">To empower workers and companies with trust and efficiency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Directors' Desk Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title" data-i18n="about_directors_title">From the Directors’ Desk</h2>
+    <div class="card-grid">
+      <div class="director-card">
+        <img src="assets/images/directors/upendra.jpg" alt="Upendra Kumar">
+        <h4>Upendra Kumar</h4>
+        <p class="small">Director</p>
+      </div>
+      <div class="director-card">
+        <img src="assets/images/directors/vinay.jpg" alt="Vinay Singh">
+        <h4>Vinay Singh</h4>
+        <p class="small">Director</p>
+      </div>
+      <div class="director-card">
+        <img src="assets/images/directors/vijesh.jpg" alt="Vijesh Singh">
+        <h4>Vijesh Singh</h4>
+        <p class="small">Director</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <h4>ADHOCSY</h4>
+      <p class="small">Connecting workers and companies with trust and transparency.</p>
+    </div>
+    <div>
+      <h5>Quick Links</h5>
+      <a href="index.html">Home</a>
+      <a href="offerings.html">Offerings</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <p class="small">support@adhocsy.com</p>
+    </div>
+  </div>
+  <p class="copyright">© 2026 ADHOCSY. All rights reserved.</p>
+</footer>
+
+<!-- JS -->
+<script src="js/theme.js"></script>
+<script src="js/lang.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
