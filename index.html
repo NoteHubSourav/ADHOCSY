@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ADHOCSY | Gig Workforce Platform</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body class="light">
+
+<!-- ================= HEADER ================= -->
+<header class="navbar">
+  <div class="container nav-content">
+    
+    <div class="logo">
+      <img src="assets/logos/logo-light.png" class="logo-light" alt="ADHOCSY">
+      <img src="assets/logos/logo-dark.png" class="logo-dark" alt="ADHOCSY">
+    </div>
+
+    <div class="nav-actions">
+      <!-- Language Switch -->
+      <select id="languageSwitcher">
+        <option value="en">EN</option>
+        <option value="hi">हिंदी</option>
+        <option value="mr">मराठी</option>
+      </select>
+
+      <!-- Theme Toggle -->
+      <button id="themeToggle" class="icon-btn">🌙</button>
+
+      <!-- Menu -->
+      <button class="icon-btn">☰</button>
+    </div>
+
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero-grid">
+
+    <!-- Text -->
+    <div class="hero-text">
+      <h1 data-i18n="hero_title">
+        India’s Trusted Gig Workforce Platform
+      </h1>
+
+      <p data-i18n="hero_desc">
+        Connecting workers with companies for part-time and full-time opportunities with dignity and transparency.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="worker.html" class="btn-primary">I’M A WORKER</a>
+        <a href="employer.html" class="btn-accent">I’M AN EMPLOYER</a>
+      </div>
+    </div>
+
+    <!-- Image -->
+    <div class="hero-image">
+      <picture>
+        <source srcset="assets/images/hero/hero-home-dark.png" media="(prefers-color-scheme: dark)">
+        <img src="assets/images/hero/hero-home-light.png" alt="Gig Workers" loading="lazy">
+      </picture>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= TRUSTED BY ================= -->
+<section class="section bg-light">
+  <div class="container">
+    <h3 class="section-title">Trusted By Leading Companies</h3>
+
+    <div class="logo-row">
+      <img src="assets/images/clients/client1.png">
+      <img src="assets/images/clients/client2.png">
+      <img src="assets/images/clients/client3.png">
+      <img src="assets/images/clients/client4.png">
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT WE SOLVE ================= -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">What We Solve</h2>
+
+    <div class="card-grid">
+      <div class="card">
+        <h4>For Workers</h4>
+        <p>Access verified jobs, fair wages, and a secure digital identity.</p>
+      </div>
+
+      <div class="card">
+        <h4>For Companies</h4>
+        <p>Hire reliable manpower quickly across locations.</p>
+      </div>
+
+      <div class="card">
+        <h4>Our Solution</h4>
+        <p>A single trusted platform bridging workforce gaps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DIRECTORS ================= -->
+<section class="section bg-light">
+  <div class="container">
+    <h2 class="section-title">From the Directors’ Desk</h2>
+
+    <div class="card-grid">
+      <div class="director-card">
+        <img src="assets/images/directors/upendra.jpg">
+        <h4>Upendra Kumar</h4>
+        <p class="small">Director</p>
+      </div>
+
+      <div class="director-card">
+        <img src="assets/images/directors/vinay.jpg">
+        <h4>Vinay Singh</h4>
+        <p class="small">Director</p>
+      </div>
+
+      <div class="director-card">
+        <img src="assets/images/directors/vijesh.jpg">
+        <h4>Vijesh Singh</h4>
+        <p class="small">Director</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container footer-grid">
+
+    <div>
+      <h4>ADHOCSY</h4>
+      <p class="small">India’s trusted gig workforce platform.</p>
+    </div>
+
+    <div>
+      <h5>Quick Links</h5>
+      <a href="about.html">About</a>
+      <a href="offerings.html">Offerings</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div>
+      <h5>Contact</h5>
+      <p class="small">support@adhocsy.com</p>
+    </div>
+
+  </div>
+
+  <p class="copyright">
+    © 2026 ADHOCSY. All rights reserved.
+  </p>
+</footer>
+
+<!-- JS -->
+<script src="js/theme.js"></script>
+<script src="js/lang.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
