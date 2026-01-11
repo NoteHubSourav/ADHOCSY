@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | ADHOCSY</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="light">
+
+<!-- Header -->
+<header class="navbar">
+  <div class="container nav-content">
+    <div class="logo">
+      <img src="assets/logos/logo-light.png" class="logo-light" alt="ADHOCSY">
+      <img src="assets/logos/logo-dark.png" class="logo-dark" alt="ADHOCSY">
+    </div>
+    <div class="nav-actions">
+      <select id="languageSwitcher">
+        <option value="en">EN</option>
+        <option value="hi">हिंदी</option>
+        <option value="mr">मराठी</option>
+      </select>
+      <button id="themeToggle" class="icon-btn">🌙</button>
+      <button class="icon-btn">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <h1 data-i18n="contact_hero_title">Get in Touch with ADHOCSY</h1>
+      <p data-i18n="contact_hero_desc">Reach out to us for inquiries, support, or partnerships.</p>
+    </div>
+    <div class="hero-image">
+      <picture>
+        <source srcset="assets/images/hero/hero-contact-dark.png" media="(prefers-color-scheme: dark)">
+        <img src="assets/images/hero/hero-contact-light.png" alt="Contact ADHOCSY" loading="lazy">
+      </picture>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="section bg-light">
+  <div class="container">
+    <h2 class="section-title" data-i18n="contact_form_title">Contact Form</h2>
+    <form>
+      <div class="form-group">
+        <label for="name" data-i18n="contact_name_label">Full Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email" data-i18n="contact_email_label">Work Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone" data-i18n="contact_phone_label">Phone</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+      <div class="form-group">
+        <label for="company" data-i18n="contact_company_label">Company Name</label>
+        <input type="text" id="company" name="company">
+      </div>
+      <div class="form-group">
+        <label for="message" data-i18n="contact_message_label">Describe your requirement</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn-primary" data-i18n="contact_submit_button">Submit</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <h4>ADHOCSY</h4>
+      <p class="small">Connecting workers and companies with trust and transparency.</p>
+    </div>
+    <div>
+      <h5>Quick Links</h5>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="offerings.html">Offerings</a>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <p class="small">support@adhocsy.com</p>
+    </div>
+  </div>
+  <p class="copyright">© 2026 ADHOCSY. All rights reserved.</p>
+</footer>
+
+<!-- JS -->
+<script src="js/theme.js"></script>
+<script src="js/lang.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
