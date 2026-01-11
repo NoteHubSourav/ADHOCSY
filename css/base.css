@@ -1,0 +1,106 @@
+/* ===============================
+   ADHOCSY – Base Styles
+   =============================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--bg);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* ---------- CONTAINER ---------- */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 16px;
+}
+
+/* ---------- HEADINGS ---------- */
+h1, h2, h3, h4, h5 {
+  color: var(--text-primary);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+h1 { font-size: 40px; }
+h2 { font-size: 28px; }
+h3 { font-size: 22px; }
+h4 { font-size: 18px; }
+h5 { font-size: 16px; }
+
+/* ---------- TEXT ---------- */
+p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.small {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ---------- LINKS ---------- */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ---------- BUTTON RESET ---------- */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ---------- IMAGES ---------- */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------- FORMS ---------- */
+input, textarea, select {
+  font-family: var(--font-primary);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  outline: none;
+  background: var(--card);
+  color: var(--text-primary);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--blue);
+}
+
+/* ---------- SECTIONS ---------- */
+.section {
+  padding: 64px 0;
+}
+
+.bg-light {
+  background: var(--bg);
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 768px) {
+  h1 { font-size: 30px; }
+  h2 { font-size: 24px; }
+}
