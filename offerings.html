@@ -11,7 +11,7 @@
 </head>
 <body class="light">
 
-<!-- Header -->
+<!-- ================= HEADER ================= -->
 <header class="navbar">
   <div class="container nav-content">
     <div class="logo">
@@ -27,10 +27,15 @@
       <button id="themeToggle" class="icon-btn">🌙</button>
       <button class="icon-btn">☰</button>
     </div>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="about.html" data-i18n="nav_about">About</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </nav>
   </div>
 </header>
 
-<!-- Hero Section -->
+<!-- ================= HERO ================= -->
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-text">
@@ -46,7 +51,7 @@
   </div>
 </section>
 
-<!-- Offerings Section -->
+<!-- ================= OFFERINGS ================= -->
 <section class="section bg-light">
   <div class="container">
     <h2 class="section-title" data-i18n="offerings_section_title">What We Offer</h2>
@@ -54,34 +59,38 @@
       <div class="card">
         <h4 data-i18n="offering_worker_solutions">Worker Solutions</h4>
         <p data-i18n="offering_worker_desc">Access to verified jobs, skill development, and fair wages.</p>
+        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-accent mt-16">Get it on Google Play</a>
       </div>
       <div class="card">
         <h4 data-i18n="offering_employer_solutions">Employer Solutions</h4>
         <p data-i18n="offering_employer_desc">Quick and reliable access to a trusted workforce.</p>
+        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-accent mt-16">Get it on Google Play</a>
       </div>
       <div class="card">
         <h4 data-i18n="offering_trust_safety">Trust & Safety</h4>
         <p data-i18n="offering_trust_desc">Ensuring transparency and security for all parties.</p>
+        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-accent mt-16">Get it on Google Play</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
+<!-- ================= FOOTER ================= -->
 <footer class="footer">
   <div class="container footer-grid">
     <div>
       <h4>ADHOCSY</h4>
       <p class="small">Empowering the gig economy with trust and efficiency.</p>
+      <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-primary">Get it on Google Play</a>
     </div>
     <div>
-      <h5>Quick Links</h5>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <h5 data-i18n="quick_links">Quick Links</h5>
+      <a href="index.html" data-i18n="nav_home">Home</a>
+      <a href="about.html" data-i18n="nav_about">About</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
     </div>
     <div>
-      <h5>Contact</h5>
+      <h5 data-i18n="contact">Contact</h5>
       <p class="small">support@adhocsy.com</p>
     </div>
   </div>
@@ -89,8 +98,9 @@
 </footer>
 
 <!-- JS -->
-<script src="js/theme.js"></script>
+<script src="js/translations.js"></script>
 <script src="js/lang.js"></script>
+<script src="js/theme.js"></script>
 <script src="js/main.js"></script>
 
 </body>
