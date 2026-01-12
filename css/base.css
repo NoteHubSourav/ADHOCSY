@@ -1,5 +1,6 @@
 /* ===============================
    ADHOCSY – Base Styles
+   Upgraded for Responsive Typography & Mobile
    =============================== */
 
 *,
@@ -12,6 +13,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
@@ -19,7 +21,6 @@ body {
   background: var(--bg);
   color: var(--text-secondary);
   line-height: 1.6;
-  font-size: 14px;
 }
 
 /* ---------- CONTAINER ---------- */
@@ -36,15 +37,14 @@ h1, h2, h3, h4, h5 {
   line-height: 1.2;
 }
 
-h1 { font-size: 40px; }
-h2 { font-size: 28px; }
-h3 { font-size: 22px; }
-h4 { font-size: 18px; }
+h1 { font-size: 48px; }
+h2 { font-size: 36px; }
+h3 { font-size: 28px; }
+h4 { font-size: 20px; }
 h5 { font-size: 16px; }
 
-/* ---------- TEXT ---------- */
 p {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-secondary);
 }
 
@@ -76,7 +76,7 @@ img {
 /* ---------- FORMS ---------- */
 input, textarea, select {
   font-family: var(--font-primary);
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-light);
   outline: none;
@@ -99,8 +99,16 @@ select:focus {
   background: var(--bg);
 }
 
-/* ---------- MOBILE ---------- */
+/* ---------- MOBILE RESPONSIVENESS ---------- */
+@media (max-width: 1024px) {
+  h1 { font-size: 40px; }
+  h2 { font-size: 32px; }
+  h3 { font-size: 24px; }
+}
+
 @media (max-width: 768px) {
-  h1 { font-size: 30px; }
-  h2 { font-size: 24px; }
+  h1 { font-size: 32px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 22px; }
+  body { font-size: 15px; }
 }
