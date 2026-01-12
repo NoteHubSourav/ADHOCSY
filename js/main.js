@@ -3,10 +3,6 @@
 // ===============================
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize theme toggle (already handled in theme.js)
-  // Initialize language switcher (already handled in lang.js)
-
-  // Example of additional functionality:
 
   // Smooth scrolling for anchor links
   const anchorLinks = document.querySelectorAll('a[href^="#"]');
@@ -24,11 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Example of a simple form validation
+  // Form validation
   const forms = document.querySelectorAll("form");
   forms.forEach(form => {
     form.addEventListener("submit", function (e) {
-      // Simple validation example
       const inputs = form.querySelectorAll("input, textarea, select");
       let isValid = true;
       inputs.forEach(input => {
@@ -39,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
           input.classList.remove("input-error");
         }
       });
-
       if (!isValid) {
         e.preventDefault();
         alert("Please fill out all required fields.");
@@ -47,5 +41,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  console.log("ADHOCSY site is fully initialized!");
+  console.log("ADHOCSY site fully initialized!");
 });
