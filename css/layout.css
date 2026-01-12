@@ -1,12 +1,16 @@
 /* ===============================
    ADHOCSY – Layout Styles
+   Upgraded for Hero, Navbar, Footer & Responsive Grid
    =============================== */
 
 /* ---------- NAVBAR ---------- */
 .navbar {
   background: var(--card);
   padding: 16px 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav-content {
@@ -16,10 +20,11 @@
 }
 
 .logo img {
-  height: 40px;
+  height: 50px;
   transition: opacity 0.3s ease;
 }
 
+/* ---------- NAV ACTIONS ---------- */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -30,12 +35,27 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 22px;
   color: var(--text-primary);
   transition: color 0.3s ease;
 }
 
 .icon-btn:hover {
+  color: var(--blue);
+}
+
+/* ---------- NAV LINKS ---------- */
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
   color: var(--blue);
 }
 
@@ -45,6 +65,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 80px 0;
+  flex-wrap: wrap;
 }
 
 .hero-grid {
@@ -75,6 +96,7 @@
 .hero-buttons {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .hero-image {
@@ -88,21 +110,13 @@
   box-shadow: var(--shadow-card);
 }
 
-/* ---------- SECTION ---------- */
-.section {
-  padding: 64px 0;
-}
-
+/* ---------- SECTION TITLES ---------- */
 .section-title {
   font-size: 32px;
   font-weight: 800;
   margin-bottom: 32px;
   text-align: center;
   color: var(--navy);
-}
-
-.bg-light {
-  background: var(--bg);
 }
 
 /* ---------- GRID LAYOUT ---------- */
@@ -113,20 +127,38 @@
   justify-items: center;
 }
 
-.card {
+/* ---------- FOOTER ---------- */
+.footer {
   background: var(--card);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-  padding: 24px;
+  padding: 48px 0 24px;
   text-align: center;
-  transition: transform 0.3s ease;
 }
 
-.card:hover {
-  transform: translateY(-4px);
+.footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.footer a {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.footer a:hover {
+  color: var(--blue);
 }
 
 /* ---------- RESPONSIVE ---------- */
+@media (max-width: 1024px) {
+  .hero-text h1 { font-size: 40px; }
+  .hero-text p { font-size: 15px; }
+}
+
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
@@ -137,7 +169,7 @@
     max-width: 100%;
   }
 
-  .hero-text h1 {
-    font-size: 36px;
+  .nav-links {
+    display: none; /* Hamburger menu shows on mobile */
   }
 }
