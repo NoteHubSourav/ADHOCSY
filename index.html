@@ -2,13 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ADHOCSY | Gig Workforce Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ADHOCSY – Work. Trust. Dignity.</title>
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
@@ -17,145 +13,108 @@
 
 <body class="light">
 
-<!-- ================= HEADER ================= -->
+<!-- ================= NAVBAR ================= -->
 <header class="navbar">
   <div class="container nav-content">
+
+    <!-- Logo -->
     <div class="logo">
       <img src="assets/logos/logo-light.png" class="logo-light" alt="ADHOCSY">
       <img src="assets/logos/logo-dark.png" class="logo-dark" alt="ADHOCSY">
     </div>
 
+    <!-- Nav Links -->
+    <nav class="nav-links">
+      <a href="about.html" data-i18n="nav_about">About</a>
+      <a href="offerings.html" data-i18n="nav_offerings">What We Offer</a>
+      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+      <a href="google-link" class="btn-accent nav-cta">
+        <span>Get it on</span> Google Play
+      </a>
+    </nav>
+
+    <!-- Actions -->
     <div class="nav-actions">
-      <!-- Language Switch -->
       <select id="languageSwitcher">
         <option value="en">EN</option>
         <option value="hi">हिंदी</option>
         <option value="mr">मराठी</option>
       </select>
 
-      <!-- Theme Toggle -->
-      <button id="themeToggle" class="icon-btn">🌙</button>
-
-      <!-- Hamburger Menu for mobile -->
-      <button class="icon-btn">☰</button>
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">
+        🌙
+      </button>
     </div>
-
-    <!-- Navigation Links -->
-    <nav class="nav-links">
-      <a href="about.html" data-i18n="nav_about">About</a>
-      <a href="offerings.html" data-i18n="nav_offerings">Offerings</a>
-      <a href="contact.html" data-i18n="nav_contact">Contact</a>
-    </nav>
   </div>
 </header>
 
 <!-- ================= HERO ================= -->
-<section class="hero">
+<section class="hero hero-home">
+  <div class="hero-overlay"></div>
+
   <div class="container hero-grid">
-    <!-- Text -->
     <div class="hero-text">
-      <h1 data-i18n="hero_title">India’s Trusted Gig Workforce Platform</h1>
-      <p data-i18n="hero_desc">Connecting workers with companies for part-time and full-time opportunities with dignity and transparency.</p>
+      <h1 data-i18n="home_hero_title">
+        Trusted Workforce.<br>
+        Dignified Work.
+      </h1>
+
+      <p data-i18n="home_hero_desc">
+        ADHOCSY connects workers and employers through transparency,
+        speed, and trust.
+      </p>
+
       <div class="hero-buttons">
-        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-primary" data-i18n="worker_button">I’M A WORKER</a>
-        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-accent" data-i18n="employer_button">I’M AN EMPLOYER</a>
+        <a href="google-link" class="btn-primary">
+          👷 I am a Worker
+        </a>
+        <a href="google-link" class="btn-ghost">
+          🧑‍💼 I am an Employer
+        </a>
       </div>
-    </div>
-
-    <!-- Image -->
-    <div class="hero-image">
-      <picture>
-        <source srcset="assets/images/hero/hero-home-dark.png" media="(prefers-color-scheme: dark)">
-        <img src="assets/images/hero/hero-home-light.png" alt="Gig Workers" loading="lazy">
-      </picture>
     </div>
   </div>
 </section>
 
-<!-- ================= TRUSTED BY ================= -->
+<!-- ================= FEATURE CARDS ================= -->
 <section class="section bg-light">
-  <div class="container">
-    <h3 class="section-title" data-i18n="trusted_by_title">Trusted By Leading Companies</h3>
-    <div class="logo-row">
-      <img src="assets/images/clients/client1.png" alt="Client 1">
-      <img src="assets/images/clients/client2.png" alt="Client 2">
-      <img src="assets/images/clients/client3.png" alt="Client 3">
-      <img src="assets/images/clients/client4.png" alt="Client 4">
+  <div class="container card-grid">
+
+    <div class="card">
+      <h4 data-i18n="feature_verified">Verified Workers</h4>
+      <p data-i18n="feature_verified_desc">
+        Trusted and background-checked manpower.
+      </p>
     </div>
+
+    <div class="card">
+      <h4 data-i18n="feature_fast">Fast Hiring</h4>
+      <p data-i18n="feature_fast_desc">
+        Get workers exactly when you need them.
+      </p>
+    </div>
+
+    <div class="card">
+      <h4 data-i18n="feature_fair">Fair Wages</h4>
+      <p data-i18n="feature_fair_desc">
+        Transparent payments and worker dignity.
+      </p>
+    </div>
+
   </div>
 </section>
 
-<!-- ================= WHAT WE OFFER ================= -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title" data-i18n="offerings_section_title">What We Offer</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h4 data-i18n="offering_worker_solutions">Worker Solutions</h4>
-        <p data-i18n="offering_worker_desc">Access to verified jobs, skill development, and fair wages.</p>
-        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-primary">Get it on Google Play</a>
-      </div>
-      <div class="card">
-        <h4 data-i18n="offering_employer_solutions">Employer Solutions</h4>
-        <p data-i18n="offering_employer_desc">Quick and reliable access to a trusted workforce.</p>
-        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-primary">Get it on Google Play</a>
-      </div>
-      <div class="card">
-        <h4 data-i18n="offering_trust_safety">Trust & Safety</h4>
-        <p data-i18n="offering_trust_desc">Ensuring transparency and security for all parties.</p>
-        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-primary">Get it on Google Play</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= DIRECTORS ================= -->
-<section class="section bg-light">
-  <div class="container">
-    <h2 class="section-title" data-i18n="directors_desk_title">From the Directors’ Desk</h2>
-    <div class="card-grid">
-      <div class="director-card">
-        <img src="assets/images/directors/vinay.png" alt="Mr Vinay Singh">
-        <h4>Mr Vinay Singh</h4>
-        <p class="small" data-i18n="testimonial_vinay">With more than 20 years of experience in operations...</p>
-      </div>
-      <div class="director-card">
-        <img src="assets/images/directors/upendra.png" alt="Mr Upendra Kumar">
-        <h4>Mr Upendra Kumar</h4>
-        <p class="small" data-i18n="testimonial_upendra">With over 20 years in teaching and social welfare...</p>
-      </div>
-      <div class="director-card">
-        <img src="assets/images/directors/vijesh.png" alt="Mr Vijesh Singh">
-        <h4>Mr Vijesh Singh</h4>
-        <p class="small" data-i18n="testimonial_vijesh">Over the last 15 years in construction and plant operations...</p>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ================= STICKY PLAY BUTTON ================= -->
+<a href="google-link" class="playstore-sticky">
+  Get it on Google Play
+</a>
 
 <!-- ================= FOOTER ================= -->
 <footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <h4>ADHOCSY</h4>
-      <p class="small">India’s trusted gig workforce platform.</p>
-      <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-primary">Get it on Google Play</a>
-    </div>
-    <div>
-      <h5 data-i18n="quick_links">Quick Links</h5>
-      <a href="about.html" data-i18n="nav_about">About</a>
-      <a href="offerings.html" data-i18n="nav_offerings">Offerings</a>
-      <a href="contact.html" data-i18n="nav_contact">Contact</a>
-    </div>
-    <div>
-      <h5 data-i18n="contact">Contact</h5>
-      <p class="small">support@adhocsy.com</p>
-    </div>
-  </div>
-  <p class="copyright">© 2026 ADHOCSY. All rights reserved.</p>
+  <p class="small">© 2026 ADHOCSY. All rights reserved.</p>
 </footer>
 
-<!-- JS -->
+<!-- ================= SCRIPTS ================= -->
 <script src="js/translations.js"></script>
 <script src="js/lang.js"></script>
 <script src="js/theme.js"></script>
