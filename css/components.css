@@ -1,11 +1,12 @@
 /* ===============================
    ADHOCSY – Components Styles
+   Upgraded: Buttons, Cards, Forms
    =============================== */
 
 /* ---------- BUTTONS ---------- */
 .btn-primary {
   background: var(--blue);
-  color: #FFFFFF;
+  color: #fff;
   padding: 12px 24px;
   border-radius: var(--radius-md);
   font-weight: 800;
@@ -15,7 +16,7 @@
 }
 
 .btn-primary:hover {
-  background: darken(var(--blue), 10%);
+  background: var(--blue-dark);
 }
 
 .btn-accent {
@@ -23,14 +24,14 @@
   color: var(--navy);
   padding: 12px 24px;
   border-radius: var(--radius-md);
-  font-weight: 900;
+  font-weight: 800;
   text-align: center;
   display: inline-block;
   transition: background 0.3s ease;
 }
 
 .btn-accent:hover {
-  background: darken(var(--yellow), 10%);
+  filter: brightness(0.9);
 }
 
 .btn-ghost {
@@ -65,14 +66,36 @@
   transform: translateY(-4px);
 }
 
+/* ---------- TESTIMONIAL CARDS ---------- */
+.testimonial-card {
+  background: var(--card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 24px;
+  margin: 16px;
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+}
+
+.quote {
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-top: 12px;
+}
+
 /* ---------- INPUTS ---------- */
 input, textarea, select {
-  padding: 10px 12px;
+  padding: 12px 14px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
   background: var(--card);
   color: var(--text-primary);
   font-family: var(--font-primary);
+  width: 100%;
 }
 
 input:focus, textarea:focus, select:focus {
@@ -90,10 +113,4 @@ input:focus, textarea:focus, select:focus {
   margin-bottom: 8px;
   font-weight: 600;
   color: var(--text-primary);
-}
-
-.form-group input, .form-group textarea, .form-group select {
-  width: 100%;
-  padding: 10px;
-  border-radius: var(--radius-sm);
 }
