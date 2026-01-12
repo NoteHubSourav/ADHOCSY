@@ -1,34 +1,21 @@
-// ===============================
-// ADHOCSY – Theme Toggle
-// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("themeToggle");
+  const lightLogo = document.querySelector(".logo-light");
+  const darkLogo = document.querySelector(".logo-dark");
 
-document.addEventListener("DOMContentLoaded", function () {
-  const themeToggleButton = document.getElementById("themeToggle");
-  const logoLight = document.querySelector(".logo-light");
-  const logoDark = document.querySelector(".logo-dark");
+  let theme = localStorage.getItem("theme") || "light";
 
-  let currentTheme = localStorage.getItem("theme") || "light";
-  applyTheme(currentTheme);
+  function applyTheme(t) {
+    document.body.className = t;
+    localStorage.setItem("theme", t);
+    lightLogo.style.display = t === "light" ? "block" : "none";
+    darkLogo.style.display = t === "dark" ? "block" : "none";
+  }
 
-  themeToggleButton.addEventListener("click", () => {
-    currentTheme = currentTheme === "light" ? "dark" : "light";
-    localStorage.setItem("theme", currentTheme);
-    applyTheme(currentTheme);
+  toggle.addEventListener("click", () => {
+    theme = theme === "light" ? "dark" : "light";
+    applyTheme(theme);
   });
 
-  function applyTheme(theme) {
-    if (theme === "light") {
-      document.body.classList.add("light");
-      document.body.classList.remove("dark");
-      logoLight.style.display = "block";
-      logoDark.style.display = "none";
-      themeToggleButton.textContent = "🌙";
-    } else {
-      document.body.classList.add("dark");
-      document.body.classList.remove("light");
-      logoLight.style.display = "none";
-      logoDark.style.display = "block";
-      themeToggleButton.textContent = "☀️";
-    }
-  }
+  applyTheme(theme);
 });
