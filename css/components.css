@@ -1,116 +1,153 @@
-/* =============================== */
-/* ADHOCSY – Components Styles */
-/* Upgraded: Buttons, Cards, Forms */
-/* =============================== */
+/* ============================================================ */
+/* ADHOCSY – Premium Component Library                         */
+/* Includes: Buttons, Cards, Glassmorphism, and Interactive UI */
+/* ============================================================ */
 
 /* ---------- BUTTONS ---------- */
 .btn-primary {
   background: var(--blue);
-  color: #fff;
-  padding: 12px 24px;
+  color: #ffffff;
+  padding: 0.875rem 1.75rem;
   border-radius: var(--radius-md);
-  font-weight: 800;
-  text-align: center;
-  display: inline-block;
-  transition: background 0.3s ease;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
 }
 
 .btn-primary:hover {
   background: var(--blue-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
 }
 
 .btn-accent {
   background: var(--yellow);
-  color: var(--navy);
-  padding: 12px 24px;
+  color: #1e293b; /* Dark slate text for readability */
+  padding: 0.875rem 1.75rem;
   border-radius: var(--radius-md);
-  font-weight: 800;
-  text-align: center;
-  display: inline-block;
-  transition: background 0.3s ease;
+  font-weight: 700;
+  transition: var(--transition);
 }
 
 .btn-accent:hover {
-  filter: brightness(0.9);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--navy);
-  padding: 12px 24px;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  font-weight: 600;
-  text-align: center;
-  display: inline-block;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-.btn-ghost:hover {
-  background: var(--border-subtle);
-  color: var(--navy);
+  background: var(--yellow-dark);
+  transform: scale(1.02);
 }
 
 /* ---------- CARDS ---------- */
 .card {
   background: var(--card);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-  padding: 24px;
-  margin: 16px 0;
-  text-align: center;
-  transition: transform 0.3s ease;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(37, 99, 235, 0.2);
 }
 
-/* ---------- TESTIMONIAL CARDS ---------- */
-.testimonial-card {
-  background: var(--card);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
-  padding: 24px;
-  margin: 16px;
-  text-align: left;
-  transition: transform 0.3s ease;
+/* ---------- DIRECTOR CARD (Special Interaction) ---------- */
+.director-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  aspect-ratio: 3/4;
 }
 
-.testimonial-card:hover {
-  transform: translateY(-4px);
-}
-
-.quote {
-  font-style: italic;
-  color: var(--text-secondary);
-  margin-top: 12px;
-}
-
-/* ---------- INPUTS ---------- */
-input, textarea, select {
-  padding: 12px 14px;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  background: var(--card);
-  color: var(--text-primary);
-  font-family: var(--font-primary);
+.director-card img {
   width: 100%;
+  height: 100%;
+  object-cover: cover;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-input:focus, textarea:focus, select:focus {
-  border-color: var(--blue);
-  outline: none;
+.director-card:hover img {
+  transform: scale(1.1);
 }
 
-/* ---------- FORM ELEMENTS ---------- */
+.bio-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(37, 99, 235, 0.95), rgba(37, 99, 235, 0.7));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition);
+}
+
+.director-card:hover .bio-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- FORMS ---------- */
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 1.5rem;
+  text-align: left;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 700;
   color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.025em;
+}
+
+/* ---------- GLASS NAVIGATION ---------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 1rem 0;
+}
+
+/* ---------- TESTIMONIALS ---------- */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.testimonial-card {
+  background: var(--bg-soft);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  position: relative;
+}
+
+.testimonial-card::before {
+  content: "“";
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 4rem;
+  color: var(--blue);
+  opacity: 0.1;
+  font-family: serif;
+}
+
+.quote {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-style: italic;
 }
