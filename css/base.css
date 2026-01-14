@@ -1,11 +1,49 @@
-/* =============================== */
-/* ADHOCSY – Base Styles */
-/* Upgraded for Responsive Typography & Mobile */
-/* =============================== */
+/* ============================================================ */
+/* ADHOCSY – Modern Base & Typography System                    */
+/* Features: Fluid Typography, Responsive Grid, Smooth Motion  */
+/* ============================================================ */
 
-*,
-*::before,
-*::after {
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Core Palette */
+  --blue: #2563eb;
+  --blue-dark: #1e40af;
+  --yellow: #fef08a;
+  --yellow-dark: #facc15;
+  
+  /* Neutral Palette - Light Mode Default */
+  --bg: #ffffff;
+  --bg-soft: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border: #e2e8f0;
+  --card: #ffffff;
+  
+  /* Design Tokens */
+  --font-primary: 'Plus Jakarta Sans', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --bg-soft: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --border: #334155;
+  --card: #1e293b;
+}
+
+/* ---------- RESET & BASE ---------- */
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -13,7 +51,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -21,94 +59,105 @@ body {
   background: var(--bg);
   color: var(--text-secondary);
   line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ---------- CONTAINER ---------- */
 .container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 16px;
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-/* ---------- HEADINGS ---------- */
+/* ---------- FLUID TYPOGRAPHY ---------- */
 h1, h2, h3, h4, h5 {
   color: var(--text-primary);
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
 }
 
-h1 { font-size: 48px; }
-h2 { font-size: 36px; }
-h3 { font-size: 28px; }
-h4 { font-size: 20px; }
-h5 { font-size: 16px; }
+/* Using clamp for smooth scaling between mobile (min) and desktop (max) */
+h1 { font-size: clamp(2.25rem, 5vw, 4rem); } /* 36px - 64px */
+h2 { font-size: clamp(1.875rem, 4vw, 3rem); } /* 30px - 48px */
+h3 { font-size: clamp(1.5rem, 3vw, 2.25rem); } /* 24px - 36px */
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1rem; }
 
 p {
-  font-size: 14px;
-  color: var(--text-secondary);
+  font-size: 1.125rem; /* 18px */
+  margin-bottom: 1.5rem;
 }
 
 .small {
-  font-size: 12px;
+  font-size: 0.875rem; /* 14px */
   color: var(--text-muted);
 }
 
-/* ---------- LINKS ---------- */
+/* ---------- LINKS & BUTTONS ---------- */
 a {
   text-decoration: none;
   color: inherit;
+  transition: var(--transition);
 }
 
-/* ---------- BUTTON RESET ---------- */
 button {
   border: none;
   background: none;
   cursor: pointer;
   font-family: inherit;
+  transition: var(--transition);
+}
+
+/* ---------- FORM ELEMENTS ---------- */
+input, textarea, select {
+  width: 100%;
+  font-family: var(--font-primary);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text-primary);
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  background: var(--bg);
+}
+
+/* ---------- UTILITY SECTIONS ---------- */
+.section {
+  padding: clamp(4rem, 10vh, 8rem) 0;
+}
+
+.bg-soft {
+  background-color: var(--bg-soft);
 }
 
 /* ---------- IMAGES ---------- */
 img {
   max-width: 100%;
+  height: auto;
   display: block;
+  border-radius: var(--radius-md);
 }
 
-/* ---------- FORMS ---------- */
-input, textarea, select {
-  font-family: var(--font-primary);
-  padding: 12px 14px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-light);
-  outline: none;
-  background: var(--card);
-  color: var(--text-primary);
-}
+/* ---------- HELPERS ---------- */
+.text-center { text-align: center; }
+.text-blue { color: var(--blue); }
+.mt-24 { margin-top: 1.5rem; }
+.shadow-premium { box-shadow: var(--shadow-md); }
 
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: var(--blue);
-}
-
-/* ---------- SECTIONS ---------- */
-.section {
-  padding: 64px 0;
-}
-
-.bg-light {
-  background: var(--bg);
-}
-
-/* ---------- MOBILE RESPONSIVENESS ---------- */
-@media (max-width: 1024px) {
-  h1 { font-size: 40px; }
-  h2 { font-size: 32px; }
-  h3 { font-size: 24px; }
-}
-
+/* ---------- RESPONSIVE GRID FIXES ---------- */
 @media (max-width: 768px) {
-  h1 { font-size: 32px; }
-  h2 { font-size: 28px; }
-  h3 { font-size: 22px; }
-  body { font-size: 15px; }
+  .container { padding-left: 1rem; padding-right: 1rem; }
+  p { font-size: 1rem; }
 }
