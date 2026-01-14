@@ -1,111 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Offerings | ADHOCSY</title>
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-</head>
-<body class="light">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What We Offer | ADHOCSY Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-blue: #2563eb;
+            --brand-yellow: #fef08a;
+            --brand-light-grey: #f8fafc;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .bg-soft { background-color: var(--brand-light-grey); }
+        .text-blue { color: var(--brand-blue); }
+        .bg-blue { background-color: var(--brand-blue); }
+        .hero-height { height: 80vh; }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
 
-<!-- ================= HEADER ================= -->
-<header class="navbar">
-  <div class="container nav-content">
-    <div class="logo">
-      <img src="assets/logos/logo-light.png" class="logo-light" alt="ADHOCSY">
-      <img src="assets/logos/logo-dark.png" class="logo-dark" alt="ADHOCSY">
+        .offering-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900 overflow-x-hidden">
+
+<!-- ================= NAVBAR ================= -->
+<header class="fixed top-0 w-full z-50 glass-nav">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="w-10 h-10 bg-blue rounded-lg flex items-center justify-center text-white font-bold text-xl">A</div>
+            <span class="text-2xl font-bold tracking-tight text-slate-800">ADHOCSY</span>
+        </div>
+        
+        <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-600">
+            <a href="index.html" data-i18n="nav_home" class="hover:text-blue-600 transition">Home</a>
+            <a href="about.html" data-i18n="nav_about" class="hover:text-blue-600 transition">About</a>
+            <a href="contact.html" data-i18n="nav_contact" class="hover:text-blue-600 transition">Contact</a>
+            
+            <select id="langSwitch" class="bg-transparent border-none focus:ring-0 cursor-pointer text-sm font-bold text-blue">
+                <option value="en">EN</option>
+                <option value="hi">हिंदी</option>
+                <option value="mr">मराठी</option>
+            </select>
+        </nav>
+
+        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="hidden sm:block">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-10 transition hover:opacity-80">
+        </a>
     </div>
-    <nav class="nav-links">
-      <a href="index.html" data-i18n="nav_home">Home</a>
-      <a href="about.html" data-i18n="nav_about">About</a>
-      <a href="contact.html" data-i18n="nav_contact">Contact</a>
-    </nav>
-    <div class="nav-actions">
-      <select id="languageSwitcher">
-        <option value="en">EN</option>
-        <option value="hi">हिंदी</option>
-        <option value="mr">मराठी</option>
-      </select>
-      <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">
-        🌙
-      </button>
-    </div>
-  </div>
 </header>
 
-<!-- ================= HERO ================= -->
-<section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-text">
-      <h1 data-i18n="offerings_hero_title">Our Offerings</h1>
-      <p data-i18n="offerings_hero_desc">Discover the solutions ADHOCSY provides for workers and employers.</p>
+<!-- ================= HERO SECTION ================= -->
+<section class="relative pt-24 hero-height flex items-center bg-soft">
+    <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+        <div class="z-10 text-left">
+            <span class="inline-block px-4 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs font-bold uppercase tracking-widest mb-4">Our Solutions</span>
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6" data-i18n="offerings_hero_title">
+                The Solutions <br><span class="text-blue">We Provide</span>
+            </h1>
+            <p class="text-lg text-slate-600 mb-8 max-w-lg" data-i18n="offerings_hero_desc">
+                Discover how ADHOCSY creates a balanced ecosystem for both hardworking individuals and forward-thinking enterprises.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="transition transform hover:scale-105 shadow-lg rounded-lg overflow-hidden">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get on Play Store" class="h-14">
+                </a>
+            </div>
+        </div>
+        <div class="relative h-full hidden md:block">
+            <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=1000" 
+                 alt="Professional Solutions" 
+                 class="relative z-10 rounded-3xl shadow-2xl object-cover h-[500px] w-full border-8 border-white">
+        </div>
     </div>
-    <div class="hero-image">
-      <picture>
-        <source srcset="assets/images/hero/hero-offerings-dark.png" media="(prefers-color-scheme: dark)">
-        <img src="assets/images/hero/hero-offerings-light.png" alt="Our Offerings" loading="lazy">
-      </picture>
-    </div>
-  </div>
 </section>
 
-<!-- ================= OFFERINGS ================= -->
-<section class="section bg-light">
-  <div class="container">
-    <h2 class="section-title" data-i18n="offerings_section_title">What We Offer</h2>
-    <div class="card-grid">
-      <div class="card">
-        <img src="assets/images/offerings/offer-1.jpg" alt="Worker Solutions" loading="lazy">
-        <h4 data-i18n="offering_worker_solutions">Worker Solutions</h4>
-        <p data-i18n="offering_worker_desc">Access to verified jobs, skill development, and fair wages.</p>
-        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-accent mt-16">Get it on Google Play</a>
-      </div>
-      <div class="card">
-        <img src="assets/images/offerings/offer-2.jpg" alt="Employer Solutions" loading="lazy">
-        <h4 data-i18n="offering_employer_solutions">Employer Solutions</h4>
-        <p data-i18n="offering_employer_desc">Quick and reliable access to a trusted workforce.</p>
-        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-accent mt-16">Get it on Google Play</a>
-      </div>
-      <div class="card">
-        <img src="assets/images/offerings/offer-3.jpg" alt="Trust & Safety" loading="lazy">
-        <h4 data-i18n="offering_trust_safety">Trust & Safety</h4>
-        <p data-i18n="offering_trust_desc">Ensuring transparency and security for all parties.</p>
-        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-accent mt-16">Get it on Google Play</a>
-      </div>
+<!-- ================= OFFERINGS GRID ================= -->
+<section class="py-24 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4" data-i18n="offerings_section_title">What We Offer</h2>
+            <div class="h-1.5 w-24 bg-blue mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Offering 1: Workers -->
+            <div class="offering-card bg-white rounded-3xl border border-slate-100 overflow-hidden transition-all duration-300">
+                <div class="h-64 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=600" alt="Worker Solutions" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8">
+                    <h4 class="text-2xl font-bold mb-4" data-i18n="offering_worker_solutions">Worker Solutions</h4>
+                    <p class="text-slate-500 mb-8 leading-relaxed" data-i18n="offering_worker_desc">Access to verified jobs, instant skill matching, and guaranteed fair wages through our secure digital payment system.</p>
+                    <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="block">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-10">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Offering 2: Employers -->
+            <div class="offering-card bg-white rounded-3xl border border-slate-100 overflow-hidden transition-all duration-300">
+                <div class="h-64 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1521791136366-3e44c703f54b?auto=format&fit=crop&q=80&w=600" alt="Employer Solutions" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8">
+                    <h4 class="text-2xl font-bold mb-4" data-i18n="offering_employer_solutions">Employer Solutions</h4>
+                    <p class="text-slate-500 mb-8 leading-relaxed" data-i18n="offering_employer_desc">Quickly scale your workforce with pre-verified, high-quality talent ready to work when you are.</p>
+                    <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="block">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-10">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Offering 3: Trust & Safety -->
+            <div class="offering-card bg-white rounded-3xl border border-slate-100 overflow-hidden transition-all duration-300">
+                <div class="h-64 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600" alt="Trust and Safety" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8">
+                    <h4 class="text-2xl font-bold mb-4" data-i18n="offering_trust_safety">Trust & Safety</h4>
+                    <p class="text-slate-500 mb-8 leading-relaxed" data-i18n="offering_trust_desc">Our advanced AI vetting and rating system ensures that trust is built into every transaction on the platform.</p>
+                    <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="block">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-10">
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- ================= FOOTER ================= -->
-<footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <h4>ADHOCSY</h4>
-      <p class="small">Empowering the gig economy with trust and efficiency.</p>
-      <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="btn-primary">Get it on Google Play</a>
+<footer class="bg-slate-900 text-slate-400 py-16">
+    <div class="container mx-auto px-6 grid md:grid-cols-3 gap-12">
+        <div>
+            <div class="text-white font-bold text-2xl mb-4">ADHOCSY</div>
+            <p class="text-sm leading-relaxed">Built for Dignity. Designed for Speed. Trusted by thousands across the nation.</p>
+        </div>
+        <div>
+            <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Links</h4>
+            <ul class="space-y-4 text-sm">
+                <li><a href="index.html" class="hover:text-blue-400 transition">Home</a></li>
+                <li><a href="about.html" class="hover:text-blue-400 transition">About Us</a></li>
+                <li><a href="contact.html" class="hover:text-blue-400 transition">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Download</h4>
+            <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-12 shadow-2xl">
+            </a>
+        </div>
     </div>
-    <div>
-      <h5 data-i18n="quick_links">Quick Links</h5>
-      <a href="index.html" data-i18n="nav_home">Home</a>
-      <a href="about.html" data-i18n="nav_about">About</a>
-      <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    <div class="container mx-auto px-6 mt-12 pt-8 border-t border-slate-800 text-center text-xs">
+        © 2026 ADHOCSY. All rights reserved.
     </div>
-    <div>
-      <h5 data-i18n="contact">Contact</h5>
-      <p class="small">support@adhocsy.com</p>
-    </div>
-  </div>
-  <p class="copyright">© 2026 ADHOCSY. All rights reserved.</p>
 </footer>
 
-<!-- ================= SCRIPTS ================= -->
-<script src="js/translations.js"></script>
-<script src="js/lang.js"></script>
-<script src="js/theme.js"></script>
-<script src="js/main.js"></script>
+<script>
+    const translations = {
+        en: {
+            nav_home: "Home",
+            nav_about: "About",
+            nav_contact: "Contact",
+            offerings_hero_title: "The Solutions <br><span class='text-blue'>We Provide</span>",
+            offerings_hero_desc: "Discover how ADHOCSY creates a balanced ecosystem for both hardworking individuals and forward-thinking enterprises.",
+            offerings_section_title: "What We Offer",
+            offering_worker_solutions: "Worker Solutions",
+            offering_worker_desc: "Access to verified jobs, skill development, and fair wages.",
+            offering_employer_solutions: "Employer Solutions",
+            offering_employer_desc: "Quick and reliable access to a trusted workforce.",
+            offering_trust_safety: "Trust & Safety",
+            offering_trust_desc: "Ensuring transparency and security for all parties."
+        },
+        hi: {
+            nav_home: "होम",
+            nav_about: "हमारे बारे में",
+            nav_contact: "संपर्क",
+            offerings_hero_title: "समाधान जो <br><span class='text-blue'>हम प्रदान करते हैं</span>",
+            offerings_hero_desc: "जानें कि कैसे ADHOCSY मेहनती व्यक्तियों और प्रगतिशील उद्यमों दोनों के लिए एक संतुलित पारिस्थितिकी तंत्र बनाता है।",
+            offerings_section_title: "हमारी पेशकश",
+            offering_worker_solutions: "श्रमिक समाधान",
+            offering_worker_desc: "सत्यापित नौकरियों, कौशल विकास और उचित वेतन तक पहुंच।",
+            offering_employer_solutions: "नियोक्ता समाधान",
+            offering_employer_desc: "भरोसेमंद कार्यबल तक त्वरित और विश्वसनीय पहुंच।",
+            offering_trust_safety: "विश्वास और सुरक्षा",
+            offering_trust_desc: "सभी पक्षों के लिए पारदर्शिता और सुरक्षा सुनिश्चित करना।"
+        },
+        mr: {
+            nav_home: "होम",
+            nav_about: "आमच्याबद्दल",
+            nav_contact: "संपर्क",
+            offerings_hero_title: "आम्ही प्रदान <br><span class='text-blue'>करीत असलेले उपाय</span>",
+            offerings_hero_desc: "ADHOCSY कष्टाळू व्यक्ती आणि प्रगत उपक्रम दोघांसाठी संतुलित परिसंस्था कशी तयार करते ते शोधा.",
+            offerings_section_title: "आम्ही काय ऑफर करतो",
+            offering_worker_solutions: "कामगार उपाय",
+            offering_worker_desc: "सत्यापित नोकऱ्या, कौशल्य विकास आणि रास्त मजुरीमध्ये प्रवेश.",
+            offering_employer_solutions: "नियोक्ता उपाय",
+            offering_employer_desc: "विश्वासार्ह कार्यबलापर्यंत जलद आणि विश्वसनीय प्रवेश.",
+            offering_trust_safety: "विश्वास आणि सुरक्षितता",
+            offering_trust_desc: "सर्व पक्षांसाठी पारदर्शकता आणि सुरक्षा सुनिश्चित करणे."
+        }
+    };
+
+    const langSwitch = document.getElementById('langSwitch');
+
+    langSwitch.addEventListener('change', (e) => {
+        const lang = e.target.value;
+        const t = translations[lang];
+        
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key]) el.innerHTML = t[key];
+        });
+    });
+</script>
 
 </body>
 </html>
