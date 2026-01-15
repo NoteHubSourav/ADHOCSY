@@ -25,7 +25,6 @@
         .glass-nav { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.9); }
         .dark .glass-nav { background: rgba(10, 13, 20, 0.9); border-bottom: 1px solid rgba(255,255,255,0.1); }
         
-        /* Hero background with provided filename */
         .hero-bg {
             background-image: linear-gradient(to right, rgba(255,255,255,0.95) 20%, rgba(255,255,255,0.3) 100%), url('hero-home.jpej');
             background-size: cover;
@@ -39,49 +38,75 @@
         .director-card:hover .bio-overlay { opacity: 1; transform: translateY(0); }
         .partner-logo { height: 35px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s; }
         .partner-logo:hover { filter: grayscale(0%); opacity: 1; }
+
+        /* Mobile Menu Animation */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.active {
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
 
-<!-- NAVIGATION -->
 <header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100 dark:border-transparent">
     <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-        <!-- Logo Section -->
         <a href="index.html" class="flex items-center gap-2">
             <img src="logo-day.png" alt="ADHOCSY" class="h-10 dark:hidden">
             <img src="logo-dark.png" alt="ADHOCSY" class="h-10 hidden dark:block">
         </a>
         
-        <!-- Center Links -->
         <nav class="hidden lg:flex items-center space-x-8 font-bold text-xs uppercase tracking-widest">
             <a href="about.html" data-i18n="nav_about" class="hover:text-brandBlue transition">About</a>
             <a href="#offerings" data-i18n="nav_offerings" class="hover:text-brandBlue transition">Offering</a>
             <a href="#contact" data-i18n="nav_contact" class="hover:text-brandBlue transition">Contact</a>
         </nav>
 
-        <!-- Right Controls -->
         <div class="flex items-center gap-4">
-            <!-- Language Picker -->
             <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
                 <button onclick="changeLang('en')" id="btn-en" class="lang-btn active px-2.5 py-1.5 rounded-lg text-[9px] font-black transition">EN</button>
                 <button onclick="changeLang('hi')" id="btn-hi" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">HI</button>
                 <button onclick="changeLang('mr')" id="btn-mr" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">MR</button>
             </div>
             
-            <!-- Theme Picker -->
             <button id="themeToggle" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 transition">
                 <i class="fas fa-moon" id="themeIcon"></i>
             </button>
 
-            <!-- Play Store Link -->
             <a href="#" class="hidden sm:block hover:scale-105 transition">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-9">
             </a>
+
+            <button id="menuBtn" class="lg:hidden text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </div>
 </header>
 
-<!-- HERO SECTION -->
+<div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden">
+    <div class="flex justify-between items-center mb-12">
+        <img src="logo-day.png" alt="ADHOCSY" class="h-8 dark:hidden">
+        <img src="logo-dark.png" alt="ADHOCSY" class="h-8 hidden dark:block">
+        <button id="closeBtn" class="text-3xl">&times;</button>
+    </div>
+    
+    <nav class="flex flex-col space-y-8 text-2xl font-black uppercase tracking-tighter">
+        <a href="about.html" data-i18n="nav_about" class="mobile-link">About</a>
+        <a href="#offerings" data-i18n="nav_offerings" class="mobile-link">Offering</a>
+        <a href="#contact" data-i18n="nav_contact" class="mobile-link">Contact</a>
+    </nav>
+
+    <div class="mt-auto">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Download Our App</p>
+        <a href="#">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-12">
+        </a>
+    </div>
+</div>
+
 <section class="relative min-h-[90vh] flex items-center hero-bg pt-20">
     <div class="container mx-auto px-6">
         <div class="max-w-3xl">
@@ -100,7 +125,6 @@
     </div>
 </section>
 
-<!-- 3 IMAGES STRIP -->
 <section class="py-12 bg-white dark:bg-brandDark">
     <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-3 gap-6">
@@ -111,7 +135,6 @@
     </div>
 </section>
 
-<!-- VIDEO SECTION -->
 <section class="py-20 bg-slate-50 dark:bg-slate-900/30">
     <div class="container mx-auto px-6 text-center">
         <h2 class="text-3xl font-black mb-12 dark:text-white" data-i18n="video_title">Experience the Platform</h2>
@@ -123,7 +146,6 @@
     </div>
 </section>
 
-<!-- PARTNERS SECTION (Expanded List) -->
 <section class="py-16 bg-white dark:bg-brandDark border-y border-slate-100 dark:border-slate-800">
     <div class="container mx-auto px-6">
         <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest text-center mb-10" data-i18n="client_title">Powering the Logistics Ecosystem</p>
@@ -139,12 +161,10 @@
     </div>
 </section>
 
-<!-- DIRECTORS SECTION -->
 <section id="directors" class="py-24 bg-slate-50 dark:bg-slate-900/40">
     <div class="container mx-auto px-6">
         <h2 class="text-4xl font-black mb-16 text-center dark:text-white" data-i18n="dir_title">Leadership</h2>
         <div class="grid md:grid-cols-3 gap-10">
-            <!-- Director 1 -->
             <div class="director-card relative group overflow-hidden rounded-[40px] bg-white dark:bg-slate-800 shadow-2xl h-[550px]">
                 <img src="director1.png" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0">
                 <div class="absolute bottom-0 w-full p-10 bg-gradient-to-t from-black/90 to-transparent text-white">
@@ -155,7 +175,6 @@
                     <p class="text-lg italic font-medium" data-i18n="dir1_line">"Our mission is to bridge the gap between skill and opportunity."</p>
                 </div>
             </div>
-            <!-- Director 2 -->
             <div class="director-card relative group overflow-hidden rounded-[40px] bg-white dark:bg-slate-800 shadow-2xl h-[550px]">
                 <img src="director2.png" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0">
                 <div class="absolute bottom-0 w-full p-10 bg-gradient-to-t from-black/90 to-transparent text-white">
@@ -166,7 +185,6 @@
                     <p class="text-lg italic font-medium" data-i18n="dir2_line">"Worker welfare and operational excellence drive our growth."</p>
                 </div>
             </div>
-            <!-- Director 3 -->
             <div class="director-card relative group overflow-hidden rounded-[40px] bg-white dark:bg-slate-800 shadow-2xl h-[550px]">
                 <img src="director3.png" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0">
                 <div class="absolute bottom-0 w-full p-10 bg-gradient-to-t from-black/90 to-transparent text-white">
@@ -181,7 +199,6 @@
     </div>
 </section>
 
-<!-- FOOTER -->
 <footer id="contact" class="bg-slate-950 text-slate-500 py-20">
     <div class="container mx-auto px-6">
         <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
@@ -199,6 +216,7 @@
 </footer>
 
 <script>
+    // Dictionary (Same as provided)
     const dict = {
         en: {
             nav_about: "About", nav_offerings: "Offering", nav_contact: "Contact",
@@ -252,11 +270,24 @@
         activeBtn.classList.remove('text-slate-400');
     }
 
+    // Theme Toggle
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     themeToggle.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
         themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    });
+
+    // Hamburger Menu Logic
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+    closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.remove('active'));
     });
 </script>
 </body>
