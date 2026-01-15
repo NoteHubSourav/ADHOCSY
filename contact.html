@@ -31,46 +31,75 @@
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
             outline: none;
         }
+
+        /* Mobile Menu Animation */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.active {
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
 
-<!-- NAVIGATION (Synced with Home/About) -->
 <header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100 dark:border-transparent">
     <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-        <!-- Dynamic Logo -->
         <a href="index.html" class="flex items-center gap-2">
             <img src="logo-day.png" alt="ADHOCSY" class="h-10 dark:hidden">
             <img src="logo-dark.png" alt="ADHOCSY" class="h-10 hidden dark:block">
         </a>
         
-        <!-- Center Nav -->
         <nav class="hidden lg:flex items-center space-x-8 font-bold text-xs uppercase tracking-widest">
             <a href="index.html" data-i18n="nav_home" class="hover:text-brandBlue transition">Home</a>
             <a href="about.html" data-i18n="nav_about" class="hover:text-brandBlue transition">About</a>
             <a href="contact.html" data-i18n="nav_contact" class="text-brandBlue">Contact</a>
-            
-            <!-- Language Toggle -->
+        </nav>
+
+        <div class="flex items-center gap-4">
             <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
                 <button onclick="changeLang('en')" id="btn-en" class="lang-btn active px-2.5 py-1.5 rounded-lg text-[9px] font-black transition">EN</button>
                 <button onclick="changeLang('hi')" id="btn-hi" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">HI</button>
                 <button onclick="changeLang('mr')" id="btn-mr" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">MR</button>
             </div>
 
-            <!-- Dark/Day Toggle -->
             <button id="themeToggle" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400">
                 <i class="fas fa-moon" id="themeIcon"></i>
             </button>
-        </nav>
 
-        <!-- Right Play Store -->
-        <a href="#" class="hidden sm:block hover:scale-105 transition">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-9">
-        </a>
+            <a href="#" class="hidden sm:block hover:scale-105 transition">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-9">
+            </a>
+
+            <button id="menuBtn" class="lg:hidden text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
     </div>
 </header>
 
-<!-- HERO SECTION -->
+<div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden">
+    <div class="flex justify-between items-center mb-12">
+        <img src="logo-day.png" alt="ADHOCSY" class="h-8 dark:hidden">
+        <img src="logo-dark.png" alt="ADHOCSY" class="h-8 hidden dark:block">
+        <button id="closeBtn" class="text-3xl">&times;</button>
+    </div>
+    
+    <nav class="flex flex-col space-y-8 text-2xl font-black uppercase tracking-tighter">
+        <a href="index.html" data-i18n="nav_home" class="mobile-link">Home</a>
+        <a href="about.html" data-i18n="nav_about" class="mobile-link">About</a>
+        <a href="contact.html" data-i18n="nav_contact" class="mobile-link text-brandBlue">Contact</a>
+    </nav>
+
+    <div class="mt-auto">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Download Our App</p>
+        <a href="#">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-12">
+        </a>
+    </div>
+</div>
+
 <section class="relative pt-40 pb-20 bg-slate-50 dark:bg-slate-900/40">
     <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         <div>
@@ -96,19 +125,15 @@
                 </div>
             </div>
         </div>
-        <!-- Use image3 for Visual Consistency -->
         <div class="rounded-[40px] overflow-hidden shadow-2xl h-[450px] border-8 border-white dark:border-slate-800">
             <img src="image3.png" alt="Contact Us" class="w-full h-full object-cover">
         </div>
     </div>
 </section>
 
-<!-- CONTACT FORM SECTION -->
 <section class="py-24 bg-white dark:bg-brandDark">
     <div class="container mx-auto px-6">
         <div class="max-w-5xl mx-auto bg-white dark:bg-slate-900 rounded-[40px] shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden flex flex-col md:flex-row">
-            
-            <!-- Form Side -->
             <div class="p-12 md:w-3/5">
                 <h2 class="text-3xl font-black mb-10 dark:text-white" data-i18n="contact_form_title">Contact Form</h2>
                 <form action="mailto:support@adhocsy.com" method="POST" enctype="text/plain" class="space-y-6">
@@ -142,7 +167,6 @@
                 </form>
             </div>
 
-            <!-- Promotion Side -->
             <div class="md:w-2/5 bg-slate-900 dark:bg-black p-12 text-white flex flex-col justify-center items-center text-center">
                 <div class="w-24 h-24 bg-brandBlue/20 rounded-3xl flex items-center justify-center text-4xl mb-8 border border-brandBlue/30">
                     <i class="fas fa-mobile-alt text-brandBlue"></i>
@@ -157,8 +181,7 @@
     </div>
 </section>
 
-<!-- FOOTER (Synced with Home/About) -->
-<footer id="contact-footer" class="bg-slate-950 text-slate-500 py-20">
+<footer class="bg-slate-950 text-slate-500 py-20">
     <div class="container mx-auto px-6">
         <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
             <img src="logo-dark.png" class="h-10">
@@ -239,6 +262,18 @@
     themeToggle.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
         themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    });
+
+    // Mobile Menu
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+    closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.remove('active'));
     });
 </script>
 </body>
