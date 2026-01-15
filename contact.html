@@ -1,176 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | ADHOCSY</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --brand-blue: #2563eb;
-            --brand-yellow: #fef08a;
-            --brand-light-grey: #f8fafc;
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { brandBlue: '#2563eb', brandDark: '#0A0D14' },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+                }
+            }
         }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .bg-soft { background-color: var(--brand-light-grey); }
-        .text-blue { color: var(--brand-blue); }
-        .bg-blue { background-color: var(--brand-blue); }
-        
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
+    </script>
+
+    <style type="text/css">
+        body { transition: background-color 0.4s ease; scroll-behavior: smooth; }
+        .glass-nav { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.9); }
+        .dark .glass-nav { background: rgba(10, 13, 20, 0.9); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .lang-btn.active { background-color: #2563eb; color: white; }
 
         .input-focus:focus {
-            border-color: var(--brand-blue);
+            border-color: #2563eb;
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
             outline: none;
         }
     </style>
 </head>
-<body class="bg-white text-slate-900">
+<body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
 
-<!-- ================= NAVBAR ================= -->
-<header class="fixed top-0 w-full z-50 glass-nav">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-2">
-            <div class="w-10 h-10 bg-blue rounded-lg flex items-center justify-center text-white font-bold text-xl">A</div>
-            <span class="text-2xl font-bold tracking-tight text-slate-800">ADHOCSY</span>
-        </div>
+<!-- NAVIGATION (Synced with Home/About) -->
+<header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100 dark:border-transparent">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <!-- Dynamic Logo -->
+        <a href="index.html" class="flex items-center gap-2">
+            <img src="logo-day.png" alt="ADHOCSY" class="h-10 dark:hidden">
+            <img src="logo-dark.png" alt="ADHOCSY" class="h-10 hidden dark:block">
+        </a>
         
-        <nav class="hidden md:flex items-center space-x-8 font-medium text-slate-600">
-            <a href="index.html" data-i18n="nav_home" class="hover:text-blue-600 transition">Home</a>
-            <a href="about.html" data-i18n="nav_about" class="hover:text-blue-600 transition">About</a>
-            <a href="#" data-i18n="nav_offerings" class="hover:text-blue-600 transition">What We Offer</a>
+        <!-- Center Nav -->
+        <nav class="hidden lg:flex items-center space-x-8 font-bold text-xs uppercase tracking-widest">
+            <a href="index.html" data-i18n="nav_home" class="hover:text-brandBlue transition">Home</a>
+            <a href="about.html" data-i18n="nav_about" class="hover:text-brandBlue transition">About</a>
+            <a href="contact.html" data-i18n="nav_contact" class="text-brandBlue">Contact</a>
             
-            <select id="langSwitch" class="bg-transparent border-none focus:ring-0 cursor-pointer text-sm font-bold text-blue">
-                <option value="en">EN</option>
-                <option value="hi">हिंदी</option>
-                <option value="mr">मराठी</option>
-            </select>
+            <!-- Language Toggle -->
+            <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+                <button onclick="changeLang('en')" id="btn-en" class="lang-btn active px-2.5 py-1.5 rounded-lg text-[9px] font-black transition">EN</button>
+                <button onclick="changeLang('hi')" id="btn-hi" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">HI</button>
+                <button onclick="changeLang('mr')" id="btn-mr" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">MR</button>
+            </div>
+
+            <!-- Dark/Day Toggle -->
+            <button id="themeToggle" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
         </nav>
 
-        <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="hidden sm:block transition hover:opacity-80">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-10">
+        <!-- Right Play Store -->
+        <a href="#" class="hidden sm:block hover:scale-105 transition">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-9">
         </a>
     </div>
 </header>
 
-<!-- ================= HERO SECTION ================= -->
-<section class="relative pt-32 pb-20 bg-soft border-b border-slate-100">
+<!-- HERO SECTION -->
+<section class="relative pt-40 pb-20 bg-slate-50 dark:bg-slate-900/40">
     <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         <div>
-            <span class="inline-block px-4 py-1 rounded-full bg-blue/10 text-blue text-xs font-bold uppercase tracking-widest mb-4" data-i18n="contact_tag">Support & Partnerships</span>
-            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6" data-i18n="contact_hero_title">
-                Get in Touch with <br><span class="text-blue">ADHOCSY</span>
+            <span class="inline-block px-4 py-1 rounded-full bg-brandBlue/10 text-brandBlue text-[10px] font-black uppercase tracking-widest mb-4" data-i18n="contact_tag">Support & Partnerships</span>
+            <h1 class="text-5xl md:text-6xl font-black leading-tight mb-8 dark:text-white" id="heroTitle">
+                Get in Touch with <br><span class="text-brandBlue">ADHOCSY</span>
             </h1>
-            <p class="text-xl text-slate-600 mb-8 max-w-lg" data-i18n="contact_hero_desc">
+            <p class="text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg" id="heroDesc">
                 Have questions about our platform or interested in partnering with us? Our team is ready to help.
             </p>
-            <div class="space-y-4">
-                <div class="flex items-center gap-4 text-slate-600">
-                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm">📧</div>
-                    <span>support@adhocsy.com</span>
+            <div class="space-y-6">
+                <div class="flex items-center gap-5 text-slate-600 dark:text-slate-300">
+                    <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg text-brandBlue">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </div>
+                    <span class="font-bold">support@adhocsy.com</span>
                 </div>
-                <div class="flex items-center gap-4 text-slate-600">
-                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm">📍</div>
-                    <span>India-wide Digital Ecosystem</span>
+                <div class="flex items-center gap-5 text-slate-600 dark:text-slate-300">
+                    <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg text-brandBlue">
+                        <i class="fas fa-map-marker-alt text-xl"></i>
+                    </div>
+                    <span class="font-bold">India-wide Digital Ecosystem</span>
                 </div>
             </div>
         </div>
-        <div class="rounded-3xl overflow-hidden shadow-2xl h-[400px]">
-            <img src="https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&q=80&w=1000" alt="Contact Us" class="w-full h-full object-cover">
+        <!-- Use image3 for Visual Consistency -->
+        <div class="rounded-[40px] overflow-hidden shadow-2xl h-[450px] border-8 border-white dark:border-slate-800">
+            <img src="image3.png" alt="Contact Us" class="w-full h-full object-cover">
         </div>
     </div>
 </section>
 
-<!-- ================= CONTACT FORM SECTION ================= -->
-<section class="py-24 bg-white">
+<!-- CONTACT FORM SECTION -->
+<section class="py-24 bg-white dark:bg-brandDark">
     <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col md:flex-row">
+        <div class="max-w-5xl mx-auto bg-white dark:bg-slate-900 rounded-[40px] shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden flex flex-col md:flex-row">
             
             <!-- Form Side -->
-            <div class="p-10 md:w-3/5">
-                <h2 class="text-3xl font-bold mb-8" data-i18n="contact_form_title">Contact Form</h2>
+            <div class="p-12 md:w-3/5">
+                <h2 class="text-3xl font-black mb-10 dark:text-white" data-i18n="contact_form_title">Contact Form</h2>
                 <form action="mailto:support@adhocsy.com" method="POST" enctype="text/plain" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="contact_name_label">Full Name</label>
-                            <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 input-focus transition">
+                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_name_label">Full Name</label>
+                            <input type="text" name="name" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
                         </div>
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="contact_email_label">Work Email</label>
-                            <input type="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 input-focus transition">
+                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_email_label">Work Email</label>
+                            <input type="email" name="email" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="contact_phone_label">Phone</label>
-                            <input type="tel" name="phone" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 input-focus transition">
+                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_phone_label">Phone</label>
+                            <input type="tel" name="phone" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
                         </div>
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="contact_company_label">Company</label>
-                            <input type="text" name="company" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 input-focus transition">
+                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_company_label">Company</label>
+                            <input type="text" name="company" class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="contact_message_label">Requirement Details</label>
-                        <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 input-focus transition"></textarea>
+                        <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_message_label">Requirement Details</label>
+                        <textarea name="message" rows="4" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition"></textarea>
                     </div>
-                    <button type="submit" class="w-full py-4 bg-blue text-white font-bold rounded-xl hover:bg-blue-700 transition transform hover:scale-[1.02]" data-i18n="contact_submit_button">
+                    <button type="submit" class="w-full py-5 bg-brandBlue text-white font-black rounded-2xl hover:bg-blue-700 transition transform hover:scale-[1.02] shadow-xl shadow-brandBlue/30 uppercase tracking-widest text-sm" data-i18n="contact_submit_button">
                         Submit Requirement
                     </button>
                 </form>
             </div>
 
             <!-- Promotion Side -->
-            <div class="md:w-2/5 bg-slate-900 p-10 text-white flex flex-col justify-center items-center text-center">
-                <div class="w-20 h-20 bg-blue/20 rounded-2xl flex items-center justify-center text-4xl mb-6">📱</div>
-                <h3 class="text-2xl font-bold mb-4">On the go?</h3>
-                <p class="text-slate-400 mb-8">Manage your workforce or find work directly from your mobile device.</p>
-                <a href="https://play.google.com/store/apps/details?id=YOUR_APP_ID" class="transition transform hover:scale-105">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-16">
+            <div class="md:w-2/5 bg-slate-900 dark:bg-black p-12 text-white flex flex-col justify-center items-center text-center">
+                <div class="w-24 h-24 bg-brandBlue/20 rounded-3xl flex items-center justify-center text-4xl mb-8 border border-brandBlue/30">
+                    <i class="fas fa-mobile-alt text-brandBlue"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4">On the go?</h3>
+                <p class="text-slate-400 mb-10 leading-relaxed">Manage your workforce or find work directly from your mobile device.</p>
+                <a href="#" class="transition transform hover:scale-105">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14">
                 </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
-<footer class="bg-slate-900 text-slate-400 py-16">
-    <div class="container mx-auto px-6 grid md:grid-cols-3 gap-12 text-center md:text-left">
-        <div>
-            <div class="text-white font-bold text-2xl mb-4">ADHOCSY</div>
-            <p class="text-sm">Empowering the workforce through transparency and technology. Connect, work, and grow with dignity.</p>
+<!-- FOOTER (Synced with Home/About) -->
+<footer id="contact-footer" class="bg-slate-950 text-slate-500 py-20">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
+            <img src="logo-dark.png" class="h-10">
+            <div class="flex gap-10">
+                <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-facebook"></i></a>
+            </div>
         </div>
-        <div class="flex flex-col space-y-4">
-            <h4 class="text-white font-bold mb-2 uppercase tracking-wider text-sm">Navigation</h4>
-            <a href="index.html" class="hover:text-blue-400 transition">Home</a>
-            <a href="about.html" class="hover:text-blue-400 transition">About Us</a>
-            <a href="#" class="hover:text-blue-400 transition">Offerings</a>
+        <div class="text-center text-xs font-bold tracking-[0.3em] uppercase opacity-40">
+            © 2026 ADHOCSY TECHNOLOGIES. BUILT FOR DIGNITY.
         </div>
-        <div>
-            <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Contact Information</h4>
-            <p class="text-sm mb-4">General Inquiries & Support:</p>
-            <p class="text-blue-400 font-bold text-lg">support@adhocsy.com</p>
-        </div>
-    </div>
-    <div class="container mx-auto px-6 mt-12 pt-8 border-t border-slate-800 text-center text-xs">
-        © 2026 ADHOCSY Technologies Pvt Ltd. All rights reserved.
     </div>
 </footer>
 
 <script>
-    const translations = {
+    const dict = {
         en: {
-            nav_home: "Home",
-            nav_about: "About",
-            nav_offerings: "What We Offer",
+            nav_home: "Home", nav_about: "About", nav_contact: "Contact",
             contact_tag: "Support & Partnerships",
-            contact_hero_title: "Get in Touch with <br><span class='text-blue'>ADHOCSY</span>",
-            contact_hero_desc: "Have questions about our platform or interested in partnering with us? Our team is ready to help.",
+            heroTitle: "Get in Touch with <br><span class='text-brandBlue'>ADHOCSY</span>",
+            heroDesc: "Have questions about our platform or interested in partnering with us? Our team is ready to help.",
             contact_form_title: "Contact Form",
             contact_name_label: "Full Name",
             contact_email_label: "Work Email",
@@ -180,12 +190,10 @@
             contact_submit_button: "Submit Requirement"
         },
         hi: {
-            nav_home: "होम",
-            nav_about: "हमारे बारे में",
-            nav_offerings: "हमारी सेवाएँ",
+            nav_home: "होम", nav_about: "हमारे बारे में", nav_contact: "संपर्क",
             contact_tag: "सहायता और साझेदारी",
-            contact_hero_title: "ADHOCSY से <br><span class='text-blue'>संपर्क करें</span>",
-            contact_hero_desc: "हमारे प्लेटफ़ॉर्म के बारे में कोई प्रश्न है या हमारे साथ साझेदारी करने में रुचि रखते हैं? हमारी टीम मदद के लिए तैयार है।",
+            heroTitle: "ADHOCSY से <br><span class='text-brandBlue'>संपर्क करें</span>",
+            heroDesc: "हमारे प्लेटफ़ॉर्म के बारे में कोई प्रश्न है या हमारे साथ साझेदारी करने में रुचि रखते हैं? हमारी टीम मदद के लिए तैयार है।",
             contact_form_title: "संपर्क फ़ॉर्म",
             contact_name_label: "पूरा नाम",
             contact_email_label: "कार्य ईमेल",
@@ -195,12 +203,10 @@
             contact_submit_button: "विवरण सबमिट करें"
         },
         mr: {
-            nav_home: "होम",
-            nav_about: "आमच्याबद्दल",
-            nav_offerings: "आम्ही काय ऑफर करतो",
+            nav_home: "होम", nav_about: "आमच्याबद्दल", nav_contact: "संपर्क",
             contact_tag: "समर्थन आणि भागीदारी",
-            contact_hero_title: "ADHOCSY शी <br><span class='text-blue'>संपर्क साधा</span>",
-            contact_hero_desc: "आमच्या प्लॅटफॉर्मबद्दल काही प्रश्न आहेत किंवा आमच्याशी भागीदारी करण्यास उत्सुक आहात? आमची टीम मदतीसाठी तयार आहे.",
+            heroTitle: "ADHOCSY शी <br><span class='text-brandBlue'>संपर्क साधा</span>",
+            heroDesc: "आमच्या प्लॅटफॉर्मबद्दल काही प्रश्न आहेत किंवा आमच्याशी भागीदारी करण्यास उत्सुक आहात? आमची टीम मदतीसाठी तयार आहे.",
             contact_form_title: "संपर्क फॉर्म",
             contact_name_label: "पूर्ण नाव",
             contact_email_label: "काम ईमेल",
@@ -211,18 +217,29 @@
         }
     };
 
-    const langSwitch = document.getElementById('langSwitch');
-
-    langSwitch.addEventListener('change', (e) => {
-        const lang = e.target.value;
-        const t = translations[lang];
-        
+    function changeLang(lang) {
+        const t = dict[lang];
+        document.getElementById('heroTitle').innerHTML = t.heroTitle;
+        document.getElementById('heroDesc').innerText = t.heroDesc;
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (t[key]) el.innerHTML = t[key];
         });
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.remove('active', 'bg-brandBlue', 'text-white');
+            b.classList.add('text-slate-400');
+        });
+        const activeBtn = document.getElementById(`btn-${lang}`);
+        activeBtn.classList.add('active', 'bg-brandBlue', 'text-white');
+        activeBtn.classList.remove('text-slate-400');
+    }
+
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
     });
 </script>
-
 </body>
 </html>
