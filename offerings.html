@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What We Offer | ADHOCSY Solutions</title>
+    <title>Contact Us | ADHOCSY</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -25,216 +25,220 @@
         .glass-nav { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.9); }
         .dark .glass-nav { background: rgba(10, 13, 20, 0.9); border-bottom: 1px solid rgba(255,255,255,0.1); }
         .lang-btn.active { background-color: #2563eb; color: white; }
-        .offering-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .offering-card:hover { transform: translateY(-12px); }
-        
+
+        .input-focus:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
+
         /* Mobile Menu Animation */
-        #mobileMenu { transition: transform 0.3s ease-in-out; transform: translateX(100%); }
-        #mobileMenu.open { transform: translateX(0); }
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.active {
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
 
-<!-- NAVIGATION -->
 <header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100 dark:border-transparent">
     <div class="container mx-auto px-6 py-3 flex justify-between items-center">
         <a href="index.html" class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-brandBlue rounded-lg flex items-center justify-center text-white font-bold text-lg">A</div>
-            <span class="text-xl font-bold tracking-tight text-slate-800 dark:text-white">ADHOCSY</span>
+            <img src="logo-day.png" alt="ADHOCSY" class="h-10 dark:hidden">
+            <img src="logo-dark.png" alt="ADHOCSY" class="h-10 hidden dark:block">
         </a>
         
-        <!-- Desktop Nav -->
         <nav class="hidden lg:flex items-center space-x-8 font-bold text-xs uppercase tracking-widest">
             <a href="index.html" data-i18n="nav_home" class="hover:text-brandBlue transition">Home</a>
             <a href="about.html" data-i18n="nav_about" class="hover:text-brandBlue transition">About</a>
-            <a href="offering.html" data-i18n="nav_offering" class="text-brandBlue">Offerings</a>
-            <a href="contact.html" data-i18n="nav_contact" class="hover:text-brandBlue transition">Contact</a>
-            
-            <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
-                <button onclick="changeLang('en')" class="lang-btn active px-2.5 py-1.5 rounded-lg text-[9px] font-black transition">EN</button>
-                <button onclick="changeLang('hi')" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">HI</button>
-                <button onclick="changeLang('mr')" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">MR</button>
-            </div>
-
-            <button onclick="toggleTheme()" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400">
-                <i class="fas fa-moon" id="themeIcon"></i>
-            </button>
+            <a href="contact.html" data-i18n="nav_contact" class="text-brandBlue">Contact</a>
         </nav>
 
-        <!-- Mobile Toggle & Play Store -->
         <div class="flex items-center gap-4">
+            <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+                <button onclick="changeLang('en')" id="btn-en" class="lang-btn active px-2.5 py-1.5 rounded-lg text-[9px] font-black transition">EN</button>
+                <button onclick="changeLang('hi')" id="btn-hi" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">HI</button>
+                <button onclick="changeLang('mr')" id="btn-mr" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">MR</button>
+            </div>
+
+            <button id="themeToggle" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+
             <a href="#" class="hidden sm:block hover:scale-105 transition">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-8">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-9">
             </a>
-            <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-slate-800 dark:text-white">
+
+            <button id="menuBtn" class="lg:hidden text-2xl focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </div>
 </header>
 
-<!-- MOBILE MENU OVERLAY -->
-<div id="mobileMenu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark lg:hidden flex flex-col p-8">
+<div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden">
     <div class="flex justify-between items-center mb-12">
-        <span class="text-xl font-bold text-brandBlue">Menu</span>
-        <button onclick="toggleMobileMenu()" class="text-3xl text-slate-800 dark:text-white">
-            <i class="fas fa-times"></i>
-        </button>
+        <img src="logo-day.png" alt="ADHOCSY" class="h-8 dark:hidden">
+        <img src="logo-dark.png" alt="ADHOCSY" class="h-8 hidden dark:block">
+        <button id="closeBtn" class="text-3xl">&times;</button>
     </div>
     
-    <nav class="flex flex-col space-y-6 text-2xl font-bold">
-        <a href="index.html" onclick="toggleMobileMenu()" data-i18n="nav_home">Home</a>
-        <a href="about.html" onclick="toggleMobileMenu()" data-i18n="nav_about">About</a>
-        <a href="offering.html" onclick="toggleMobileMenu()" data-i18n="nav_offering" class="text-brandBlue">Offerings</a>
-        <a href="contact.html" onclick="toggleMobileMenu()" data-i18n="nav_contact">Contact</a>
+    <nav class="flex flex-col space-y-8 text-2xl font-black uppercase tracking-tighter">
+        <a href="index.html" data-i18n="nav_home" class="mobile-link">Home</a>
+        <a href="about.html" data-i18n="nav_about" class="mobile-link">About</a>
+        <a href="contact.html" data-i18n="nav_contact" class="mobile-link text-brandBlue">Contact</a>
     </nav>
 
-    <div class="mt-auto pt-10 border-t border-slate-100 dark:border-slate-800">
-        <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4">Select Language</p>
-        <div class="flex gap-4">
-            <button onclick="changeLang('en')" class="text-sm font-bold text-brandBlue">English</button>
-            <button onclick="changeLang('hi')" class="text-sm font-bold text-slate-400">Hindi</button>
-            <button onclick="changeLang('mr')" class="text-sm font-bold text-slate-400">Marathi</button>
-        </div>
-        <button onclick="toggleTheme()" class="mt-8 w-full py-4 rounded-2xl bg-slate-100 dark:bg-slate-800 flex justify-center items-center gap-3 font-bold">
-            <i class="fas fa-moon"></i> Switch Theme
-        </button>
+    <div class="mt-auto">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Download Our App</p>
+        <a href="#">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-12">
+        </a>
     </div>
 </div>
 
-<!-- HERO SECTION -->
-<section class="relative pt-44 pb-24 bg-slate-50 dark:bg-slate-900/40 overflow-hidden">
-    <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-        <div class="relative z-10 text-center md:text-left">
-            <span class="inline-block px-4 py-1 rounded-full bg-brandBlue/10 text-brandBlue text-[10px] font-black uppercase tracking-widest mb-6" data-i18n="offerings_tag">Our Solutions</span>
-            <h1 class="text-5xl md:text-7xl font-black leading-tight mb-8 dark:text-white" id="heroTitle">
-                The Solutions <br><span class="text-brandBlue">We Provide</span>
+<section class="relative pt-40 pb-20 bg-slate-50 dark:bg-slate-900/40">
+    <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <span class="inline-block px-4 py-1 rounded-full bg-brandBlue/10 text-brandBlue text-[10px] font-black uppercase tracking-widest mb-4" data-i18n="contact_tag">Support & Partnerships</span>
+            <h1 class="text-5xl md:text-6xl font-black leading-tight mb-8 dark:text-white" id="heroTitle">
+                Get in Touch with <br><span class="text-brandBlue">ADHOCSY</span>
             </h1>
-            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg mx-auto md:mx-0 leading-relaxed" id="heroDesc">
-                Discover how ADHOCSY creates a balanced ecosystem for both hardworking individuals and forward-thinking enterprises.
+            <p class="text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg" id="heroDesc">
+                Have questions about our platform or interested in partnering with us? Our team is ready to help.
             </p>
-            <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                <a href="#" class="bg-brandBlue text-white px-8 py-4 rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-blue-700 transition shadow-xl shadow-brandBlue/20" data-i18n="cta_explore">Explore Benefits</a>
+            <div class="space-y-6">
+                <div class="flex items-center gap-5 text-slate-600 dark:text-slate-300">
+                    <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg text-brandBlue">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </div>
+                    <span class="font-bold">support@adhocsy.com</span>
+                </div>
+                <div class="flex items-center gap-5 text-slate-600 dark:text-slate-300">
+                    <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg text-brandBlue">
+                        <i class="fas fa-map-marker-alt text-xl"></i>
+                    </div>
+                    <span class="font-bold">India-wide Digital Ecosystem</span>
+                </div>
             </div>
         </div>
-        <div class="relative group hidden md:block">
-            <div class="absolute -inset-4 bg-brandBlue/10 rounded-[50px] blur-2xl"></div>
-            <div class="relative rounded-[40px] overflow-hidden border-8 border-white dark:border-slate-800 shadow-2xl h-[550px]">
-                <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=1000" alt="Solutions" class="w-full h-full object-cover">
-            </div>
+        <div class="rounded-[40px] overflow-hidden shadow-2xl h-[450px] border-8 border-white dark:border-slate-800">
+            <img src="image3.png" alt="Contact Us" class="w-full h-full object-cover">
         </div>
     </div>
 </section>
 
-<!-- OFFERINGS GRID -->
 <section class="py-24 bg-white dark:bg-brandDark">
     <div class="container mx-auto px-6">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-3xl md:text-5xl font-black mb-6 dark:text-white" data-i18n="offerings_section_title">Ecosystem Capabilities</h2>
-            <p class="text-slate-500 dark:text-slate-400 font-medium" data-i18n="offerings_section_desc">We bridge the gap between skill and demand with technology built on trust.</p>
-        </div>
+        <div class="max-w-5xl mx-auto bg-white dark:bg-slate-900 rounded-[40px] shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden flex flex-col md:flex-row">
+            <div class="p-12 md:w-3/5">
+                <h2 class="text-3xl font-black mb-10 dark:text-white" data-i18n="contact_form_title">Contact Form</h2>
+                <form action="mailto:support@adhocsy.com" method="POST" enctype="text/plain" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_name_label">Full Name</label>
+                            <input type="text" name="name" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_email_label">Work Email</label>
+                            <input type="email" name="email" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_phone_label">Phone</label>
+                            <input type="tel" name="phone" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_company_label">Company</label>
+                            <input type="text" name="company" class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_message_label">Requirement Details</label>
+                        <textarea name="message" rows="4" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-5 bg-brandBlue text-white font-black rounded-2xl hover:bg-blue-700 transition transform hover:scale-[1.02] shadow-xl shadow-brandBlue/30 uppercase tracking-widest text-sm" data-i18n="contact_submit_button">
+                        Submit Requirement
+                    </button>
+                </form>
+            </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Card 1 -->
-            <div class="offering-card bg-slate-50 dark:bg-slate-900/50 rounded-[40px] p-2 border border-slate-100 dark:border-slate-800">
-                <div class="rounded-[35px] overflow-hidden h-56 mb-8">
-                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover">
+            <div class="md:w-2/5 bg-slate-900 dark:bg-black p-12 text-white flex flex-col justify-center items-center text-center">
+                <div class="w-24 h-24 bg-brandBlue/20 rounded-3xl flex items-center justify-center text-4xl mb-8 border border-brandBlue/30">
+                    <i class="fas fa-mobile-alt text-brandBlue"></i>
                 </div>
-                <div class="px-6 pb-10">
-                    <h4 class="text-xl font-black mb-4 dark:text-white" data-i18n="offering_worker_solutions">Worker Solutions</h4>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-6" data-i18n="offering_worker_desc">Access to verified jobs, instant skill matching, and guaranteed fair wages.</p>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="offering-card bg-slate-50 dark:bg-slate-900/50 rounded-[40px] p-2 border border-slate-100 dark:border-slate-800">
-                <div class="rounded-[35px] overflow-hidden h-56 mb-8">
-                    <img src="https://images.unsplash.com/photo-1521791136366-3e44c703f54b?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover">
-                </div>
-                <div class="px-6 pb-10">
-                    <h4 class="text-xl font-black mb-4 dark:text-white" data-i18n="offering_employer_solutions">Employer Solutions</h4>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-6" data-i18n="offering_employer_desc">Quickly scale your workforce with pre-verified talent ready to work.</p>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="offering-card bg-slate-50 dark:bg-slate-900/50 rounded-[40px] p-2 border border-slate-100 dark:border-slate-800">
-                <div class="rounded-[35px] overflow-hidden h-56 mb-8">
-                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover">
-                </div>
-                <div class="px-6 pb-10">
-                    <h4 class="text-xl font-black mb-4 dark:text-white" data-i18n="offering_trust_safety">Trust & Safety</h4>
-                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-6" data-i18n="offering_trust_desc">Advanced AI vetting ensures trust is built into every single transaction.</p>
-                </div>
+                <h3 class="text-2xl font-black mb-4">On the go?</h3>
+                <p class="text-slate-400 mb-10 leading-relaxed">Manage your workforce or find work directly from your mobile device.</p>
+                <a href="#" class="transition transform hover:scale-105">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14">
+                </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="bg-slate-950 text-slate-500 py-16">
-    <div class="container mx-auto px-6 text-center">
-        <div class="text-white font-bold text-2xl mb-8">ADHOCSY</div>
-        <div class="flex justify-center gap-8 mb-10 text-xl">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
+<footer class="bg-slate-950 text-slate-500 py-20">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
+            <img src="logo-dark.png" class="h-10">
+            <div class="flex gap-10">
+                <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-facebook"></i></a>
+            </div>
         </div>
-        <p class="text-[10px] uppercase tracking-[0.3em] opacity-40">© 2026 ADHOCSY TECHNOLOGIES.</p>
+        <div class="text-center text-xs font-bold tracking-[0.3em] uppercase opacity-40">
+            © 2026 ADHOCSY TECHNOLOGIES. BUILT FOR DIGNITY.
+        </div>
     </div>
 </footer>
 
 <script>
     const dict = {
         en: {
-            nav_home: "Home", nav_about: "About", nav_offering: "Offerings", nav_contact: "Contact",
-            offerings_tag: "Our Solutions",
-            heroTitle: "The Solutions <br><span class='text-brandBlue'>We Provide</span>",
-            heroDesc: "Discover how ADHOCSY creates a balanced ecosystem for both hardworking individuals and forward-thinking enterprises.",
-            offerings_section_title: "Ecosystem Capabilities",
-            offerings_section_desc: "We bridge the gap between skill and demand with technology built on trust.",
-            offering_worker_solutions: "Worker Solutions",
-            offering_worker_desc: "Access to verified jobs, instant skill matching, and guaranteed fair wages.",
-            offering_employer_solutions: "Employer Solutions",
-            offering_employer_desc: "Quickly scale your workforce with pre-verified talent ready to work.",
-            offering_trust_safety: "Trust & Safety",
-            offering_trust_desc: "Advanced AI vetting ensures trust is built into every single transaction.",
-            cta_explore: "Explore Benefits"
+            nav_home: "Home", nav_about: "About", nav_contact: "Contact",
+            contact_tag: "Support & Partnerships",
+            heroTitle: "Get in Touch with <br><span class='text-brandBlue'>ADHOCSY</span>",
+            heroDesc: "Have questions about our platform or interested in partnering with us? Our team is ready to help.",
+            contact_form_title: "Contact Form",
+            contact_name_label: "Full Name",
+            contact_email_label: "Work Email",
+            contact_phone_label: "Phone",
+            contact_company_label: "Company",
+            contact_message_label: "Requirement Details",
+            contact_submit_button: "Submit Requirement"
         },
         hi: {
-            nav_home: "होम", nav_about: "हमारे बारे में", nav_offering: "सेवाएं", nav_contact: "संपर्क",
-            offerings_tag: "हमारे समाधान",
-            heroTitle: "समाधान जो <br><span class='text-brandBlue'>हम प्रदान करते हैं</span>",
-            heroDesc: "जानें कि कैसे ADHOCSY मेहनती व्यक्तियों और प्रगतिशील उद्यमों दोनों के लिए एक संतुलित पारिस्थितिकी तंत्र बनाता है।",
-            offerings_section_title: "पारिस्थितिकी तंत्र की क्षमताएं",
-            offerings_section_desc: "हम विश्वास पर बनी तकनीक के साथ कौशल और मांग के बीच की खाई को पाटते हैं।",
-            offering_worker_solutions: "श्रमिक समाधान",
-            offering_worker_desc: "सत्यापित नौकरियों, तत्काल कौशल मिलान और उचित वेतन तक पहुंच।",
-            offering_employer_solutions: "नियोक्ता समाधान",
-            offering_employer_desc: "पूर्व-सत्यापित प्रतिभा के साथ अपने कार्यबल को तेजी से बढ़ाएं।",
-            offering_trust_safety: "विश्वास और सुरक्षा",
-            offering_trust_desc: "उन्नत AI वेटिंग सुनिश्चित करती है कि हर लेनदेन में विश्वास बना रहे।",
-            cta_explore: "लाभ जानें"
+            nav_home: "होम", nav_about: "हमारे बारे में", nav_contact: "संपर्क",
+            contact_tag: "सहायता और साझेदारी",
+            heroTitle: "ADHOCSY से <br><span class='text-brandBlue'>संपर्क करें</span>",
+            heroDesc: "हमारे प्लेटफ़ॉर्म के बारे में कोई प्रश्न है या हमारे साथ साझेदारी करने में रुचि रखते हैं? हमारी टीम मदद के लिए तैयार है।",
+            contact_form_title: "संपर्क फ़ॉर्म",
+            contact_name_label: "पूरा नाम",
+            contact_email_label: "कार्य ईमेल",
+            contact_phone_label: "फ़ोन",
+            contact_company_label: "कंपनी",
+            contact_message_label: "आवश्यकता का विवरण",
+            contact_submit_button: "विवरण सबमिट करें"
         },
         mr: {
-            nav_home: "होम", nav_about: "आमच्याबद्दल", nav_offering: "ऑफरिंग", nav_contact: "संपर्क",
-            offerings_tag: "आमचे उपाय",
-            heroTitle: "आम्ही प्रदान <br><span class='text-brandBlue'>करीत असलेले उपाय</span>",
-            heroDesc: "ADHOCSY कष्टाळू व्यक्ती आणि प्रगत उपक्रम दोघांसाठी संतुलित परिसंस्था कशी तयार करते ते शोधा.",
-            offerings_section_title: "परिसंस्था क्षमता",
-            offerings_section_desc: "आम्ही विश्वासावर आधारित तंत्रज्ञानासह कौशल्य आणि मागणी यांच्यातील दरी सांधतो.",
-            offering_worker_solutions: "कामगार उपाय",
-            offering_worker_desc: "सत्यापित नोकऱ्या, त्वरित कौशल्य जुळणी आणि रास्त मजुरी मिळवा.",
-            offering_employer_solutions: "नियोक्ता उपाय",
-            offering_employer_desc: "तुमच्या गरजेनुसार काम करण्यासाठी तयार असलेल्या प्रतिभेसह तुमचे कार्यबल वाढवा.",
-            offering_trust_safety: "विश्वास आणि सुरक्षितता",
-            offering_trust_desc: "प्रगत AI पडताळणी सिस्टीम व्यवहारात विश्वास निर्माण करते.",
-            cta_explore: "फायदे शोधा"
+            nav_home: "होम", nav_about: "आमच्याबद्दल", nav_contact: "संपर्क",
+            contact_tag: "समर्थन आणि भागीदारी",
+            heroTitle: "ADHOCSY शी <br><span class='text-brandBlue'>संपर्क साधा</span>",
+            heroDesc: "आमच्या प्लॅटफॉर्मबद्दल काही प्रश्न आहेत किंवा आमच्याशी भागीदारी करण्यास उत्सुक आहात? आमची टीम मदतीसाठी तयार आहे.",
+            contact_form_title: "संपर्क फॉर्म",
+            contact_name_label: "पूर्ण नाव",
+            contact_email_label: "काम ईमेल",
+            contact_phone_label: "फोन",
+            contact_company_label: "कंपनी",
+            contact_message_label: "आवश्यकतेचा तपशील",
+            contact_submit_button: "तपशील सबमिट करा"
         }
     };
-
-    function toggleMobileMenu() {
-        document.getElementById('mobileMenu').classList.toggle('open');
-        document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
-    }
 
     function changeLang(lang) {
         const t = dict[lang];
@@ -244,12 +248,32 @@
             const key = el.getAttribute('data-i18n');
             if (t[key]) el.innerHTML = t[key];
         });
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.remove('active', 'bg-brandBlue', 'text-white');
+            b.classList.add('text-slate-400');
+        });
+        const activeBtn = document.getElementById(`btn-${lang}`);
+        activeBtn.classList.add('active', 'bg-brandBlue', 'text-white');
+        activeBtn.classList.remove('text-slate-400');
     }
 
-    function toggleTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    themeToggle.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
-        document.getElementById('themeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-    }
+        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    });
+
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+    closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    });
 </script>
 </body>
 </html>
