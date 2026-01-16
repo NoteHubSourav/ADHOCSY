@@ -125,7 +125,8 @@
     </div>
 </section>
 
-<section class="py-12 bg-white dark:bg-brandDark">
+<!-- Added id="offerings" here for navigation -->
+<section id="offerings" class="py-12 bg-white dark:bg-brandDark">
     <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-3 gap-6">
             <img src="image1.png" alt="Feature 1" class="rounded-3xl w-full aspect-video object-cover shadow-lg border border-slate-100 dark:border-slate-800">
@@ -199,10 +200,11 @@
     </div>
 </section>
 
+<!-- Ensure id="contact" is correctly set here -->
 <footer id="contact" class="bg-slate-950 text-slate-500 py-20">
     <div class="container mx-auto px-6">
         <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
-            <img src="logo-dark.png" class="h-10">
+            <img src="logo-dark.png" class="h-10" alt="ADHOCSY">
             <div class="flex gap-10">
                 <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-instagram"></i></a>
                 <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-youtube"></i></a>
@@ -216,7 +218,7 @@
 </footer>
 
 <script>
-    // Dictionary (Same as provided)
+    // Dictionary
     const dict = {
         en: {
             nav_about: "About", nav_offerings: "Offering", nav_contact: "Contact",
