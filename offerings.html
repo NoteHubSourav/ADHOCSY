@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | ADHOCSY</title>
+    <title>Offerings & Partnerships – ADHOCSY</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -25,14 +25,7 @@
         .glass-nav { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.9); }
         .dark .glass-nav { background: rgba(10, 13, 20, 0.9); border-bottom: 1px solid rgba(255,255,255,0.1); }
         .lang-btn.active { background-color: #2563eb; color: white; }
-
-        .input-focus:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-            outline: none;
-        }
-
-        /* Mobile Menu Animation */
+        
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
             transform: translateX(100%);
@@ -40,21 +33,36 @@
         #mobile-menu.active {
             transform: translateX(0);
         }
+
+        .offering-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        .offering-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.2);
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
 
 <header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100 dark:border-transparent">
     <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-2">
-            <img src="logo-day.png" alt="ADHOCSY" class="h-10 dark:hidden">
-            <img src="logo-dark.png" alt="ADHOCSY" class="h-10 hidden dark:block">
+        <a href="index.html" class="flex items-center gap-3 group">
+            <div class="flex items-center gap-2">
+                <img src="logo-day.png" alt="Logo" class="h-10 dark:hidden">
+                <img src="logo-dark.png" alt="Logo" class="h-10 hidden dark:block">
+            </div>
+            <span class="text-2xl font-black tracking-tighter text-slate-900 dark:text-white group-hover:text-brandBlue transition-colors">ADHOCSY</span>
         </a>
         
-        <nav class="hidden lg:flex items-center space-x-8 font-bold text-xs uppercase tracking-widest">
+        <nav class="hidden lg:flex items-center space-x-6 font-bold text-[10px] uppercase tracking-widest">
             <a href="index.html" data-i18n="nav_home" class="hover:text-brandBlue transition">Home</a>
             <a href="about.html" data-i18n="nav_about" class="hover:text-brandBlue transition">About</a>
-            <a href="contact.html" data-i18n="nav_contact" class="text-brandBlue">Contact</a>
+            <a href="offerings.html" data-i18n="nav_offerings" class="text-brandBlue">Offering</a>
+            <a href="construction.html" data-i18n="nav_construction" class="hover:text-brandBlue transition">Construction</a>
+            <a href="warehouse.html" data-i18n="nav_warehouse" class="hover:text-brandBlue transition">Warehouse</a>
+            <a href="contact.html" data-i18n="nav_contact" class="hover:text-brandBlue transition">Contact</a>
         </nav>
 
         <div class="flex items-center gap-4">
@@ -63,14 +71,10 @@
                 <button onclick="changeLang('hi')" id="btn-hi" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">HI</button>
                 <button onclick="changeLang('mr')" id="btn-mr" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">MR</button>
             </div>
-
-            <button id="themeToggle" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400">
+            
+            <button id="themeToggle" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 transition">
                 <i class="fas fa-moon" id="themeIcon"></i>
             </button>
-
-            <a href="#" class="hidden sm:block hover:scale-105 transition">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-9">
-            </a>
 
             <button id="menuBtn" class="lg:hidden text-2xl focus:outline-none">
                 <i class="fas fa-bars"></i>
@@ -81,117 +85,127 @@
 
 <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden">
     <div class="flex justify-between items-center mb-12">
-        <img src="logo-day.png" alt="ADHOCSY" class="h-8 dark:hidden">
-        <img src="logo-dark.png" alt="ADHOCSY" class="h-8 hidden dark:block">
+        <div class="flex items-center gap-2">
+            <img src="logo-day.png" alt="ADHOCSY" class="h-8 dark:hidden">
+            <img src="logo-dark.png" alt="ADHOCSY" class="h-8 hidden dark:block">
+            <span class="text-xl font-black tracking-tighter dark:text-white">ADHOCSY</span>
+        </div>
         <button id="closeBtn" class="text-3xl">&times;</button>
     </div>
     
-    <nav class="flex flex-col space-y-8 text-2xl font-black uppercase tracking-tighter">
+    <nav class="flex flex-col space-y-6 text-xl font-black uppercase tracking-tighter">
         <a href="index.html" data-i18n="nav_home" class="mobile-link">Home</a>
         <a href="about.html" data-i18n="nav_about" class="mobile-link">About</a>
-        <a href="contact.html" data-i18n="nav_contact" class="mobile-link text-brandBlue">Contact</a>
+        <a href="offerings.html" data-i18n="nav_offerings" class="mobile-link text-brandBlue">Offering</a>
+        <a href="construction.html" data-i18n="nav_construction" class="mobile-link">Construction</a>
+        <a href="warehouse.html" data-i18n="nav_warehouse" class="mobile-link">Warehouse</a>
+        <a href="contact.html" data-i18n="nav_contact" class="mobile-link">Contact</a>
     </nav>
-
-    <div class="mt-auto">
-        <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Download Our App</p>
-        <a href="#">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-12">
-        </a>
-    </div>
 </div>
 
-<section class="relative pt-40 pb-20 bg-slate-50 dark:bg-slate-900/40">
-    <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-        <div>
-            <span class="inline-block px-4 py-1 rounded-full bg-brandBlue/10 text-brandBlue text-[10px] font-black uppercase tracking-widest mb-4" data-i18n="contact_tag">Support & Partnerships</span>
-            <h1 class="text-5xl md:text-6xl font-black leading-tight mb-8 dark:text-white" id="heroTitle">
-                Get in Touch with <br><span class="text-brandBlue">ADHOCSY</span>
-            </h1>
-            <p class="text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-lg" id="heroDesc">
-                Have questions about our platform or interested in partnering with us? Our team is ready to help.
-            </p>
-            <div class="space-y-6">
-                <div class="flex items-center gap-5 text-slate-600 dark:text-slate-300">
-                    <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg text-brandBlue">
-                        <i class="fas fa-envelope text-xl"></i>
-                    </div>
-                    <span class="font-bold">support@adhocsy.com</span>
-                </div>
-                <div class="flex items-center gap-5 text-slate-600 dark:text-slate-300">
-                    <div class="w-12 h-12 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg text-brandBlue">
-                        <i class="fas fa-map-marker-alt text-xl"></i>
-                    </div>
-                    <span class="font-bold">India-wide Digital Ecosystem</span>
-                </div>
-            </div>
-        </div>
-        <div class="rounded-[40px] overflow-hidden shadow-2xl h-[450px] border-8 border-white dark:border-slate-800">
-            <img src="image3.png" alt="Contact Us" class="w-full h-full object-cover">
-        </div>
-    </div>
-</section>
-
-<section class="py-24 bg-white dark:bg-brandDark">
+<main class="pt-32 pb-20">
     <div class="container mx-auto px-6">
-        <div class="max-w-5xl mx-auto bg-white dark:bg-slate-900 rounded-[40px] shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden flex flex-col md:flex-row">
-            <div class="p-12 md:w-3/5">
-                <h2 class="text-3xl font-black mb-10 dark:text-white" data-i18n="contact_form_title">Contact Form</h2>
-                <form action="mailto:support@adhocsy.com" method="POST" enctype="text/plain" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_name_label">Full Name</label>
-                            <input type="text" name="name" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 dark:text-white" data-i18n="page_title">Industry Specific <span class="text-brandBlue">Solutions</span></h1>
+            <p class="text-xl text-slate-500 max-w-2xl mx-auto" data-i18n="page_subtitle">Tailored workforce management for construction and supply chain sectors.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10 mb-32">
+            <!-- Construction Sector Button -->
+            <a href="construction.html" class="offering-card bg-slate-50 dark:bg-slate-900/40 rounded-[40px] border border-slate-100 dark:border-slate-800 group block">
+                <div class="h-72 overflow-hidden">
+                    <img src="construction1.png" alt="Construction" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="p-10">
+                    <h2 class="text-3xl font-black mb-4 dark:text-white" data-i18n="off_c_title">Construction Workforce</h2>
+                    <p class="text-slate-500 mb-8 leading-relaxed" data-i18n="off_c_desc">On-demand skilled and unskilled labor for real estate, infrastructure, and urban projects.</p>
+                    <span class="inline-flex items-center gap-3 bg-brandBlue text-white px-8 py-4 rounded-2xl font-black group-hover:bg-blue-700 transition" data-i18n="off_c_btn">Explore Sector</span>
+                </div>
+            </a>
+
+            <!-- Warehouse Sector Button -->
+            <a href="warehouse.html" class="offering-card bg-slate-50 dark:bg-slate-900/40 rounded-[40px] border border-slate-100 dark:border-slate-800 group block">
+                <div class="h-72 overflow-hidden">
+                    <img src="warehouse1.png" alt="Warehouse" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
+                <div class="p-10">
+                    <h2 class="text-3xl font-black mb-4 dark:text-white" data-i18n="off_w_title">Warehouse Workforce</h2>
+                    <p class="text-slate-500 mb-8 leading-relaxed" data-i18n="off_w_desc">Specialized manpower for sorting, packing, loading, and inventory management.</p>
+                    <span class="inline-flex items-center gap-3 bg-slate-900 dark:bg-white dark:text-brandDark text-white px-8 py-4 rounded-2xl font-black transition" data-i18n="off_w_btn">Explore Sector</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- VOLUNTEER PARTNER SECTION -->
+        <div class="bg-slate-50 dark:bg-slate-900/40 rounded-[50px] p-8 md:p-16 border-2 border-brandBlue/10 relative overflow-hidden">
+            <div class="relative z-10 flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2">
+                    <span class="inline-block px-4 py-2 rounded-full bg-brandBlue/10 text-brandBlue font-black text-xs uppercase tracking-widest mb-6" data-i18n="vol_tag">Partnership Program</span>
+                    <h2 class="text-4xl md:text-5xl font-black mb-8 dark:text-white leading-tight" data-i18n="vol_title">Join Adhocsy as a <span class="text-brandBlue">Volunteer Partner</span></h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-400 mb-10" data-i18n="vol_desc">Earn monthly income by simply referring workers or companies to Adhocsy. No investment. No targets. Just smart referrals.</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-10">
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                            <span class="text-3xl mb-2 block">🚫</span>
+                            <p class="font-bold text-sm" data-i18n="vol_f1">No Investment</p>
                         </div>
-                        <div>
-                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_email_label">Work Email</label>
-                            <input type="email" name="email" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                            <span class="text-3xl mb-2 block">🎯</span>
+                            <p class="font-bold text-sm" data-i18n="vol_f2">No Targets</p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_phone_label">Phone</label>
-                            <input type="tel" name="phone" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_company_label">Company</label>
-                            <input type="text" name="company" class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition">
+                </div>
+                
+                <div class="lg:w-1/2 w-full">
+                    <div class="bg-slate-900 rounded-[40px] p-8 md:p-10 text-white shadow-2xl">
+                        <h3 class="text-2xl font-black mb-8 border-b border-slate-800 pb-6 flex items-center gap-3">
+                            <span class="p-3 bg-brandBlue rounded-2xl text-xl">🤝</span>
+                            <span data-i18n="earn_w_title">Earn by Referring Workers</span>
+                        </h3>
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-start gap-4" data-i18n="earn_w1">₹10 when a worker joins using your Referral ID</li>
+                            <li class="flex items-start gap-4" data-i18n="earn_w2">₹6 per job completed by the L2 worker</li>
+                            <li class="flex items-start gap-4" data-i18n="earn_w3">₹4 per job from the next referral level</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-4 text-[10px] font-black uppercase tracking-widest text-emerald-400">
+                            <span class="bg-emerald-400/10 px-3 py-1.5 rounded-lg">✅ <span data-i18n="tag_life">Lifetime Earnings</span></span>
+                            <span class="bg-emerald-400/10 px-3 py-1.5 rounded-lg">✅ <span data-i18n="tag_direct">Direct to Wallet</span></span>
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-black text-slate-500 uppercase tracking-widest mb-3" data-i18n="contact_message_label">Requirement Details</label>
-                        <textarea name="message" rows="4" required class="w-full px-5 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 input-focus transition"></textarea>
-                    </div>
-                    <button type="submit" class="w-full py-5 bg-brandBlue text-white font-black rounded-2xl hover:bg-blue-700 transition transform hover:scale-[1.02] shadow-xl shadow-brandBlue/30 uppercase tracking-widest text-sm" data-i18n="contact_submit_button">
-                        Submit Requirement
-                    </button>
-                </form>
+                </div>
             </div>
 
-            <div class="md:w-2/5 bg-slate-900 dark:bg-black p-12 text-white flex flex-col justify-center items-center text-center">
-                <div class="w-24 h-24 bg-brandBlue/20 rounded-3xl flex items-center justify-center text-4xl mb-8 border border-brandBlue/30">
-                    <i class="fas fa-mobile-alt text-brandBlue"></i>
+            <div class="grid lg:grid-cols-2 gap-10 mt-10">
+                <div class="bg-brandBlue text-white p-10 rounded-[40px]">
+                    <h3 class="text-2xl font-black mb-6 flex items-center gap-3">
+                        <span class="p-3 bg-white/20 rounded-2xl text-xl">🏢</span>
+                        <span data-i18n="earn_c_title">Earn by Referring Companies</span>
+                    </h3>
+                    <p class="text-xl font-bold mb-4" data-i18n="earn_c1">Get 2% of platform fees every month</p>
+                    <p class="text-blue-100 mb-8" data-i18n="earn_c2">Earnings continue as long as the company works with Adhocsy.</p>
+                    <div class="bg-white/10 p-6 rounded-3xl border border-white/10">
+                        <p class="text-xs font-black uppercase tracking-widest mb-4" data-i18n="ex_title">Example:</p>
+                        <p class="text-sm">100 workers × ₹700 per shift = ₹70,000 | Fee (8%) = ₹5,600</p>
+                        <p class="text-lg font-black mt-2">👉 <span data-i18n="ex_res">You earn ₹112 every month</span></p>
+                    </div>
                 </div>
-                <h3 class="text-2xl font-black mb-4">On the go?</h3>
-                <p class="text-slate-400 mb-10 leading-relaxed">Manage your workforce or find work directly from your mobile device.</p>
-                <a href="#" class="transition transform hover:scale-105">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14">
-                </a>
+
+                <div class="bg-white dark:bg-slate-800 p-10 rounded-[40px] flex flex-col justify-between border border-slate-100 dark:border-slate-700">
+                    <div>
+                        <h3 class="text-2xl font-black mb-6 dark:text-white" data-i18n="who_title">Who Can Join?</h3>
+                        <p class="text-slate-500 font-bold mb-6" data-i18n="who_list">College students • Working professionals • Freelancers • Consultants</p>
+                    </div>
+                    <a href="#" class="block w-full text-center bg-brandBlue text-white py-5 rounded-2xl font-black text-xl hover:scale-[1.02] transition" data-i18n="start_btn">Start Earning Now</a>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</main>
 
 <footer class="bg-slate-950 text-slate-500 py-20">
-    <div class="container mx-auto px-6">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
-            <img src="logo-dark.png" class="h-10">
-            <div class="flex gap-10">
-                <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-youtube"></i></a>
-                <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-facebook"></i></a>
-            </div>
-        </div>
-        <div class="text-center text-xs font-bold tracking-[0.3em] uppercase opacity-40">
+    <div class="container mx-auto px-6 text-center">
+        <img src="logo-dark.png" class="h-10 mx-auto mb-10" alt="ADHOCSY">
+        <div class="text-xs font-bold tracking-[0.3em] uppercase opacity-40">
             © 2026 ADHOCSY TECHNOLOGIES. BUILT FOR DIGNITY.
         </div>
     </div>
@@ -200,50 +214,69 @@
 <script>
     const dict = {
         en: {
-            nav_home: "Home", nav_about: "About", nav_contact: "Contact",
-            contact_tag: "Support & Partnerships",
-            heroTitle: "Get in Touch with <br><span class='text-brandBlue'>ADHOCSY</span>",
-            heroDesc: "Have questions about our platform or interested in partnering with us? Our team is ready to help.",
-            contact_form_title: "Contact Form",
-            contact_name_label: "Full Name",
-            contact_email_label: "Work Email",
-            contact_phone_label: "Phone",
-            contact_company_label: "Company",
-            contact_message_label: "Requirement Details",
-            contact_submit_button: "Submit Requirement"
+            nav_home: "Home", nav_about: "About", nav_offerings: "Offering", nav_contact: "Contact",
+            nav_construction: "Construction", nav_warehouse: "Warehouse",
+            page_title: "Industry Specific <span class='text-brandBlue'>Solutions</span>",
+            page_subtitle: "Tailored workforce management for construction and supply chain sectors.",
+            off_c_title: "Construction Workforce", off_c_desc: "On-demand skilled and unskilled labor for real estate, infrastructure, and urban projects.", off_c_btn: "Explore Sector",
+            off_w_title: "Warehouse Workforce", off_w_desc: "Specialized manpower for sorting, packing, loading, and inventory management.", off_w_btn: "Explore Sector",
+            vol_tag: "Partnership Program", vol_title: "Join Adhocsy as a <span class='text-brandBlue'>Volunteer Partner</span>",
+            vol_desc: "Earn monthly income by simply referring workers or companies to Adhocsy.",
+            vol_f1: "No Investment", vol_f2: "No Targets",
+            earn_w_title: "Earn by Referring Workers",
+            earn_w1: "• ₹10 when a worker joins using your Referral ID",
+            earn_w2: "• ₹6 per job completed by the L2 worker",
+            earn_w3: "• ₹4 per job from the next referral level",
+            tag_life: "Lifetime Earnings", tag_direct: "Direct to Wallet",
+            earn_c_title: "Earn by Referring Companies", earn_c1: "Get 2% of platform fees every month", earn_c2: "Earnings continue as long as the company works with Adhocsy.",
+            ex_title: "Example:", ex_res: "You earn ₹112 every month",
+            who_title: "Who Can Join?", who_list: "College students • Working professionals • Freelancers • Consultants",
+            start_btn: "Start Earning Now"
         },
         hi: {
-            nav_home: "होम", nav_about: "हमारे बारे में", nav_contact: "संपर्क",
-            contact_tag: "सहायता और साझेदारी",
-            heroTitle: "ADHOCSY से <br><span class='text-brandBlue'>संपर्क करें</span>",
-            heroDesc: "हमारे प्लेटफ़ॉर्म के बारे में कोई प्रश्न है या हमारे साथ साझेदारी करने में रुचि रखते हैं? हमारी टीम मदद के लिए तैयार है।",
-            contact_form_title: "संपर्क फ़ॉर्म",
-            contact_name_label: "पूरा नाम",
-            contact_email_label: "कार्य ईमेल",
-            contact_phone_label: "फ़ोन",
-            contact_company_label: "कंपनी",
-            contact_message_label: "आवश्यकता का विवरण",
-            contact_submit_button: "विवरण सबमिट करें"
+            nav_home: "होम", nav_about: "हमारे बारे में", nav_offerings: "सेवाएं", nav_contact: "संपर्क",
+            nav_construction: "निर्माण", nav_warehouse: "वेयरहाउस",
+            page_title: "उद्योग विशिष्ट <span class='text-brandBlue'>समाधान</span>",
+            page_subtitle: "निर्माण और आपूर्ति श्रृंखला क्षेत्रों के लिए विशेष कार्यबल प्रबंधन।",
+            off_c_title: "निर्माण कार्यबल", off_c_desc: "रियल एस्टेट और बुनियादी ढांचे के लिए ऑन-डिमांड कुशल और अकुशल श्रम।", off_c_btn: "सेक्टर देखें",
+            off_w_title: "वेयरहाउस कार्यबल", off_w_desc: "सॉर्टिंग, पैकिंग और लोडिंग के लिए विशेष जनशक्ति।", off_w_btn: "सेक्टर देखें",
+            vol_tag: "साझेदारी कार्यक्रम", vol_title: "Adhocsy के साथ <span class='text-brandBlue'>वॉलंटियर पार्टनर</span> बनें",
+            vol_desc: "श्रमिकों या कंपनियों को रेफर करके मासिक आय अर्जित करें।",
+            vol_f1: "कोई निवेश नहीं", vol_f2: "कोई लक्ष्य नहीं",
+            earn_w_title: "श्रमिकों को रेफर करके कमाएं",
+            earn_w1: "• आपकी रेफरल आईडी से जुड़ने पर ₹10",
+            earn_w2: "• L2 श्रमिक के काम पर ₹6",
+            earn_w3: "• अगले स्तर से ₹4 प्रति कार्य",
+            tag_life: "जीवन भर की कमाई", tag_direct: "सीधे वॉलेट में",
+            earn_c_title: "कंपनियों को रेफर करके कमाएं", earn_c1: "हर महीने प्लेटफॉर्म फीस का 2% प्राप्त करें", earn_c2: "कमाई जारी रहती है जब तक कंपनी जुड़ी है।",
+            ex_title: "उदाहरण:", ex_res: "आप हर महीने ₹112 कमाते हैं",
+            who_title: "कौन शामिल हो सकता है?", who_list: "छात्र • पेशेवर • फ्रीलांसर • सलाहकार",
+            start_btn: "अभी कमाई शुरू करें"
         },
         mr: {
-            nav_home: "होम", nav_about: "आमच्याबद्दल", nav_contact: "संपर्क",
-            contact_tag: "समर्थन आणि भागीदारी",
-            heroTitle: "ADHOCSY शी <br><span class='text-brandBlue'>संपर्क साधा</span>",
-            heroDesc: "आमच्या प्लॅटफॉर्मबद्दल काही प्रश्न आहेत किंवा आमच्याशी भागीदारी करण्यास उत्सुक आहात? आमची टीम मदतीसाठी तयार आहे.",
-            contact_form_title: "संपर्क फॉर्म",
-            contact_name_label: "पूर्ण नाव",
-            contact_email_label: "काम ईमेल",
-            contact_phone_label: "फोन",
-            contact_company_label: "कंपनी",
-            contact_message_label: "आवश्यकतेचा तपशील",
-            contact_submit_button: "तपशील सबमिट करा"
+            nav_home: "होम", nav_about: "आमच्याबद्दल", nav_offerings: "सेवा", nav_contact: "संपर्क",
+            nav_construction: "बांधकाम", nav_warehouse: "वेअरहाउस",
+            page_title: "उद्योग विशिष्ट <span class='text-brandBlue'>उपाय</span>",
+            page_subtitle: "बांधकाम आणि पुरवठा साखळी क्षेत्रांसाठी मनुष्यबळ व्यवस्थापन.",
+            off_c_title: "बांधकाम मनुष्यबळ", off_c_desc: "पायाभूत सुविधा प्रकल्पांसाठी कुशल आणि अकुशल कामगार.", off_c_btn: "सेक्टर पहा",
+            off_w_title: "वेअरहाउस मनुष्यबळ", off_w_desc: "सॉर्टिंग आणि पॅकिंगसाठी विशेष मनुष्यबळ.", off_w_btn: "सेक्टर पहा",
+            vol_tag: "भागीदारी कार्यक्रम", vol_title: "Adhocsy सोबत <span class='text-brandBlue'>स्वयंसेवक भागीदार</span> व्हा",
+            vol_desc: "कामगार किंवा कंपन्यांना रेफर करून मासिक उत्पन्न मिळवा.",
+            vol_f1: "गुंतवणूक नाही", vol_f2: "लक्ष्य नाही",
+            earn_w_title: "कामगारांना रेफर करून कमवा",
+            earn_w1: "• रेफरल आयडीने जोडल्यावर ₹10",
+            earn_w2: "• L2 कामगाराच्या कामावर ₹6",
+            earn_w3: "• पुढील स्तरावरून ₹4 प्रति काम",
+            tag_life: "आजीवन कमाई", tag_direct: "थेट वॉलेटमध्ये",
+            earn_c_title: "कंपन्यांना रेफर करून कमवा", earn_c1: "दरमहा प्लॅटफॉर्म फीच्या 2% मिळवा", earn_c2: "कमाई सुरू राहते जोपर्यंत कंपनी जोडलेली आहे.",
+            ex_title: "उदाहरण:", ex_res: "तुम्ही दरमहा ₹112 कमवता",
+            who_title: "कोण सामील होऊ शकते?", who_list: "विद्यार्थी • व्यावसायिक • फ्रीलांसर • सल्लागार",
+            start_btn: "आता कमाई सुरू करा"
         }
     };
 
     function changeLang(lang) {
         const t = dict[lang];
-        document.getElementById('heroTitle').innerHTML = t.heroTitle;
-        document.getElementById('heroDesc').innerText = t.heroDesc;
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (t[key]) el.innerHTML = t[key];
@@ -252,28 +285,17 @@
             b.classList.remove('active', 'bg-brandBlue', 'text-white');
             b.classList.add('text-slate-400');
         });
-        const activeBtn = document.getElementById(`btn-${lang}`);
-        activeBtn.classList.add('active', 'bg-brandBlue', 'text-white');
-        activeBtn.classList.remove('text-slate-400');
+        document.getElementById(`btn-${lang}`).classList.add('active', 'bg-brandBlue', 'text-white');
     }
 
     const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
     themeToggle.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
-        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        document.getElementById('themeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
     });
 
-    const menuBtn = document.getElementById('menuBtn');
-    const closeBtn = document.getElementById('closeBtn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-
-    menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
-    closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => mobileMenu.classList.remove('active'));
-    });
+    document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('active'));
+    document.getElementById('closeBtn').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('active'));
 </script>
 </body>
 </html>
