@@ -39,7 +39,6 @@
         .partner-logo { height: 35px; filter: grayscale(100%); opacity: 0.6; transition: 0.3s; }
         .partner-logo:hover { filter: grayscale(0%); opacity: 1; }
 
-        /* Mobile Menu Animation */
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
             transform: translateX(100%);
@@ -47,15 +46,30 @@
         #mobile-menu.active {
             transform: translateX(0);
         }
+
+        .step-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .dark .step-card {
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
 
 <header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100 dark:border-transparent">
     <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-2">
-            <img src="logo-day.png" alt="ADHOCSY" class="h-10 dark:hidden">
-            <img src="logo-dark.png" alt="ADHOCSY" class="h-10 hidden dark:block">
+        <a href="index.html" class="flex items-center gap-3 group">
+            <div class="flex items-center gap-2">
+                <img src="logo-day.png" alt="Logo" class="h-10 dark:hidden">
+                <img src="logo-dark.png" alt="Logo" class="h-10 hidden dark:block">
+            </div>
+            <span class="text-2xl font-black tracking-tighter text-slate-900 dark:text-white group-hover:text-brandBlue transition-colors">ADHOCSY</span>
         </a>
         
         <nav class="hidden lg:flex items-center space-x-8 font-bold text-xs uppercase tracking-widest">
@@ -88,8 +102,11 @@
 
 <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden">
     <div class="flex justify-between items-center mb-12">
-        <img src="logo-day.png" alt="ADHOCSY" class="h-8 dark:hidden">
-        <img src="logo-dark.png" alt="ADHOCSY" class="h-8 hidden dark:block">
+        <div class="flex items-center gap-2">
+            <img src="logo-day.png" alt="ADHOCSY" class="h-8 dark:hidden">
+            <img src="logo-dark.png" alt="ADHOCSY" class="h-8 hidden dark:block">
+            <span class="text-xl font-black tracking-tighter dark:text-white">ADHOCSY</span>
+        </div>
         <button id="closeBtn" class="text-3xl">&times;</button>
     </div>
     
@@ -125,7 +142,55 @@
     </div>
 </section>
 
-<!-- Added id="offerings" here for navigation -->
+<!-- HOW IT WORKS SECTION -->
+<section class="py-24 bg-white dark:bg-brandDark">
+    <div class="container mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-4xl font-black mb-4 dark:text-white">How Adhocsy Works</h2>
+            <p class="text-slate-500 font-medium">(In Simple Steps)</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="step-card p-8 rounded-[32px] bg-slate-50 dark:bg-slate-900/40">
+                <div class="text-4xl mb-4">1️⃣</div>
+                <h3 class="text-xl font-bold mb-2 dark:text-white">Register</h3>
+                <p class="text-slate-500 dark:text-slate-400">Workers register on Adhocsy platform with ease.</p>
+            </div>
+            <div class="step-card p-8 rounded-[32px] bg-slate-50 dark:bg-slate-900/40">
+                <div class="text-4xl mb-4">2️⃣</div>
+                <h3 class="text-xl font-bold mb-2 dark:text-white">Post Jobs</h3>
+                <p class="text-slate-500 dark:text-slate-400">Companies post jobs that need reliable workforce.</p>
+            </div>
+            <div class="step-card p-8 rounded-[32px] bg-slate-50 dark:bg-slate-900/40">
+                <div class="text-4xl mb-4">3️⃣</div>
+                <h3 class="text-xl font-bold mb-2 dark:text-white">Accept</h3>
+                <p class="text-slate-500 dark:text-slate-400">Workers accept jobs available in their nearby location.</p>
+            </div>
+            <div class="step-card p-8 rounded-[32px] bg-slate-50 dark:bg-slate-900/40">
+                <div class="text-4xl mb-4">4️⃣</div>
+                <h3 class="text-xl font-bold mb-2 dark:text-white">Complete</h3>
+                <p class="text-slate-500 dark:text-slate-400">Work gets completed with professional standards.</p>
+            </div>
+            <div class="step-card p-8 rounded-[32px] bg-slate-50 dark:bg-slate-900/40">
+                <div class="text-4xl mb-4">5️⃣</div>
+                <h3 class="text-xl font-bold mb-2 dark:text-white">Get Paid</h3>
+                <p class="text-slate-500 dark:text-slate-400">Money goes straight to workers' digital wallets.</p>
+            </div>
+            <div class="step-card p-8 rounded-[32px] bg-slate-50 dark:bg-slate-900/40">
+                <div class="text-4xl mb-4">6️⃣</div>
+                <h3 class="text-xl font-bold mb-2 dark:text-white">Refer & Earn</h3>
+                <p class="text-slate-500 dark:text-slate-400">Referrers earn rewards automatically for growing the network.</p>
+            </div>
+        </div>
+
+        <div class="mt-16 text-center">
+            <p class="text-2xl font-black text-brandBlue tracking-tight">
+                Simple. Transparent. Powerful.
+            </p>
+        </div>
+    </div>
+</section>
+
 <section id="offerings" class="py-12 bg-white dark:bg-brandDark">
     <div class="container mx-auto px-6">
         <div class="grid md:grid-cols-3 gap-6">
@@ -200,7 +265,6 @@
     </div>
 </section>
 
-<!-- Ensure id="contact" is correctly set here -->
 <footer id="contact" class="bg-slate-950 text-slate-500 py-20">
     <div class="container mx-auto px-6">
         <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
@@ -218,7 +282,6 @@
 </footer>
 
 <script>
-    // Dictionary
     const dict = {
         en: {
             nav_about: "About", nav_offerings: "Offering", nav_contact: "Contact",
@@ -272,7 +335,6 @@
         activeBtn.classList.remove('text-slate-400');
     }
 
-    // Theme Toggle
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     themeToggle.addEventListener('click', () => {
@@ -280,7 +342,6 @@
         themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
     });
 
-    // Hamburger Menu Logic
     const menuBtn = document.getElementById('menuBtn');
     const closeBtn = document.getElementById('closeBtn');
     const mobileMenu = document.getElementById('mobile-menu');
