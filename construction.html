@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Workforce – ADHOCSY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { brandBlue: '#2563eb', brandDark: '#0A0D14' },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+
+    <style type="text/css">
+        body { transition: background-color 0.4s ease; scroll-behavior: smooth; }
+        .glass-nav { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.9); }
+        .dark .glass-nav { background: rgba(10, 13, 20, 0.9); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .lang-btn.active { background-color: #2563eb; color: white; }
+        
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out; transform: translateX(100%);
+        }
+        #mobile-menu.active { transform: translateX(0); }
+
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #2563eb;
+        }
+        .step-number {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
+
+<header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100 dark:border-transparent">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-3 group">
+            <div class="flex items-center gap-2">
+                <img src="logo-day.png" alt="Logo" class="h-10 dark:hidden">
+                <img src="logo-dark.png" alt="Logo" class="h-10 hidden dark:block">
+            </div>
+            <span class="text-2xl font-black tracking-tighter text-slate-900 dark:text-white group-hover:text-brandBlue transition-colors">ADHOCSY</span>
+        </a>
+        
+        <nav class="hidden lg:flex items-center space-x-6 font-bold text-[10px] uppercase tracking-widest">
+            <a href="index.html" data-i18n="nav_home" class="hover:text-brandBlue transition">Home</a>
+            <a href="about.html" data-i18n="nav_about" class="hover:text-brandBlue transition">About</a>
+            <a href="offerings.html" data-i18n="nav_offerings" class="hover:text-brandBlue transition">Offering</a>
+            <a href="construction.html" data-i18n="nav_construction" class="text-brandBlue">Construction</a>
+            <a href="warehouse.html" data-i18n="nav_warehouse" class="hover:text-brandBlue transition">Warehouse</a>
+            <a href="contact.html" data-i18n="nav_contact" class="hover:text-brandBlue transition">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+            <!-- Language Switcher -->
+            <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+                <button onclick="changeLang('en')" id="btn-en" class="lang-btn active px-2.5 py-1.5 rounded-lg text-[9px] font-black transition">EN</button>
+                <button onclick="changeLang('hi')" id="btn-hi" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">HI</button>
+                <button onclick="changeLang('mr')" id="btn-mr" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">MR</button>
+            </div>
+
+            <button id="themeToggle" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 transition">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+            <button id="menuBtn" class="lg:hidden text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden">
+    <div class="flex justify-between items-center mb-12">
+        <div class="flex items-center gap-2">
+            <img src="logo-day.png" alt="ADHOCSY" class="h-8 dark:hidden">
+            <img src="logo-dark.png" alt="ADHOCSY" class="h-8 hidden dark:block">
+            <span class="text-xl font-black tracking-tighter dark:text-white">ADHOCSY</span>
+        </div>
+        <button id="closeBtn" class="text-3xl">&times;</button>
+    </div>
+    <nav class="flex flex-col space-y-6 text-xl font-black uppercase tracking-tighter">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="about.html" data-i18n="nav_about">About</a>
+        <a href="offerings.html" data-i18n="nav_offerings">Offering</a>
+        <a href="construction.html" data-i18n="nav_construction" class="text-brandBlue">Construction</a>
+        <a href="warehouse.html" data-i18n="nav_warehouse">Warehouse</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact</a>
+    </nav>
+</div>
+
+<main class="pt-32 pb-20">
+    <!-- Hero Section -->
+    <section class="container mx-auto px-6 mb-24">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+            <div class="lg:w-1/2">
+                <span class="inline-block px-4 py-2 rounded-full bg-brandBlue/10 text-brandBlue font-black text-xs uppercase tracking-widest mb-6" data-i18n="hero_tag">Sector Spotlight</span>
+                <h1 class="text-5xl md:text-7xl font-black mb-8 dark:text-white leading-[1.1]" data-i18n="hero_title">
+                    On-Demand <span class="text-brandBlue">Construction</span> Workforce
+                </h1>
+                <p class="text-xl text-slate-500 mb-10 leading-relaxed max-w-xl" data-i18n="hero_desc">
+                    Hire reliable, site-ready construction workers instantly — without payroll hassles or long-term commitments. Scale for projects, weekly shifts, or daily peak needs.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="contact.html" class="px-8 py-5 bg-brandBlue text-white rounded-2xl font-black text-center hover:bg-blue-700 transition shadow-xl shadow-blue-500/20" data-i18n="cta_post">Post Construction Jobs</a>
+                    <a href="#how-it-works" class="px-8 py-5 bg-slate-100 dark:bg-slate-800 rounded-2xl font-black text-center hover:bg-slate-200 dark:hover:bg-slate-700 transition" data-i18n="cta_how">Explore How It Works</a>
+                </div>
+            </div>
+            <div class="lg:w-1/2 relative">
+                <div class="rounded-[50px] overflow-hidden shadow-2xl">
+                    <img src="construction-hero.png" alt="Construction Site" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=1200'">
+                </div>
+                <div class="absolute -bottom-6 -left-6 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-700 hidden md:block">
+                    <p class="text-3xl font-black text-brandBlue">24/7</p>
+                    <p class="text-xs font-bold uppercase tracking-widest text-slate-400" data-i18n="stat_avail">Worker Availability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Available Roles -->
+    <section class="bg-slate-50 dark:bg-slate-900/40 py-24 mb-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black mb-4 dark:text-white" data-i18n="roles_title">Available Construction Roles</h2>
+                <p class="text-slate-500" data-i18n="roles_desc">Verified skilled and unskilled manpower at your fingertips.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-[35px] text-center border border-slate-100 dark:border-slate-700 feature-card">
+                    <div class="text-4xl mb-4">👷</div>
+                    <h3 class="font-black" data-i18n="role_1">Helper</h3>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-[35px] text-center border border-slate-100 dark:border-slate-700 feature-card">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="font-black" data-i18n="role_2">Electrician</h3>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-[35px] text-center border border-slate-100 dark:border-slate-700 feature-card">
+                    <div class="text-4xl mb-4">🚰</div>
+                    <h3 class="font-black" data-i18n="role_3">Plumber</h3>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-[35px] text-center border border-slate-100 dark:border-slate-700 feature-card">
+                    <div class="text-4xl mb-4">🏗️</div>
+                    <h3 class="font-black" data-i18n="role_4">Mistri (Supervisor)</h3>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-[35px] text-center border border-slate-100 dark:border-slate-700 feature-card">
+                    <div class="text-4xl mb-4">🚛</div>
+                    <h3 class="font-black" data-i18n="role_5">Pump Operator</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Built for Employers -->
+    <section class="container mx-auto px-6 mb-32">
+        <div class="flex flex-col lg:flex-row items-center gap-20">
+            <div class="lg:w-1/2 order-2 lg:order-1">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-slate-100 dark:bg-slate-800 p-8 rounded-[40px]">
+                        <p class="font-black text-lg mb-2" data-i18n="sec_1_t">Infrastructure</p>
+                        <p class="text-sm text-slate-500" data-i18n="sec_1_d">Bridges, roads, and civil projects.</p>
+                    </div>
+                    <div class="bg-brandBlue p-8 rounded-[40px] text-white">
+                        <p class="font-black text-lg mb-2" data-i18n="sec_2_t">Real Estate</p>
+                        <p class="text-blue-100 text-sm" data-i18n="sec_2_d">Residential and commercial towers.</p>
+                    </div>
+                    <div class="bg-slate-900 p-8 rounded-[40px] text-white">
+                        <p class="font-black text-lg mb-2" data-i18n="sec_3_t">RMC Plants</p>
+                        <p class="text-slate-400 text-sm" data-i18n="sec_3_d">Concrete and batching operations.</p>
+                    </div>
+                    <div class="bg-slate-100 dark:bg-slate-800 p-8 rounded-[40px]">
+                        <p class="font-black text-lg mb-2" data-i18n="sec_4_t">Peak Demand</p>
+                        <p class="text-sm text-slate-500" data-i18n="sec_4_d">Sudden project deadlines.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-1/2 order-1 lg:order-2">
+                <h2 class="text-4xl font-black mb-6 dark:text-white" data-i18n="emp_title">Built for Construction Employers</h2>
+                <p class="text-lg text-slate-500 mb-8 leading-relaxed" data-i18n="emp_desc">Stop delaying projects due to manpower shortages. Adhocsy is designed to integrate into your existing site operations seamlessly.</p>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-4 font-bold"><i class="fas fa-check-circle text-brandBlue"></i> <span data-i18n="ben_1">No payroll or PF/ESI burden</span></li>
+                    <li class="flex items-center gap-4 font-bold"><i class="fas fa-check-circle text-brandBlue"></i> <span data-i18n="ben_2">Flexible scaling as per site needs</span></li>
+                    <li class="flex items-center gap-4 font-bold"><i class="fas fa-check-circle text-brandBlue"></i> <span data-i18n="ben_3">Transparent pricing & tracking</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section id="how-it-works" class="container mx-auto px-6 mb-32">
+        <div class="bg-slate-950 rounded-[60px] p-10 md:p-20 text-white">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black mb-4" data-i18n="step_title">How It Works</h2>
+                <p class="text-slate-400" data-i18n="step_subtitle">Streamline your hiring in five simple steps.</p>
+            </div>
+            <div class="grid md:grid-cols-5 gap-8 text-center">
+                <div>
+                    <div class="step-number w-12 h-12 rounded-2xl flex items-center justify-center font-black mx-auto mb-6 text-xl">1</div>
+                    <h3 class="font-bold text-sm uppercase tracking-widest mb-2" data-i18n="step_1_h">Register</h3>
+                    <p class="text-xs text-slate-400" data-i18n="step_1_d">Register your site on Adhocsy</p>
+                </div>
+                <div>
+                    <div class="step-number w-12 h-12 rounded-2xl flex items-center justify-center font-black mx-auto mb-6 text-xl">2</div>
+                    <h3 class="font-bold text-sm uppercase tracking-widest mb-2" data-i18n="step_2_h">Post</h3>
+                    <p class="text-xs text-slate-400" data-i18n="step_2_d">Post required shifts & roles</p>
+                </div>
+                <div>
+                    <div class="step-number w-12 h-12 rounded-2xl flex items-center justify-center font-black mx-auto mb-6 text-xl">3</div>
+                    <h3 class="font-bold text-sm uppercase tracking-widest mb-2" data-i18n="step_3_h">Verified</h3>
+                    <p class="text-xs text-slate-400" data-i18n="step_3_d">Workers accept jobs nearby</p>
+                </div>
+                <div>
+                    <div class="step-number w-12 h-12 rounded-2xl flex items-center justify-center font-black mx-auto mb-6 text-xl">4</div>
+                    <h3 class="font-bold text-sm uppercase tracking-widest mb-2" data-i18n="step_4_h">Complete</h3>
+                    <p class="text-xs text-slate-400" data-i18n="step_4_d">Work gets completed on site</p>
+                </div>
+                <div>
+                    <div class="step-number w-12 h-12 rounded-2xl flex items-center justify-center font-black mx-auto mb-6 text-xl">5</div>
+                    <h3 class="font-bold text-sm uppercase tracking-widest mb-2" data-i18n="step_5_h">Pay</h3>
+                    <p class="text-xs text-slate-400" data-i18n="step_5_d">Pay digitally — no paperwork</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="container mx-auto px-6 text-center">
+        <div class="max-w-4xl mx-auto bg-brandBlue rounded-[50px] p-12 md:p-20 text-white relative overflow-hidden">
+            <div class="relative z-10">
+                <h2 class="text-4xl md:text-5xl font-black mb-8 leading-tight" data-i18n="footer_cta_h">Build Faster with Adhocsy</h2>
+                <p class="text-xl text-blue-100 mb-12" data-i18n="footer_cta_d">Get skilled construction workers on demand — only with Adhocsy.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="contact.html" class="px-10 py-5 bg-white text-brandBlue rounded-2xl font-black hover:scale-105 transition" data-i18n="footer_btn_1">Get Workers for My Site</a>
+                    <a href="contact.html" class="px-10 py-5 bg-blue-700 text-white rounded-2xl font-black hover:scale-105 transition border border-blue-600" data-i18n="footer_btn_2">Talk to an Expert</a>
+                </div>
+            </div>
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+        </div>
+    </section>
+</main>
+
+<footer class="bg-slate-950 text-slate-500 py-20">
+    <div class="container mx-auto px-6 text-center">
+        <img src="logo-dark.png" class="h-10 mx-auto mb-10" alt="ADHOCSY">
+        <div class="text-xs font-bold tracking-[0.3em] uppercase opacity-40">
+            © 2026 ADHOCSY TECHNOLOGIES. BUILT FOR DIGNITY.
+        </div>
+    </div>
+</footer>
+
+<script>
+    const dict = {
+        en: {
+            nav_home: "Home", nav_about: "About", nav_offerings: "Offering", nav_contact: "Contact",
+            nav_construction: "Construction", nav_warehouse: "Warehouse",
+            hero_tag: "Sector Spotlight", hero_title: "On-Demand <span class='text-brandBlue'>Construction</span> Workforce",
+            hero_desc: "Hire reliable, site-ready construction workers instantly — without payroll hassles or long-term commitments.",
+            cta_post: "Post Construction Jobs", cta_how: "Explore How It Works",
+            stat_avail: "Worker Availability",
+            roles_title: "Available Construction Roles", roles_desc: "Verified skilled and unskilled manpower at your fingertips.",
+            role_1: "Helper", role_2: "Electrician", role_3: "Plumber", role_4: "Mistri (Supervisor)", role_5: "Pump Operator",
+            sec_1_t: "Infrastructure", sec_1_d: "Bridges, roads, and civil projects.",
+            sec_2_t: "Real Estate", sec_2_d: "Residential and commercial towers.",
+            sec_3_t: "RMC Plants", sec_3_d: "Concrete and batching operations.",
+            sec_4_t: "Peak Demand", sec_4_d: "Sudden project deadlines.",
+            emp_title: "Built for Construction Employers", emp_desc: "Stop delaying projects due to manpower shortages.",
+            ben_1: "No payroll or PF/ESI burden", ben_2: "Flexible scaling as per site needs", ben_3: "Transparent pricing & tracking",
+            step_title: "How It Works", step_subtitle: "Streamline your hiring in five simple steps.",
+            step_1_h: "Register", step_1_d: "Register your site on Adhocsy",
+            step_2_h: "Post", step_2_d: "Post required shifts & roles",
+            step_3_h: "Verified", step_3_d: "Workers accept jobs nearby",
+            step_4_h: "Complete", step_4_d: "Work gets completed on site",
+            step_5_h: "Pay", step_5_d: "Pay digitally — no paperwork",
+            footer_cta_h: "Build Faster with Adhocsy", footer_cta_d: "Get skilled construction workers on demand — only with Adhocsy.",
+            footer_btn_1: "Get Workers for My Site", footer_btn_2: "Talk to an Expert"
+        },
+        hi: {
+            nav_home: "होम", nav_about: "हमारे बारे में", nav_offerings: "सेवाएं", nav_contact: "संपर्क",
+            nav_construction: "निर्माण", nav_warehouse: "वेयरहाउस",
+            hero_tag: "सेक्टर स्पॉटलाइट", hero_title: "ऑन-डिमांड <span class='text-brandBlue'>निर्माण</span> कार्यबल",
+            hero_desc: "विश्वसनीय, साइट-तैयार निर्माण श्रमिकों को तुरंत नियुक्त करें — बिना पेरोल की झंझट या दीर्घकालिक प्रतिबद्धताओं के।",
+            cta_post: "निर्माण कार्य पोस्ट करें", cta_how: "काम करने का तरीका देखें",
+            stat_avail: "श्रमिक उपलब्धता",
+            roles_title: "उपलब्ध निर्माण भूमिकाएं", roles_desc: "आपकी उंगलियों पर सत्यापित कुशल और अकुशल जनशक्ति।",
+            role_1: "हेल्पर", role_2: "इलेक्ट्रीशियन", role_3: "प्लंबर", role_4: "मिस्त्री (सुपरवाइजर)", role_5: "पंप ऑपरेटर",
+            sec_1_t: "इन्फ्रास्ट्रक्चर", sec_1_d: "पुल, सड़कें और नागरिक परियोजनाएं।",
+            sec_2_t: "रियल एस्टेट", sec_2_d: "आवासीय और वाणिज्यिक टावर।",
+            sec_3_t: "RMC प्लांट", sec_3_d: "कंक्रीट और बैचिंग संचालन।",
+            sec_4_t: "पीक डिमांड", sec_4_d: "अचानक परियोजना की समय सीमा।",
+            emp_title: "निर्माण नियोक्ताओं के लिए निर्मित", emp_desc: "जनशक्ति की कमी के कारण परियोजनाओं में देरी रोकें।",
+            ben_1: "कोई पेरोल या PF/ESI बोझ नहीं", ben_2: "साइट की जरूरतों के अनुसार लचीला स्केलिंग", ben_3: "पारदर्शी मूल्य निर्धारण और ट्रैकिंग",
+            step_title: "यह कैसे काम करता है", step_subtitle: "पांच सरल चरणों में अपनी भर्ती को सुव्यवस्थित करें।",
+            step_1_h: "पंजीकरण", step_1_d: "Adhocsy पर अपनी साइट रजिस्टर करें",
+            step_2_h: "पोस्ट", step_2_d: "आवश्यक शिफ्ट और भूमिकाएं पोस्ट करें",
+            step_3_h: "सत्यापित", step_3_d: "श्रमिक आसपास की नौकरियां स्वीकार करते हैं",
+            step_4_h: "पूर्ण", step_4_d: "साइट पर काम पूरा हो जाता है",
+            step_5_h: "भुगतान", step_5_d: "डिजिटल रूप से भुगतान करें — कोई कागजी कार्रवाई नहीं",
+            footer_cta_h: "Adhocsy के साथ तेजी से निर्माण करें", footer_cta_d: "ऑन डिमांड कुशल निर्माण श्रमिक प्राप्त करें — केवल Adhocsy के साथ।",
+            footer_btn_1: "मेरी साइट के लिए श्रमिक प्राप्त करें", footer_btn_2: "विशेषज्ञ से बात करें"
+        },
+        mr: {
+            nav_home: "होम", nav_about: "आमच्याबद्दल", nav_offerings: "सेवा", nav_contact: "संपर्क",
+            nav_construction: "बांधकाम", nav_warehouse: "वेअरहाउस",
+            hero_tag: "सेक्टर स्पॉटलाइट", hero_title: "ऑन-डिमांड <span class='text-brandBlue'>बांधकाम</span> मनुष्यबळ",
+            hero_desc: "विश्वसनीय, साइट-तयार बांधकाम कामगारांना त्वरित नियुक्त करा — पेरोलच्या त्रासाशिवाय किंवा दीर्घकालीन वचनबद्धतेशिवाय।",
+            cta_post: "बांधकाम नोकऱ्या पोस्ट करा", cta_how: "कार्यपद्धती जाणून घ्या",
+            stat_avail: "कामगार उपलब्धता",
+            roles_title: "उपलब्ध बांधकाम भूमिका", roles_desc: "तुमच्या बोटांच्या टोकावर सत्यापित कुशल आणि अकुशल मनुष्यबळ।",
+            role_1: "हेल्पर", role_2: "इलेक्ट्रीशियन", role_3: "प्लंबर", role_4: "मिस्त्री (पर्यवेक्षक)", role_5: "पंप ऑपरेटर",
+            sec_1_t: "पायाभूत सुविधा", sec_1_d: "पुले, रस्ते आणि नागरी प्रकल्प।",
+            sec_2_t: "रिअल इस्टेट", sec_2_d: "निवासी आणि व्यावसायिक टॉवर्स।",
+            sec_3_t: "RMC प्लांट्स", sec_3_d: "काँक्रीट आणि बॅचिंग ऑपरेशन्स।",
+            sec_4_t: "पीक डिमांड", sec_4_d: "प्रकल्पाच्या अचानक डेडलाईन्स।",
+            emp_title: "बांधकाम नियोक्त्यांसाठी तयार", emp_desc: "मनुष्यबळाच्या कमतरतेमुळे प्रकल्पांना उशीर करणे थांबवा।",
+            ben_1: "पेरोल किंवा PF/ESI ओझे नाही", ben_2: "साइटच्या गरजेनुसार लवचिक स्केलिंग", ben_3: "पारदर्शक किंमत आणि ट्रॅकिंग",
+            step_title: "हे कसे कार्य करते", step_subtitle: "पाच सोप्या चरणांमध्ये आपली भरती सुव्यवस्थित करा।",
+            step_1_h: "नोंदणी", step_1_d: "Adhocsy वर तुमची साइट नोंदवा",
+            step_2_h: "पोस्ट", step_2_d: "आवश्यक शिफ्ट आणि भूमिका पोस्ट करा",
+            step_3_h: "सत्यापित", step_3_d: "कामगार जवळच्या नोकऱ्या स्वीकारतात",
+            step_4_h: "पूर्ण", step_4_d: "साइटवर काम पूर्ण होते",
+            step_5_h: "पे", step_5_d: "डिजिटल पेमेंट्स — कागदपत्रांशिवाय",
+            footer_cta_h: "Adhocsy सह वेगाने बांधकाम करा", footer_cta_d: "ऑन डिमांड कुशल बांधकाम कामगार मिळवा — फक्त Adhocsy सह।",
+            footer_btn_1: "माझ्या साइटसाठी कामगार मिळवा", footer_btn_2: "तज्ञांशी बोला"
+        }
+    };
+
+    function changeLang(lang) {
+        const t = dict[lang];
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key]) el.innerHTML = t[key];
+        });
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.remove('active', 'bg-brandBlue', 'text-white');
+            b.classList.add('text-slate-400');
+        });
+        document.getElementById(`btn-${lang}`).classList.add('active', 'bg-brandBlue', 'text-white');
+    }
+
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        document.getElementById('themeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+    });
+
+    document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('active'));
+    document.getElementById('closeBtn').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('active'));
+</script>
+</body>
+</html>
