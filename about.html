@@ -30,7 +30,6 @@
             background-image: linear-gradient(to bottom, rgba(37, 99, 235, 0.05), transparent);
         }
 
-        /* Mobile Menu Animation */
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
             transform: translateX(100%);
@@ -38,15 +37,26 @@
         #mobile-menu.active {
             transform: translateX(0);
         }
+        .comparison-card {
+            transition: all 0.3s ease;
+        }
+        .comparison-card:hover {
+            transform: translateY(-5px);
+        }
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
 
 <header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100 dark:border-transparent">
     <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-2">
-            <img src="logo-day.png" alt="ADHOCSY" class="h-10 dark:hidden">
-            <img src="logo-dark.png" alt="ADHOCSY" class="h-10 hidden dark:block">
+        <!-- Brand Logo Image -->
+        <a href="index.html" class="flex items-center gap-2 group">
+            <img src="logo-day.png" alt="ADHOCSY" id="navLogo" class="logo-img transition-opacity duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="text-2xl font-black tracking-tighter text-slate-900 dark:text-white hidden" style="display:none">ADHOCSY</span>
         </a>
         
         <nav class="hidden lg:flex items-center space-x-8 font-bold text-xs uppercase tracking-widest">
@@ -66,10 +76,6 @@
                 <i class="fas fa-moon" id="themeIcon"></i>
             </button>
 
-            <a href="#" class="hidden sm:block hover:scale-105 transition">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-9">
-            </a>
-
             <button id="menuBtn" class="lg:hidden text-2xl focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
@@ -79,27 +85,21 @@
 
 <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden">
     <div class="flex justify-between items-center mb-12">
-        <img src="logo-day.png" alt="ADHOCSY" class="h-8 dark:hidden">
-        <img src="logo-dark.png" alt="ADHOCSY" class="h-8 hidden dark:block">
+        <a href="index.html">
+            <img src="logo-day.png" alt="ADHOCSY" id="mobileLogo" class="h-10 w-auto" onerror="this.style.display='none';">
+        </a>
         <button id="closeBtn" class="text-3xl">&times;</button>
     </div>
-    
     <nav class="flex flex-col space-y-8 text-2xl font-black uppercase tracking-tighter">
         <a href="index.html" data-i18n="nav_home" class="mobile-link">Home</a>
         <a href="about.html" data-i18n="nav_about" class="mobile-link text-brandBlue">About</a>
-        <a href="#contact" data-i18n="nav_contact" class="mobile-link">Contact</a>
+        <a href="contact.html" data-i18n="nav_contact" class="mobile-link">Contact</a>
     </nav>
-
-    <div class="mt-auto">
-        <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Download Our App</p>
-        <a href="#">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" class="h-12">
-        </a>
-    </div>
 </div>
 
 <main class="pt-32 pb-20 about-hero">
     <div class="container mx-auto px-6">
+        <!-- Hero Section -->
         <div class="max-w-4xl mx-auto text-center mb-20">
             <span class="text-brandBlue font-black uppercase tracking-widest text-sm" data-i18n="about_tag">Our Story</span>
             <h1 class="text-4xl md:text-6xl font-black mt-4 mb-8 dark:text-white leading-tight" data-i18n="about_title">Reimagining the <br><span class="text-brandBlue">Work-Life Balance</span></h1>
@@ -108,42 +108,126 @@
             </p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-12 items-center mb-32">
-            <img src="image1.png" class="rounded-[40px] shadow-2xl border-4 border-white dark:border-slate-800 w-full object-cover h-[500px]">
-            <div>
-                <h2 class="text-3xl font-black mb-6 dark:text-white" data-i18n="mission_title">Our Mission</h2>
-                <p class="text-lg text-slate-600 dark:text-slate-400 mb-8" data-i18n="mission_text">
-                    To build a decentralized, transparent, and high-speed workforce ecosystem that empowers the gig economy of tomorrow.
-                </p>
-                <div class="space-y-4">
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-brandBlue/10 rounded-xl flex items-center justify-center text-brandBlue shrink-0"><i class="fas fa-check"></i></div>
-                        <div><h4 class="font-bold dark:text-white" data-i18n="p_1">Verified Talent</h4><p class="text-sm text-slate-500" data-i18n="p_1_d">Rigorous 3-step verification process.</p></div>
+        <!-- Comparison Table Section -->
+        <div class="mb-32">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-black mb-4" data-i18n="comp_title">🔄 Traditional Hiring vs Adhocsy</h2>
+                <p class="text-slate-500 font-bold uppercase tracking-wider" data-i18n="comp_subtitle">See the difference. Feel the savings.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Traditional -->
+                <div class="comparison-card p-8 rounded-[40px] bg-red-50 dark:bg-red-950/20 border-2 border-red-100 dark:border-red-900/30">
+                    <h3 class="text-2xl font-black text-red-600 mb-6 flex items-center gap-3">
+                        <span class="text-3xl">🟥</span> <span data-i18n="trad_hiring">Traditional Hiring</span>
+                    </h3>
+                    <p class="text-sm font-bold text-red-500 uppercase tracking-widest mb-8" data-i18n="trad_meta">(Old, rigid, expensive)</p>
+                    <ul class="space-y-6">
+                        <li class="flex gap-4">
+                            <span class="text-2xl">🕒</span>
+                            <div><b class="block dark:text-white" data-i18n="t_1">Slow Hiring</b><span class="text-slate-500 text-sm" data-i18n="t_1_d">Manual sourcing, calls, follow-ups, delays</span></div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="text-2xl">💰</span>
+                            <div><b class="block dark:text-white" data-i18n="t_2">High Fixed Cost</b><span class="text-slate-500 text-sm" data-i18n="t_2_d">Monthly payroll, PF, ESI, compliance</span></div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="text-2xl">📉</span>
+                            <div><b class="block dark:text-white" data-i18n="t_3">Poor Flexibility</b><span class="text-slate-500 text-sm" data-i18n="t_3_d">Overstaffed on slow days, understaffed on peak days</span></div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="text-2xl">🧾</span>
+                            <div><b class="block dark:text-white" data-i18n="t_4">Paperwork Heavy</b><span class="text-slate-500 text-sm" data-i18n="t_4_d">Attendance, salary processing, contractor dependency</span></div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="text-2xl">🚫</span>
+                            <div><b class="block dark:text-white" data-i18n="t_5">Hard to Scale</b><span class="text-slate-500 text-sm" data-i18n="t_5_d">Difficult to add or remove workers quickly</span></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Adhocsy -->
+                <div class="comparison-card p-8 rounded-[40px] bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-100 dark:border-emerald-900/30 shadow-xl shadow-emerald-500/10">
+                    <h3 class="text-2xl font-black text-emerald-600 mb-6 flex items-center gap-3">
+                        <span class="text-3xl">🟩</span> <span data-i18n="adhoc_hiring">Adhocsy – On-Demand Workforce</span>
+                    </h3>
+                    <p class="text-sm font-bold text-emerald-500 uppercase tracking-widest mb-8" data-i18n="adhoc_meta">(Fast, flexible, cost-efficient)</p>
+                    <ul class="space-y-6">
+                        <li class="flex gap-4">
+                            <span class="text-2xl">⚡</span>
+                            <div><b class="block dark:text-white" data-i18n="a_1">Instant Hiring</b><span class="text-slate-500 text-sm" data-i18n="a_1_d">Post jobs → workers accept nearby</span></div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="text-2xl">💸</span>
+                            <div><b class="block dark:text-white" data-i18n="a_2">Pay Per Shift Only</b><span class="text-slate-500 text-sm" data-i18n="a_2_d">No payroll. No PF/ESI. No long-term cost.</span></div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="text-2xl">📈</span>
+                            <div><b class="block dark:text-white" data-i18n="a_3">Scale Anytime</b><span class="text-slate-500 text-sm" data-i18n="a_3_d">Increase or reduce workforce daily</span></div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="text-2xl">📱</span>
+                            <div><b class="block dark:text-white" data-i18n="a_4">Fully Digital</b><span class="text-slate-500 text-sm" data-i18n="a_4_d">Job tracking, payments & reports in one app</span></div>
+                        </li>
+                        <li class="flex gap-4">
+                            <span class="text-2xl">🎯</span>
+                            <div><b class="block dark:text-white" data-i18n="a_5">Local Verified Workers</b><span class="text-slate-500 text-sm" data-i18n="a_5_d">Workers sourced near your location</span></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cost Saving Highlights -->
+        <div class="bg-brandDark text-white rounded-[40px] p-10 mb-32 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-10 opacity-10 text-9xl font-black">💸</div>
+            <div class="relative z-10">
+                <h2 class="text-3xl font-black mb-8 flex items-center gap-3" data-i18n="saving_title">💸 ₹₹₹ Cost-Saving Highlights</h2>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div>
+                        <p class="text-brandBlue font-bold mb-6 text-xl" data-i18n="saving_subtitle">With Adhocsy, you save on:</p>
+                        <ul class="space-y-4 text-lg">
+                            <li class="flex items-center gap-3">❌ <span class="text-slate-300" data-i18n="s_1">Monthly fixed salaries</span></li>
+                            <li class="flex items-center gap-3">❌ <span class="text-slate-300" data-i18n="s_2">PF / ESI / contractor margins</span></li>
+                            <li class="flex items-center gap-3">❌ <span class="text-slate-300" data-i18n="s_3">Idle workforce cost</span></li>
+                            <li class="flex items-center gap-3">❌ <span class="text-slate-300" data-i18n="s_4">Recruitment & replacement cost</span></li>
+                        </ul>
                     </div>
-                    <div class="flex items-start gap-4">
-                        <div class="w-12 h-12 bg-brandBlue/10 rounded-xl flex items-center justify-center text-brandBlue shrink-0"><i class="fas fa-bolt"></i></div>
-                        <div><h4 class="font-bold dark:text-white" data-i18n="p_2">Instant Matching</h4><p class="text-sm text-slate-500" data-i18n="p_2_d">AI-driven hiring in under 60 seconds.</p></div>
+                    <div class="flex flex-col justify-center">
+                        <div class="bg-slate-800/50 p-6 rounded-2xl border border-slate-700">
+                            <div class="flex items-center gap-3 mb-4"><span class="text-emerald-400 text-2xl">✅</span> <p class="font-bold" data-i18n="s_v1">Pay only when work is done</p></div>
+                            <div class="flex items-center gap-3 mb-6"><span class="text-emerald-400 text-2xl">✅</span> <p class="font-bold" data-i18n="s_v2">Zero cost on non-working days</p></div>
+                            <p class="text-sm italic text-slate-400" data-i18n="s_tip">💡 Employers typically save 20–35% on workforce costs compared to traditional models.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-12 items-center mb-32 md:flex-row-reverse flex-col-reverse">
-             <div class="md:order-1 order-2">
-                <h2 class="text-3xl font-black mb-6 dark:text-white" data-i18n="vision_title">Our Vision</h2>
-                <p class="text-lg text-slate-600 dark:text-slate-400 mb-8" data-i18n="vision_text">
-                    By 2030, ADHOCSY aims to be the primary livelihood source for over 10 million workers globally, ensuring social security and financial inclusion for all.
-                </p>
+        <!-- Conversion CTAs -->
+        <div class="grid md:grid-cols-2 gap-8 mb-32 text-center md:text-left">
+            <div class="bg-slate-100 dark:bg-slate-900 p-10 rounded-[40px] border-2 border-transparent hover:border-brandBlue transition">
+                <p class="text-sm font-black text-slate-400 uppercase tracking-widest mb-4" data-i18n="cta_1_label">For Construction Employers</p>
+                <a href="#" class="inline-flex items-center gap-3 bg-brandBlue text-white px-8 py-4 rounded-2xl font-black hover:scale-105 transition">
+                    🔘 <span data-i18n="cta_1_btn">Get Workers for My Construction Site</span>
+                </a>
             </div>
-            <img src="image2.png" class="rounded-[40px] shadow-2xl border-4 border-white dark:border-slate-800 w-full object-cover h-[400px] md:order-2 order-1">
+            <div class="bg-slate-100 dark:bg-slate-900 p-10 rounded-[40px] border-2 border-transparent hover:border-brandBlue transition">
+                <p class="text-sm font-black text-slate-400 uppercase tracking-widest mb-4" data-i18n="cta_2_label">For Warehouse Employers</p>
+                <a href="#" class="inline-flex items-center gap-3 bg-brandBlue text-white px-8 py-4 rounded-2xl font-black hover:scale-105 transition">
+                    🔘 <span data-i18n="cta_2_btn">Hire Warehouse Workforce Now</span>
+                </a>
+            </div>
         </div>
     </div>
 </main>
 
 <footer id="contact" class="bg-slate-950 text-slate-500 py-20">
-    <div class="container mx-auto px-6">
+    <div class="container mx-auto px-6 text-center">
         <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
-            <img src="logo-dark.png" class="h-10">
+            <div class="flex items-center gap-2">
+                <img src="logo-dark.png" alt="ADHOCSY" class="h-8 w-auto">
+            </div>
             <div class="flex gap-10">
                 <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-instagram"></i></a>
                 <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-youtube"></i></a>
@@ -162,28 +246,70 @@
             nav_home: "Home", nav_about: "About", nav_contact: "Contact",
             about_tag: "Our Story", about_title: "Reimagining the <br><span class='text-brandBlue'>Work-Life Balance</span>",
             about_desc: "ADHOCSY was founded on a simple principle: every worker deserves dignity, and every employer deserves reliability.",
-            mission_title: "Our Mission", mission_text: "To build a decentralized, transparent, and high-speed workforce ecosystem that empowers the gig economy.",
-            vision_title: "Our Vision", vision_text: "By 2030, ADHOCSY aims to be the primary livelihood source for over 10 million workers globally.",
-            p_1: "Verified Talent", p_1_d: "Rigorous 3-step verification process.",
-            p_2: "Instant Matching", p_2_d: "AI-driven hiring in under 60 seconds."
+            comp_title: "🔄 Traditional Hiring vs Adhocsy", comp_subtitle: "See the difference. Feel the savings.",
+            trad_hiring: "Traditional Hiring", trad_meta: "(Old, rigid, expensive)",
+            t_1: "Slow Hiring", t_1_d: "Manual sourcing, calls, follow-ups, delays",
+            t_2: "High Fixed Cost", t_2_d: "Monthly payroll, PF, ESI, compliance",
+            t_3: "Poor Flexibility", t_3_d: "Overstaffed on slow days, understaffed on peak days",
+            t_4: "Paperwork Heavy", t_4_d: "Attendance, salary processing, contractor dependency",
+            t_5: "Hard to Scale", t_5_d: "Difficult to add or remove workers quickly",
+            adhoc_hiring: "Adhocsy – On-Demand Workforce", adhoc_meta: "(Fast, flexible, cost-efficient)",
+            a_1: "Instant Hiring", a_1_d: "Post jobs → workers accept nearby",
+            a_2: "Pay Per Shift Only", a_2_d: "No payroll. No PF/ESI. No long-term cost.",
+            a_3: "Scale Anytime", a_3_d: "Increase or reduce workforce daily",
+            a_4: "Fully Digital", a_4_d: "Job tracking, payments & reports in one app",
+            a_5: "Local Verified Workers", a_5_d: "Workers sourced near your location",
+            saving_title: "💸 ₹₹₹ Cost-Saving Highlights", saving_subtitle: "With Adhocsy, you save on:",
+            s_1: "Monthly fixed salaries", s_2: "PF / ESI / contractor margins", s_3: "Idle workforce cost", s_4: "Recruitment & replacement cost",
+            s_v1: "Pay only when work is done", s_v2: "Zero cost on non-working days", s_tip: "💡 Employers typically save 20–35% on workforce costs compared to traditional models.",
+            cta_1_label: "For Construction Employers", cta_1_btn: "Get Workers for My Construction Site",
+            cta_2_label: "For Warehouse Employers", cta_2_btn: "Hire Warehouse Workforce Now"
         },
         hi: {
             nav_home: "होम", nav_about: "हमारे बारे में", nav_contact: "संपर्क",
             about_tag: "हमारी कहानी", about_title: "<span class='text-brandBlue'>कार्य-जीवन संतुलन</span> की नई कल्पना",
             about_desc: "ADHOCSY की स्थापना एक सरल सिद्धांत पर की गई थी: हर कर्मचारी गरिमा का हकदार है, और हर नियोक्ता विश्वसनीयता का।",
-            mission_title: "हमारा मिशन", mission_text: "एक विकेन्द्रीकृत, पारदर्शी और हाई-स्पीड कार्यबल पारिस्थितिकी तंत्र का निर्माण करना जो गिग अर्थव्यवस्था को सशक्त बनाता है।",
-            vision_title: "हमारा विजन", vision_text: "2030 तक, ADHOCSY का लक्ष्य वैश्विक स्तर पर 10 मिलियन से अधिक श्रमिकों के लिए प्राथमिक आजीविका स्रोत बनना है।",
-            p_1: "सत्यापित प्रतिभा", p_1_d: "कठोर 3-चरणीय सत्यापन प्रक्रिया।",
-            p_2: "त्वरित मिलान", p_2_d: "60 सेकंड से कम समय में एआई-संचालित भर्ती।"
+            comp_title: "🔄 पारंपरिक भर्ती बनाम Adhocsy", comp_subtitle: "अंतर देखें। बचत महसूस करें।",
+            trad_hiring: "पारंपरिक भर्ती", trad_meta: "(पुरानी, कठोर, महंगी)",
+            t_1: "धीमी भर्ती", t_1_d: "मैनुअल सोर्सिंग, कॉल, फॉलो-अप, देरी",
+            t_2: "उच्च निश्चित लागत", t_2_d: "मासिक पेरोल, पीएफ, ईएसआई, अनुपालन",
+            t_3: "कम लचीलापन", t_3_d: "कम काम के दिनों में अतिरिक्त कर्मचारी, पीक दिनों में कम कर्मचारी",
+            t_4: "कागजी कार्रवाई", t_4_d: "उपस्थिति, वेतन प्रसंस्करण, ठेकेदार पर निर्भरता",
+            t_5: "स्केल करना कठिन", t_5_d: "श्रमिकों को जल्दी से जोड़ना या हटाना मुश्किल",
+            adhoc_hiring: "Adhocsy – ऑन-डिमांड वर्कफोर्स", adhoc_meta: "(तेज, लचीला, लागत-कुशल)",
+            a_1: "त्वरित भर्ती", a_1_d: "नौकरी पोस्ट करें → पास के श्रमिक स्वीकार करते हैं",
+            a_2: "केवल प्रति शिफ्ट भुगतान", a_2_d: "कोई पेरोल नहीं। कोई पीएफ/ईएसआई नहीं। कोई दीर्घकालिक लागत नहीं।",
+            a_3: "कभी भी स्केल करें", a_3_d: "कार्यबल को रोजाना बढ़ाएं या घटाएं",
+            a_4: "पूरी तरह से डिजिटल", a_4_d: "एक ऐप में जॉब ट्रैकिंग, भुगतान और रिपोर्ट",
+            a_5: "स्थानीय सत्यापित श्रमिक", a_5_d: "आपके स्थान के पास से श्रमिक",
+            saving_title: "💸 ₹₹₹ लागत-बचत की मुख्य विशेषताएं", saving_subtitle: "Adhocsy के साथ, आप बचत करते हैं:",
+            s_1: "मासिक निश्चित वेतन", s_2: "पीएफ / ईएसआई / ठेकेदार मार्जिन", s_3: "अतिरिक्त कार्यबल लागत", s_4: "भर्ती और प्रतिस्थापन लागत",
+            s_v1: "काम पूरा होने पर ही भुगतान करें", s_v2: "गैर-कार्य दिवसों पर शून्य लागत", s_tip: "💡 नियोक्ता आमतौर पर पारंपरिक मॉडल की तुलना में कार्यबल लागत पर 20-35% बचाते हैं।",
+            cta_1_label: "निर्माण नियोक्ताओं के लिए", cta_1_btn: "मेरे निर्माण स्थल के लिए श्रमिक प्राप्त करें",
+            cta_2_label: "वेयरहाउस नियोक्ताओं के लिए", cta_2_btn: "अभी वेयरहाउस वर्कफोर्स हायर करें"
         },
         mr: {
             nav_home: "होम", nav_about: "आमच्याबद्दल", nav_contact: "संपर्क",
             about_tag: "आमची गोष्ट", about_title: "<span class='text-brandBlue'>कार्य-जीवन संतुलनाची</span> नवी संकल्पना",
             about_desc: "ADHOCSY ची स्थापना एका साध्या तत्त्वावर झाली: प्रत्येक कामगार प्रतिष्ठेस पात्र आहे आणि प्रत्येक नियोक्ता विश्वसनीयतेस पात्र आहे.",
-            mission_title: "आमचे ध्येय", mission_text: "एक विकेंद्रित, पारदर्शक आणि हाय-स्पीड वर्कफोर्स इकोसिस्टम तयार करणे जे गिग अर्थव्यवस्थेला सक्षम करते.",
-            vision_title: "आमची दृष्टी", vision_text: "2030 पर्यंत, ADHOCSY चे उद्दिष्ट जागतिक स्तरावर 10 दशलक्षाहून अधिक कामगारांसाठी उपजीविकेचे प्राथमिक साधन बनण्याचे आहे.",
-            p_1: "सत्यापित कौशल्य", p_1_d: "कठोर 3-टप्प्यांची पडताळणी प्रक्रिया.",
-            p_2: "झटपट जुळणी", p_2_d: "60 सेकंदांपेक्षा कमी वेळेत AI-आधारित भरती."
+            comp_title: "🔄 पारंपारिक भरती विरुद्ध Adhocsy", comp_subtitle: "फरक पहा. बचत अनुभवा.",
+            trad_hiring: "पारंपारिक भरती", trad_meta: "(जुनी, ताठर, महागडी)",
+            t_1: "संतुलित भरती", t_1_d: "मॅन्युअल सोर्सिंग, कॉल्स, फॉलो-अप, विलंब",
+            t_2: "उच्च निश्चित खर्च", t_2_d: "मासिक पेरोल, पीएफ, ईएसआय, अनुपालन",
+            t_3: "कमी लवचिकता", t_3_d: "कमी कामाच्या दिवशी जास्त कर्मचारी, पीक दिवशी कमी कर्मचारी",
+            t_4: "कागदपत्रांचा ढिगारा", t_4_d: "हजेरी, पगार प्रक्रिया, कंत्राटदारावर अवलंबित्व",
+            t_5: "कठीण वाढ", t_5_d: "कामगार पटकन जोडणे किंवा काढून टाकणे कठीण",
+            adhoc_hiring: "Adhocsy – ऑन-डिमांड वर्कफोर्स", adhoc_meta: "(वेगवान, लवचिक, किफायतशीर)",
+            a_1: "झटपट भरती", a_1_d: "नोकरी पोस्ट करा → जवळचे कामगार स्वीकारतात",
+            a_2: "केवळ प्रति शिफ्ट पेमेंट", a_2_d: "पेरोल नाही. पीएफ/ईएसआय नाही. दीर्घकालीन खर्च नाही.",
+            a_3: "कधीही वाढवा", a_3_d: "दैनंदिन मनुष्यबळ वाढवा किंवा कमी करा",
+            a_4: "पूर्णपणे डिजिटल", a_4_d: "एकाच ॲपमध्ये जॉब ट्रॅकिंग, पेमेंट आणि रिपोर्ट्स",
+            a_5: "स्थानिक सत्यापित कामगार", a_5_d: "तुमच्या ठिकाणाजवळील कामगार",
+            saving_title: "💸 ₹₹₹ खर्च-बचतीची वैशिष्ट्ये", saving_subtitle: "Adhocsy सह, आपण वाचवता:",
+            s_1: "मासिक निश्चित पगार", s_2: "पीएफ / ईएसआय / कंत्राटदार मार्जिन", s_3: "अतिरिक्त मनुष्यबळ खर्च", s_4: "भरती आणि बदली खर्च",
+            s_v1: "काम झाल्यावरच पैसे द्या", s_v2: "बिगर कामाच्या दिवशी शून्य खर्च", s_tip: "💡 नियोक्ते सहसा पारंपारिक मॉडेलच्या तुलनेत मनुष्यबळ खर्चावर 20-35% बचत करतात.",
+            cta_1_label: "बांधकाम नियोक्त्यांसाठी", cta_1_btn: "माझ्या बांधकाम साइटसाठी कामगार मिळवा",
+            cta_2_label: "वेअरहाउस नियोक्त्यांसाठी", cta_2_btn: "आत्ता वेअरहाउस वर्कफोर्स हायर करा"
         }
     };
 
@@ -202,12 +328,20 @@
         activeBtn.classList.remove('text-slate-400');
     }
 
-    // Theme Toggle
+    // Theme Toggle and Logo Switcher
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
+    const navLogo = document.getElementById('navLogo');
+    const mobileLogo = document.getElementById('mobileLogo');
+
     themeToggle.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
         themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        
+        // Update Logo Image Sources
+        const logoSrc = isDark ? 'logo-dark.png' : 'logo-day.png';
+        navLogo.src = logoSrc;
+        mobileLogo.src = logoSrc;
     });
 
     // Hamburger Menu Logic
