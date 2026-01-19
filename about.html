@@ -348,6 +348,14 @@
         navLogo.src = logoSrc;
         mobileLogo.src = logoSrc;
     });
+// Update Website Name (Day / Night)
+const siteName = document.getElementById('siteName');
+
+siteName.textContent = isDark ? 'ADHOCSY NIGHT' : 'ADHOCSY';
+
+// Optional color handling (if not using Tailwind dark mode)
+siteName.classList.toggle('text-white', isDark);
+siteName.classList.toggle('text-slate-900', !isDark);
 
     // Hamburger Menu Logic
     const menuBtn = document.getElementById('menuBtn');
