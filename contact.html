@@ -40,6 +40,16 @@
         #mobile-menu.active {
             transform: translateX(0);
         }
+        
+        #image-loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton 1.5s infinite;
+        }
+        @keyframes skeleton {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
@@ -54,8 +64,8 @@
         
         <nav class="hidden lg:flex items-center space-x-8 font-bold text-xs uppercase tracking-widest">
             <a href="index.html" data-i18n="nav_home" class="hover:text-brandBlue transition">Home</a>
-            <a href="about.html" data-i18n="nav_about" class="text-brandBlue">About</a>
-            <a href="contact.html" data-i18n="nav_contact" class="hover:text-brandBlue transition">Contact</a>
+            <a href="about.html" data-i18n="nav_about" class="hover:text-brandBlue transition">About</a>
+            <a href="contact.html" data-i18n="nav_contact" class="text-brandBlue">Contact</a>
            <a href="offerings.html" data-i18n="nav_offerings" class="hover:text-brandBlue transition">Offering</a>
             <a href="construction.html" data-i18n="nav_contact" class="hover:text-brandBlue transition">Construction</a>
               <a href="warehouse.html" data-i18n="nav_contact" class="hover:text-brandBlue transition">Warehouse</a>
@@ -134,8 +144,9 @@
                 </div>
             </div>
         </div>
-        <div class="rounded-[40px] overflow-hidden shadow-2xl h-[450px] border-8 border-white dark:border-slate-800">
-            <img src="image3.png" alt="ADHOCSY Contact Support" class="w-full h-full object-cover">
+        <div class="relative rounded-[40px] overflow-hidden shadow-2xl h-[450px] border-8 border-white dark:border-slate-800 bg-slate-200 dark:bg-slate-800">
+            <div id="image-loading" class="absolute inset-0 z-0"></div>
+            <img id="contactHeroImage" src="" alt="ADHOCSY Contact Support" class="relative z-10 w-full h-full object-cover opacity-0 transition-opacity duration-500">
         </div>
     </div>
 </section>
@@ -207,6 +218,44 @@
 </footer>
 
 <script>
+    const apiKey = "";
+    
+    async function generateContactImage() {
+        const prompt = "A clean, high-quality, professional photography style image showing a diverse team of support agents in a modern office using high-tech tablets and computers. The background shows a digital network map of India. The lighting is bright and optimistic, featuring ADHOCSY brand colors like blue and white. 8k resolution, cinematic lighting.";
+        
+        try {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key=${apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    instances: { prompt: prompt },
+                    parameters: { sampleCount: 1 }
+                })
+            });
+            
+            if (!response.ok) throw new Error('Generation failed');
+            
+            const result = await response.json();
+            const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+            
+            const imgEl = document.getElementById('contactHeroImage');
+            imgEl.src = imageUrl;
+            imgEl.onload = () => {
+                imgEl.classList.remove('opacity-0');
+                document.getElementById('image-loading').style.display = 'none';
+            };
+        } catch (error) {
+            console.error("Image generation failed", error);
+            // Fallback to a high-quality stock illustration if API fails
+            const imgEl = document.getElementById('contactHeroImage');
+            imgEl.src = "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1200&auto=format&fit=crop";
+            imgEl.onload = () => {
+                imgEl.classList.remove('opacity-0');
+                document.getElementById('image-loading').style.display = 'none';
+            };
+        }
+    }
+
     const dict = {
         en: {
             nav_home: "Home", nav_about: "About", nav_contact: "Contact",
@@ -285,6 +334,10 @@
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => mobileMenu.classList.remove('active'));
     });
+
+    window.onload = () => {
+        generateContactImage();
+    };
 </script>
 </body>
 </html>
