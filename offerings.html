@@ -89,10 +89,20 @@
 <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden">
     <div class="flex justify-between items-center mb-12">
         <div class="flex items-center gap-2">
-            <img src="logo-day.png" alt="ADHOCSY" class="h-8 dark:hidden">
-            <img src="logo-dark.png" alt="ADHOCSY" class="h-8 hidden dark:block">
-            <span class="text-xl font-black tracking-tighter dark:text-white">ADHOCSY</span>
-        </div>
+          <img src="logo-day.png" alt="ADHOCSY" class="h-6 md:h-8 dark:hidden">
+    <img src="logo-dark.png" alt="ADHOCSY" class="h-6 md:h-8 hidden dark:block">
+    
+    <div class="flex flex-col leading-none">
+        <!-- Main Text: text-lg on mobile, text-2xl on tablet/laptop -->
+        <span id="siteName" class="text-lg md:text-2xl font-black tracking-tighter text-blue-400">
+            ADHOCSY
+        </span>
+        
+        <!-- Subtext: text-[6px] on mobile, text-[8px] on tablet/laptop -->
+        <span class="text-[6px] md:text-[8px] font-bold tracking-[0.2em] text-slate-500 dark:text-slate-400 uppercase mt-0.5">
+            On Demand Workforce
+        </span>
+    </div>
         <button id="closeBtn" class="text-3xl">&times;</button>
     </div>
     
@@ -118,7 +128,7 @@
             <!-- Construction Sector Button -->
             <a href="construction.html" class="offering-card bg-slate-50 dark:bg-slate-900/40 rounded-[40px] border border-slate-100 dark:border-slate-800 group block">
                 <div class="h-72 overflow-hidden">
-                    <img src="construction1.png" alt="Construction" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <img src="construction.png" alt="Construction" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 </div>
                 <div class="p-10">
                     <h2 class="text-3xl font-black mb-4 dark:text-white" data-i18n="off_c_title">Construction Workforce</h2>
