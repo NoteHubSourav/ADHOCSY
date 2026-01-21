@@ -31,7 +31,7 @@
         }
 
         #mobile-menu {
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             transform: translateX(100%);
         }
         #mobile-menu.active {
@@ -53,19 +53,19 @@
 
 <header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100 dark:border-transparent">
     <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-        <!-- Brand Logo Image -->
-        <a href="index.html" class="flex items-center gap-2 group">
-            <img src="logo-day.png" alt="ADHOCSY" id="navLogo" class="logo-img transition-opacity duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <span class="text-2xl font-black tracking-tighter text-slate-900 dark:text-white hidden" style="display:none">ADHOCSY</span>
+        <!-- Brand Logo & Name -->
+        <a href="index.html" class="flex items-center gap-3 group">
+            <img src="logo-day.png" alt="ADHOCSY" id="navLogo" class="logo-img transition-all duration-300">
+            <span id="siteName" class="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">ADHOCSY</span>
         </a>
         
         <nav class="hidden lg:flex items-center space-x-8 font-bold text-xs uppercase tracking-widest">
             <a href="index.html" data-i18n="nav_home" class="hover:text-brandBlue transition">Home</a>
             <a href="about.html" data-i18n="nav_about" class="text-brandBlue">About</a>
             <a href="contact.html" data-i18n="nav_contact" class="hover:text-brandBlue transition">Contact</a>
-           <a href="offerings.html" data-i18n="nav_offerings" class="hover:text-brandBlue transition">Offering</a>
+            <a href="offerings.html" data-i18n="nav_offerings" class="hover:text-brandBlue transition">Offering</a>
             <a href="construction.html" data-i18n="nav_construction" class="hover:text-brandBlue transition">Construction</a>
-              <a href="warehouse.html" data-i18n="nav_warehouse" class="hover:text-brandBlue transition">Warehouse</a>
+            <a href="warehouse.html" data-i18n="nav_warehouse" class="hover:text-brandBlue transition">Warehouse</a>
         </nav>
 
         <div class="flex items-center gap-4">
@@ -79,26 +79,29 @@
                 <i class="fas fa-moon" id="themeIcon"></i>
             </button>
 
-            <button id="menuBtn" class="lg:hidden text-2xl focus:outline-none">
+            <button id="menuBtn" class="lg:hidden text-2xl focus:outline-none p-2">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </div>
 </header>
 
-<div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden">
+<!-- Fixed Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden shadow-2xl">
     <div class="flex justify-between items-center mb-12">
-        <a href="index.html">
-            <img src="logo-day.png" alt="ADHOCSY" id="mobileLogo" class="h-10 w-auto" onerror="this.style.display='none';">
-        </a>
-        <button id="closeBtn" class="text-3xl">&times;</button>
+        <div class="flex items-center gap-3">
+            <img src="logo-day.png" alt="ADHOCSY" id="mobileLogo" class="h-10 w-auto">
+            <span id="mobileSiteName" class="text-xl font-black tracking-tighter text-slate-900 dark:text-white">ADHOCSY</span>
+        </div>
+        <button id="closeBtn" class="text-4xl text-slate-400 hover:text-brandBlue">&times;</button>
     </div>
-    <nav class="flex flex-col space-y-8 text-2xl font-black uppercase tracking-tighter">
-        <a href="about.html" data-i18n="nav_about" class="hover:text-brandBlue transition">About</a>
-            <a href="offerings.html" data-i18n="nav_offerings" class="hover:text-brandBlue transition">Offering</a>
-            <a href="contact.html" data-i18n="nav_contact" class="hover:text-brandBlue transition">Contact</a>
-              <a href="construction.html" data-i18n="nav_construction" class="hover:text-brandBlue transition">Construction</a>
-              <a href="warehouse.html" data-i18n="nav_warehouse" class="hover:text-brandBlue transition">Warehouse</a>
+    <nav class="flex flex-col space-y-6 text-3xl font-black uppercase tracking-tighter">
+        <a href="index.html" class="mobile-link hover:text-brandBlue transition" data-i18n="nav_home">Home</a>
+        <a href="about.html" class="mobile-link text-brandBlue transition" data-i18n="nav_about">About</a>
+        <a href="offerings.html" class="mobile-link hover:text-brandBlue transition" data-i18n="nav_offerings">Offering</a>
+        <a href="contact.html" class="mobile-link hover:text-brandBlue transition" data-i18n="nav_contact">Contact</a>
+        <a href="construction.html" class="mobile-link hover:text-brandBlue transition" data-i18n="nav_construction">Construction</a>
+        <a href="warehouse.html" class="mobile-link hover:text-brandBlue transition" data-i18n="nav_warehouse">Warehouse</a>
     </nav>
 </div>
 
@@ -229,10 +232,9 @@
 
 <footer id="contact" class="bg-slate-950 text-slate-500 py-20">
   <div class="container mx-auto px-6">
-    
     <!-- Top section -->
     <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
-      <img src="logo-dark.png" class="h-10" alt="ADHOCSY">
+      <img src="logo-dark.png" id="footerLogo" class="h-10" alt="ADHOCSY">
       <div class="flex gap-10">
         <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110">
           <i class="fab fa-instagram"></i>
@@ -246,32 +248,22 @@
       </div>
     </div>
 
-    <!-- Company details -->
     <div class="text-center text-sm leading-relaxed opacity-60 mb-10">
-      <p class="font-semibold text-slate-300">
-        ADHOCSY ON DEMAND WORKFORCE PRIVATE LIMITED
-      </p>
-      <p class="mt-2">
-        Registered Office: JNC CONSTRUCTION, H1A/20,<br>
-        Sector-63, Noida, Uttar Pradesh – 201301
-      </p>
-      <p class="mt-2">
-        CIN: U78100UP2026PTC241618
-      </p>
+      <p class="font-semibold text-slate-300">ADHOCSY ON DEMAND WORKFORCE PRIVATE LIMITED</p>
+      <p class="mt-2">Registered Office: JNC CONSTRUCTION, H1A/20,<br>Sector-63, Noida, Uttar Pradesh – 201301</p>
+      <p class="mt-2">CIN: U78100UP2026PTC241618</p>
     </div>
 
-    <!-- Bottom line -->
     <div class="text-center text-xs font-bold tracking-[0.3em] uppercase opacity-40">
       © 2026 ADHOCSY TECHNOLOGIES. BUILT FOR DIGNITY.
     </div>
-
   </div>
 </footer>
 
 <script>
     const dict = {
         en: {
-          nav_home: "Home", nav_about: "About", nav_offerings: "Offering", nav_contact: "Contact",
+            nav_home: "Home", nav_about: "About", nav_offerings: "Offering", nav_contact: "Contact",
             nav_construction: "Construction", nav_warehouse: "Warehouse",
             about_tag: "Our Story", about_title: "Reimagining the <br><span class='text-brandBlue'>Work-Life Balance</span>",
             about_desc: "ADHOCSY was founded on a simple principle: every worker deserves dignity, and every employer deserves reliability.",
@@ -309,7 +301,7 @@
             adhoc_hiring: "Adhocsy – ऑन-डिमांड वर्कफोर्स", adhoc_meta: "(तेज, लचीला, लागत-कुशल)",
             a_1: "त्वरित भर्ती", a_1_d: "नौकरी पोस्ट करें → पास के श्रमिक स्वीकार करते हैं",
             a_2: "केवल प्रति शिफ्ट भुगतान", a_2_d: "कोई पेरोल नहीं। कोई पीएफ/ईएसआई नहीं। कोई दीर्घकालिक लागत नहीं।",
-            a_3: "कभी भी स्केल करें", a_3_d: "कार्यबल को रोजाना बढ़ाएं या घटाएं",
+            a_3: "कभी भी स्केल करें", a_3_d: "कार्यबल को रोजाना बढ़ाएं या घटाएं",
             a_4: "पूरी तरह से डिजिटल", a_4_d: "एक ऐप में जॉब ट्रैकिंग, भुगतान और रिपोर्ट",
             a_5: "स्थानीय सत्यापित श्रमिक", a_5_d: "आपके स्थान के पास से श्रमिक",
             saving_title: "💸 ₹₹₹ लागत-बचत की मुख्य विशेषताएं", saving_subtitle: "Adhocsy के साथ, आप बचत करते हैं:",
@@ -364,24 +356,26 @@
     const themeIcon = document.getElementById('themeIcon');
     const navLogo = document.getElementById('navLogo');
     const mobileLogo = document.getElementById('mobileLogo');
+    const siteName = document.getElementById('siteName');
+    const mobileSiteName = document.getElementById('mobileSiteName');
+
+    function updateThemeUI(isDark) {
+        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        const logoSrc = isDark ? 'logo-dark.png' : 'logo-day.png';
+        
+        navLogo.src = logoSrc;
+        mobileLogo.src = logoSrc;
+        
+        // Update Title Names
+        const textValue = isDark ? 'ADHOCSY ' : 'ADHOCSY';
+        siteName.textContent = textValue;
+        mobileSiteName.textContent = textValue;
+    }
 
     themeToggle.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
-        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-        
-        // Update Logo Image Sources
-        const logoSrc = isDark ? 'logo-dark.png' : 'logo-day.png';
-        navLogo.src = logoSrc;
-        mobileLogo.src = logoSrc;
+        updateThemeUI(isDark);
     });
-// Update Website Name (Day / Night)
-const siteName = document.getElementById('siteName');
-
-siteName.textContent = isDark ? 'ADHOCSY NIGHT' : 'ADHOCSY';
-
-// Optional color handling (if not using Tailwind dark mode)
-siteName.classList.toggle('text-white', isDark);
-siteName.classList.toggle('text-slate-900', !isDark);
 
     // Hamburger Menu Logic
     const menuBtn = document.getElementById('menuBtn');
@@ -389,10 +383,18 @@ siteName.classList.toggle('text-slate-900', !isDark);
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
-    closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+    });
+
     mobileLinks.forEach(link => {
-        link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
     });
 </script>
 </body>
