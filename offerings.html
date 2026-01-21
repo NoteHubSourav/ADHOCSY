@@ -24,7 +24,7 @@
         body { transition: background-color 0.4s ease; scroll-behavior: smooth; }
         .glass-nav { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.9); }
         .dark .glass-nav { background: rgba(10, 13, 20, 0.9); border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .lang-btn.active { background-color: #2563eb; color: white; }
+        .lang-btn.active { background-color: #2563eb !important; color: white !important; }
         
         #mobile-menu {
             transition: transform 0.3s ease-in-out;
@@ -42,6 +42,15 @@
             transform: translateY(-10px);
             box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.2);
         }
+
+        .img-placeholder {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-weight: 800;
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
@@ -50,22 +59,23 @@
     <div class="container mx-auto px-6 py-3 flex justify-between items-center">
         <a href="index.html" class="flex items-center gap-3 group">
             <div class="flex items-center gap-2">
-                <img src="logo-day.png" alt="Logo" class="h-10 dark:hidden">
-                <img src="logo-dark.png" alt="Logo" class="h-10 hidden dark:block">
+                <!-- Restored Logo logic -->
+                <img src="logo-day.png" alt="Logo" class="h-10 dark:hidden" onerror="this.classList.add('hidden')">
+                <img src="logo-dark.png" alt="Logo" class="h-10 hidden dark:block" onerror="this.classList.remove('hidden'); this.style.opacity='0.5'">
             </div>
             <div class="flex flex-col leading-none">
-                <span id="siteName" class="text-2xl font-black tracking-tighter text-blue-400">ADHOCSY</span>
+                <span class="text-2xl font-black tracking-tighter text-blue-400">ADHOCSY</span>
                 <span class="text-[8px] font-bold tracking-[0.2em] text-slate-500 dark:text-slate-400 uppercase mt-0.5">On Demand Workforce</span>
             </div>
         </a>
         
         <nav class="hidden lg:flex items-center space-x-6 font-bold text-[10px] uppercase tracking-widest">
-           <a href="index.html" data-i18n="nav_home" class="hover:text-brandBlue transition">Home</a>
-            <a href="about.html" data-i18n="nav_about" class="text-brandBlue">About</a>
+            <a href="index.html" data-i18n="nav_home" class="hover:text-brandBlue transition">Home</a>
+            <a href="about.html" data-i18n="nav_about" class="hover:text-brandBlue transition">About</a>
             <a href="contact.html" data-i18n="nav_contact" class="hover:text-brandBlue transition">Contact</a>
-           <a href="offerings.html" data-i18n="nav_offerings" class="hover:text-brandBlue transition">Offering</a>
+            <a href="offerings.html" data-i18n="nav_offerings" class="text-brandBlue">Offering</a>
             <a href="construction.html" data-i18n="nav_construction" class="hover:text-brandBlue transition">Construction</a>
-              <a href="warehouse.html" data-i18n="nav_warehouse" class="hover:text-brandBlue transition">Warehouse</a>
+            <a href="warehouse.html" data-i18n="nav_warehouse" class="hover:text-brandBlue transition">Warehouse</a>
         </nav>
 
         <div class="flex items-center gap-4">
@@ -86,34 +96,27 @@
     </div>
 </header>
 
+<!-- Mobile Menu -->
 <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden">
     <div class="flex justify-between items-center mb-12">
         <div class="flex items-center gap-2">
-          <img src="logo-day.png" alt="ADHOCSY" class="h-6 md:h-8 dark:hidden">
-    <img src="logo-dark.png" alt="ADHOCSY" class="h-6 md:h-8 hidden dark:block">
-    
-    <div class="flex flex-col leading-none">
-        <!-- Main Text: text-lg on mobile, text-2xl on tablet/laptop -->
-        <span id="siteName" class="text-lg md:text-2xl font-black tracking-tighter text-blue-400">
-            ADHOCSY
-        </span>
-        
-        <!-- Subtext: text-[6px] on mobile, text-[8px] on tablet/laptop -->
-        <span class="text-[6px] md:text-[8px] font-bold tracking-[0.2em] text-slate-500 dark:text-slate-400 uppercase mt-0.5">
-            On Demand Workforce
-        </span>
-    </div>
+            <img src="logo-day.png" alt="Logo" class="h-8 dark:hidden" onerror="this.style.display='none'">
+            <img src="logo-dark.png" alt="Logo" class="h-8 hidden dark:block" onerror="this.style.display='none'">
+            <div class="flex flex-col leading-none">
+                <span class="text-lg md:text-2xl font-black tracking-tighter text-blue-400">ADHOCSY</span>
+                <span class="text-[6px] md:text-[8px] font-bold tracking-[0.2em] text-slate-500 dark:text-slate-400 uppercase mt-0.5">On Demand Workforce</span>
+            </div>
+        </div>
         <button id="closeBtn" class="text-3xl">&times;</button>
     </div>
     
     <nav class="flex flex-col space-y-6 text-xl font-black uppercase tracking-tighter">
         <a href="index.html" data-i18n="nav_home" class="mobile-link">Home</a>
         <a href="about.html" data-i18n="nav_about" class="mobile-link">About</a>
-         <a href="contact.html" data-i18n="nav_contact" class="mobile-link">Contact</a>
+        <a href="contact.html" data-i18n="nav_contact" class="mobile-link">Contact</a>
         <a href="offerings.html" data-i18n="nav_offerings" class="mobile-link text-brandBlue">Offering</a>
         <a href="construction.html" data-i18n="nav_construction" class="mobile-link">Construction</a>
         <a href="warehouse.html" data-i18n="nav_warehouse" class="mobile-link">Warehouse</a>
-       
     </nav>
 </div>
 
@@ -125,10 +128,11 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-10 mb-32">
-            <!-- Construction Sector Button -->
+            <!-- Construction Sector -->
             <a href="construction.html" class="offering-card bg-slate-50 dark:bg-slate-900/40 rounded-[40px] border border-slate-100 dark:border-slate-800 group block">
-                <div class="h-72 overflow-hidden">
-                    <img src="construction.png" alt="Construction" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="h-72 overflow-hidden img-placeholder">
+                    <img src="construction.png" alt="Construction" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.style.display='none'">
+                    <span class="absolute group-hover:opacity-0 transition text-xs font-bold uppercase tracking-widest opacity-20">Construction Sector Image</span>
                 </div>
                 <div class="p-10">
                     <h2 class="text-3xl font-black mb-4 dark:text-white" data-i18n="off_c_title">Construction Workforce</h2>
@@ -137,10 +141,11 @@
                 </div>
             </a>
 
-            <!-- Warehouse Sector Button -->
+            <!-- Warehouse Sector -->
             <a href="warehouse.html" class="offering-card bg-slate-50 dark:bg-slate-900/40 rounded-[40px] border border-slate-100 dark:border-slate-800 group block">
-                <div class="h-72 overflow-hidden">
-                    <img src="warehouse1.png" alt="Warehouse" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="h-72 overflow-hidden img-placeholder">
+                    <img src="warehouse1.png" alt="Warehouse" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.style.display='none'">
+                    <span class="absolute group-hover:opacity-0 transition text-xs font-bold uppercase tracking-widest opacity-20">Warehouse Sector Image</span>
                 </div>
                 <div class="p-10">
                     <h2 class="text-3xl font-black mb-4 dark:text-white" data-i18n="off_w_title">Warehouse Workforce</h2>
@@ -177,9 +182,9 @@
                             <span data-i18n="earn_w_title">Earn by Referring Workers</span>
                         </h3>
                         <ul class="space-y-4 mb-10">
-                            <li class="flex items-start gap-4" data-i18n="earn_w1">₹10 when a worker joins using your Referral ID</li>
-                            <li class="flex items-start gap-4" data-i18n="earn_w2">₹6 per job completed by the L2 worker</li>
-                            <li class="flex items-start gap-4" data-i18n="earn_w3">₹4 per job from the next referral level</li>
+                            <li class="flex items-start gap-4" data-i18n="earn_w1">• ₹10 when a worker joins using your Referral ID</li>
+                            <li class="flex items-start gap-4" data-i18n="earn_w2">• ₹6 per job completed by the L2 worker</li>
+                            <li class="flex items-start gap-4" data-i18n="earn_w3">• ₹4 per job from the next referral level</li>
                         </ul>
                         <div class="flex flex-wrap gap-4 text-[10px] font-black uppercase tracking-widest text-emerald-400">
                             <span class="bg-emerald-400/10 px-3 py-1.5 rounded-lg">✅ <span data-i18n="tag_life">Lifetime Earnings</span></span>
@@ -218,45 +223,26 @@
 
 <footer id="contact" class="bg-slate-950 text-slate-500 py-20">
   <div class="container mx-auto px-6">
-    
-    <!-- Top section -->
     <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
-      <img src="logo-dark.png" class="h-10" alt="ADHOCSY">
+      <img src="logo-dark.png" class="h-10" alt="ADHOCSY" onerror="this.style.opacity='0.5'">
       <div class="flex gap-10">
-        <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110">
-          <i class="fab fa-youtube"></i>
-        </a>
-        <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110">
-          <i class="fab fa-facebook"></i>
-        </a>
+        <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-facebook"></i></a>
       </div>
     </div>
 
-    <!-- Company details -->
     <div class="text-center text-sm leading-relaxed opacity-60 mb-10">
-      <p class="font-semibold text-slate-300">
-        ADHOCSY ON DEMAND WORKFORCE PRIVATE LIMITED
-      </p>
-      <p class="mt-2">
-        Registered Office: JNC CONSTRUCTION, H1A/20,<br>
-        Sector-63, Noida, Uttar Pradesh – 201301
-      </p>
-      <p class="mt-2">
-        CIN: U78100UP2026PTC241618
-      </p>
+      <p class="font-semibold text-slate-300">ADHOCSY ON DEMAND WORKFORCE PRIVATE LIMITED</p>
+      <p class="mt-2">Registered Office: JNC CONSTRUCTION, H1A/20,<br>Sector-63, Noida, Uttar Pradesh – 201301</p>
+      <p class="mt-2">CIN: U78100UP2026PTC241618</p>
     </div>
 
-    <!-- Bottom line -->
     <div class="text-center text-xs font-bold tracking-[0.3em] uppercase opacity-40">
       © 2026 ADHOCSY TECHNOLOGIES. BUILT FOR DIGNITY.
     </div>
-
   </div>
 </footer>
-
 
 <script>
     const dict = {
@@ -301,9 +287,8 @@
             start_btn: "अभी कमाई शुरू करें"
         },
         mr: {
-           nav_home: "होम", nav_about: "आमच्याबद्दल", nav_offerings: "सेवा", nav_contact: "संपर्क",
+            nav_home: "होम", nav_about: "आमच्याबद्दल", nav_offerings: "सेवा", nav_contact: "संपर्क",
             nav_construction: "बांधकाम", nav_warehouse: "वेअरहाउस",
-           
             page_title: "उद्योग विशिष्ट <span class='text-brandBlue'>उपाय</span>",
             page_subtitle: "बांधकाम आणि पुरवठा साखळी क्षेत्रांसाठी मनुष्यबळ व्यवस्थापन.",
             off_c_title: "बांधकाम मनुष्यबळ", off_c_desc: "पायाभूत सुविधा प्रकल्पांसाठी कुशल आणि अकुशल कामगार.", off_c_btn: "सेक्टर पहा",
@@ -333,7 +318,8 @@
             b.classList.remove('active', 'bg-brandBlue', 'text-white');
             b.classList.add('text-slate-400');
         });
-        document.getElementById(`btn-${lang}`).classList.add('active', 'bg-brandBlue', 'text-white');
+        const activeBtn = document.getElementById(`btn-${lang}`);
+        if(activeBtn) activeBtn.classList.add('active', 'bg-brandBlue', 'text-white');
     }
 
     const themeToggle = document.getElementById('themeToggle');
@@ -342,8 +328,16 @@
         document.getElementById('themeIcon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
     });
 
-    document.getElementById('menuBtn').addEventListener('click', () => document.getElementById('mobile-menu').classList.add('active'));
-    document.getElementById('closeBtn').addEventListener('click', () => document.getElementById('mobile-menu').classList.remove('active'));
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+    closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.remove('active'));
+    });
 </script>
 </body>
 </html>
