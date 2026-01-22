@@ -202,38 +202,41 @@
 </section>
 
 <section id="offerings" class="py-12 bg-white dark:bg-brandDark">
-    <div class="container mx-auto px-6">
-        <div class="grid md:grid-cols-3 gap-6">
-          <img
-  src="image1.png"
-  alt="Feature 1"
-  class="rounded-3xl w-full aspect-[3/4] object-cover shadow-lg border border-slate-100 dark:border-slate-800"
-/>
+  <div class="container mx-auto px-6">
+    <div class="grid md:grid-cols-3 gap-6">
 
-            <img
-  src="image2.png"
-  alt="Feature 1"
-  class="rounded-3xl w-full aspect-[3/4] object-cover shadow-lg border border-slate-100 dark:border-slate-800"
-/>
-               <img
-  src="image3.png"
-  alt="Feature 1"
-  class="rounded-3xl w-full aspect-[3/4] object-cover shadow-lg border border-slate-100 dark:border-slate-800"
-/>
-        </div>
+      <video
+        src="video1.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="rounded-3xl w-full aspect-[3/4] object-cover shadow-lg border border-slate-100 dark:border-slate-800"
+      ></video>
+
+      <video
+        src="video2.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="rounded-3xl w-full aspect-[3/4] object-cover shadow-lg border border-slate-100 dark:border-slate-800"
+      ></video>
+
+      <video
+        src="video3.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="rounded-3xl w-full aspect-[3/4] object-cover shadow-lg border border-slate-100 dark:border-slate-800"
+      ></video>
+
     </div>
+  </div>
 </section>
 
-<section class="py-20 bg-slate-50 dark:bg-slate-900/30">
-    <div class="container mx-auto px-6 text-center">
-        <h2 class="text-3xl font-black mb-12 dark:text-white" data-i18n="video_title">Experience the Platform</h2>
-        <div class="max-w-4xl mx-auto rounded-[40px] overflow-hidden border-8 border-white dark:border-slate-800 shadow-2xl">
-            <video controls class="w-full">
-                <source src="hero.mp4" type="video/mp4">
-            </video>
-        </div>
-    </div>
-</section>
+
 
 <section class="py-16 bg-white dark:bg-brandDark border-y border-slate-100 dark:border-slate-800">
     <div class="container mx-auto px-6">
@@ -258,7 +261,14 @@
                 <img src="director1.png" class="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0">
                 <div class="absolute bottom-0 w-full p-10 bg-gradient-to-t from-black/90 to-transparent text-white">
                     <h3 class="text-2xl font-bold">MR UPENDRA KUMAR</h3>
-                    <p class="text-brandBlue font-black text-xs uppercase" data-i18n="dir1_role">Founding Member (Director) | Adhocsian</p>
+                  <p class="uppercase text-xs">
+  <span class="block text-brandBlue font-black" data-i18n="dir1_role_title">
+    Founding Member
+  </span>
+  <span class="block text-slate-600 dark:text-slate-400 font-semibold" data-i18n="dir1_role_sub">
+    Director | Adhocsian
+  </span>
+</p>
                 </div>
                 <div class="bio-overlay absolute inset-0 bg-brandBlue/90 p-12 flex flex-col justify-center text-white opacity-0 translate-y-10 transition-all duration-500">
                     <p class="text-lg italic font-medium" data-i18n="dir1_line">"Our mission is to bridge the gap between skill and opportunity."</p>
