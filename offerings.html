@@ -13,7 +13,12 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    colors: { brandBlue: '#2563eb', brandDark: '#0A0D14' },
+                    colors: { 
+                        brandBlue: '#2563eb', 
+                        brandDark: '#0A0D14',
+                        adhocBlue: '#0f4c81',
+                        adhocTeal: '#1fa2a6'
+                    },
                     fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
                 }
             }
@@ -34,22 +39,24 @@
             transform: translateX(0);
         }
 
-        .offering-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
+        /* Referral Styles Integration */
+        .tab-btn {
+            transition: all 0.3s ease;
         }
-        .offering-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.2);
+        .tab-btn.active {
+            background: linear-gradient(90deg, #0f4c81, #1fa2a6);
+            color: white;
+        }
+        .panel { display: none; }
+        .panel.active { display: block; animation: fadeIn 0.4s ease-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .img-placeholder {
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-weight: 800;
+        .highlight-grad {
+            background: linear-gradient(90deg, #0f4c81, #1fa2a6);
         }
     </style>
 </head>
@@ -59,7 +66,6 @@
     <div class="container mx-auto px-6 py-3 flex justify-between items-center">
         <a href="index.html" class="flex items-center gap-3 group">
             <div class="flex items-center gap-2">
-                <!-- Restored Logo logic -->
                 <img src="logo-day.png" alt="Logo" class="h-10 dark:hidden" onerror="this.classList.add('hidden')">
                 <img src="logo-dark.png" alt="Logo" class="h-10 hidden dark:block" onerror="this.classList.remove('hidden'); this.style.opacity='0.5'">
             </div>
@@ -121,32 +127,140 @@
 </div>
 
 <main class="pt-32 pb-20">
-    <!-- VOLUNTEER PARTNER SECTION -->
-        <div class="bg-slate-50 dark:bg-slate-900/40 rounded-[50px] p-8 md:p-16 border-2 border-brandBlue/10 relative overflow-hidden">
-            <div class="relative z-10 flex flex-col lg:flex-row gap-16 items-center">
-                <div class="lg:w-1/2">
-                    <span class="inline-block px-4 py-2 rounded-full bg-brandBlue/10 text-brandBlue font-black text-xs uppercase tracking-widest mb-6" data-i18n="vol_tag">Partnership Program</span>
-                    <h2 class="text-4xl md:text-5xl font-black mb-8 dark:text-white leading-tight" data-i18n="vol_title">Join Adhocsy as a <span class="text-brandBlue">Volunteer Partner</span></h2>
-                    <p class="text-lg text-slate-600 dark:text-slate-400 mb-10" data-i18n="vol_desc">Earn monthly income by simply referring workers or companies to Adhocsy. No investment. No targets. Just smart referrals.</p>
-                    
-                    <div class="grid grid-cols-2 gap-4 mb-10">
-                        <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
-                            <span class="text-3xl mb-2 block">🚫</span>
-                            <p class="font-bold text-sm" data-i18n="vol_f1">No Investment</p>
-                        </div>
-                        <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
-                            <span class="text-3xl mb-2 block">🎯</span>
-                            <p class="font-bold text-sm" data-i18n="vol_f2">No Targets</p>
-                        </div>
-                    </div>
-                </div>
-
-        <div class="grid md:grid-cols-2 gap-10 mb-32">
-           
-
+    <div class="container mx-auto px-6">
+        
+        <!-- Header Section -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black mb-4 dark:text-white" data-i18n="page_title">Industry Specific <span class='text-brandBlue'>Solutions</span></h1>
+            <p class="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="page_subtitle">Tailored workforce management for construction and supply chain sectors.</p>
         </div>
 
-        <!-- VOLUNTEER PARTNER SECTION -->
+        <!-- Referral Program Main Section -->
+        <section class="max-w-5xl mx-auto mb-32">
+            
+            <!-- Referral Program Title -->
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-black text-adhocBlue dark:text-blue-400 mb-2">Referral Program</h2>
+                <p class="text-slate-500 dark:text-slate-400">Earn monthly income while building a sustainable workforce ecosystem</p>
+            </div>
+
+            <!-- TABS -->
+            <div class="flex justify-center gap-4 mb-10">
+                <button onclick="showPanel('employee')" class="tab-btn active px-8 py-3 rounded-full font-bold bg-slate-100 dark:bg-slate-800 text-adhocBlue dark:text-slate-300">Employee Referral</button>
+                <button onclick="showPanel('employer')" class="tab-btn px-8 py-3 rounded-full font-bold bg-slate-100 dark:bg-slate-800 text-adhocBlue dark:text-slate-300">Employer Referral</button>
+            </div>
+
+            <!-- EMPLOYEE PANEL -->
+            <div id="employee" class="panel active bg-white dark:bg-slate-900 rounded-[40px] p-8 md:p-12 shadow-xl border border-slate-100 dark:border-slate-800">
+                <div class="highlight-grad text-white p-6 rounded-2xl text-center text-xl font-bold mb-10">
+                    Earn on every job shift completed by your referral network
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <div class="mb-8">
+                            <h3 class="text-xl font-black text-adhocBlue dark:text-blue-400 mb-4">How Employee Referral Works</h3>
+                            <ul class="space-y-3 text-slate-600 dark:text-slate-400 font-medium">
+                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> L1: ₹10 per job shift</li>
+                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> L2: ₹6 per job shift</li>
+                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> L3: ₹4 per job shift</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-3xl">
+                            <h3 class="text-lg font-black text-adhocBlue dark:text-blue-400 mb-4">Upfront Example</h3>
+                            <div class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                                <p><strong>Step 1:</strong> You refer 500 employees (L1) → 100 active (20%)</p>
+                                <p><strong>Step 2:</strong> 100 L1 × 2 shifts = 200 shifts → <strong>₹2,000</strong></p>
+                                <p><strong>Step 3:</strong> L1 refers 1000 L2 → 200 active → <strong>₹2,400</strong></p>
+                                <p><strong>Step 4:</strong> L2 refers 3000 L3 → 600 active → <strong>₹4,800</strong></p>
+                                <div class="pt-4 border-t border-slate-200 dark:border-slate-700 mt-4">
+                                    <p class="text-lg font-black text-slate-900 dark:text-white">Total Monthly Earning: <span class="text-emerald-500">₹9,200</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-[32px] border border-blue-100 dark:border-blue-800/30">
+                        <h3 class="text-xl font-black text-adhocBlue dark:text-blue-300 mb-6">ROI Calculator</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">L1 Employees Referred</label>
+                                <input type="number" id="l1" value="500" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none focus:ring-2 ring-brandBlue transition">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Active %</label>
+                                    <input type="number" id="active" value="20" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Shifts/Month</label>
+                                    <input type="number" id="shifts" value="2" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none">
+                                </div>
+                            </div>
+                            <div class="mt-8 bg-emerald-500 text-white p-6 rounded-2xl text-center">
+                                <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Estimated Monthly Income</p>
+                                <p class="text-4xl font-black" id="employeeResult">₹9,200</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EMPLOYER PANEL -->
+            <div id="employer" class="panel bg-white dark:bg-slate-900 rounded-[40px] p-8 md:p-12 shadow-xl border border-slate-100 dark:border-slate-800">
+                <div class="highlight-grad text-white p-6 rounded-2xl text-center text-xl font-bold mb-10">
+                    Add employers to create demand and keep the ecosystem running
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <div class="mb-8">
+                            <h3 class="text-xl font-black text-adhocBlue dark:text-blue-400 mb-4">How Employer Referral Works</h3>
+                            <ul class="space-y-3 text-slate-600 dark:text-slate-400 font-medium">
+                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> Platform fee: <strong>10%</strong></li>
+                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> Your earning: <strong>2%</strong> of platform fees</li>
+                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> Recurring monthly income</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-3xl">
+                            <h3 class="text-lg font-black text-adhocBlue dark:text-blue-400 mb-4">Upfront Example</h3>
+                            <div class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                                <p>100 workers × ₹700 shift = ₹70,000 Vol</p>
+                                <p>Platform fee (10%) = ₹7,000</p>
+                                <p>Your earning per company = <strong>₹140 / mo</strong></p>
+                                <p class="text-lg font-black text-slate-900 dark:text-white pt-2">10 companies = <span class="text-emerald-500">₹1,400 / month</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-[32px] border border-blue-100 dark:border-blue-800/30">
+                        <h3 class="text-xl font-black text-adhocBlue dark:text-blue-300 mb-6">ROI Calculator</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Companies Added</label>
+                                <input type="number" id="companies" value="10" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Workers per Company</label>
+                                <input type="number" id="workers" value="100" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Avg Shift Value (₹)</label>
+                                <input type="number" id="shiftValue" value="700" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none">
+                            </div>
+                            <div class="mt-8 bg-emerald-500 text-white p-6 rounded-2xl text-center">
+                                <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Estimated Monthly Income</p>
+                                <p class="text-4xl font-black" id="employerResult">₹1,400</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VOLUNTEER PARTNER CTA -->
         <div class="bg-slate-50 dark:bg-slate-900/40 rounded-[50px] p-8 md:p-16 border-2 border-brandBlue/10 relative overflow-hidden">
             <div class="relative z-10 flex flex-col lg:flex-row gap-16 items-center">
                 <div class="lg:w-1/2">
@@ -157,15 +271,20 @@
                     <div class="grid grid-cols-2 gap-4 mb-10">
                         <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
                             <span class="text-3xl mb-2 block">🚫</span>
-                            <p class="font-bold text-sm" data-i18n="vol_f1">No Investment</p>
+                            <p class="font-bold text-sm dark:text-white" data-i18n="vol_f1">No Investment</p>
                         </div>
                         <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
                             <span class="text-3xl mb-2 block">🎯</span>
-                            <p class="font-bold text-sm" data-i18n="vol_f2">No Targets</p>
+                            <p class="font-bold text-sm dark:text-white" data-i18n="vol_f2">No Targets</p>
                         </div>
                     </div>
+                    <div class="bg-white dark:bg-slate-800 p-8 rounded-[40px] border border-slate-100 dark:border-slate-700">
+                        <h3 class="text-2xl font-black mb-4 dark:text-white" data-i18n="who_title">Who Can Join?</h3>
+                        <p class="text-slate-500 font-bold mb-6" data-i18n="who_list">College students • Working professionals • Freelancers • Consultants</p>
+                        <a href="#" class="block w-full text-center bg-brandBlue text-white py-5 rounded-2xl font-black text-xl hover:scale-[1.02] transition shadow-lg shadow-brandBlue/30" data-i18n="start_btn">Start Earning Now</a>
+                    </div>
                 </div>
-                
+
                 <div class="lg:w-1/2 w-full">
                     <div class="bg-slate-900 rounded-[40px] p-8 md:p-10 text-white shadow-2xl">
                         <h3 class="text-2xl font-black mb-8 border-b border-slate-800 pb-6 flex items-center gap-3">
@@ -182,30 +301,6 @@
                             <span class="bg-emerald-400/10 px-3 py-1.5 rounded-lg">✅ <span data-i18n="tag_direct">Direct to Wallet</span></span>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="grid lg:grid-cols-2 gap-10 mt-10">
-                <div class="bg-brandBlue text-white p-10 rounded-[40px]">
-                    <h3 class="text-2xl font-black mb-6 flex items-center gap-3">
-                        <span class="p-3 bg-white/20 rounded-2xl text-xl">🏢</span>
-                        <span data-i18n="earn_c_title">Earn by Referring Companies</span>
-                    </h3>
-                    <p class="text-xl font-bold mb-4" data-i18n="earn_c1">Get 2% of platform fees every month</p>
-                    <p class="text-blue-100 mb-8" data-i18n="earn_c2">Earnings continue as long as the company works with Adhocsy.</p>
-                    <div class="bg-white/10 p-6 rounded-3xl border border-white/10">
-                        <p class="text-xs font-black uppercase tracking-widest mb-4" data-i18n="ex_title">Example:</p>
-                        <p class="text-sm">100 workers × ₹700 per shift = ₹70,000 | Fee (8%) = ₹5,600</p>
-                        <p class="text-lg font-black mt-2">👉 <span data-i18n="ex_res">You earn ₹112 every month</span></p>
-                    </div>
-                </div>
-
-                <div class="bg-white dark:bg-slate-800 p-10 rounded-[40px] flex flex-col justify-between border border-slate-100 dark:border-slate-700">
-                    <div>
-                        <h3 class="text-2xl font-black mb-6 dark:text-white" data-i18n="who_title">Who Can Join?</h3>
-                        <p class="text-slate-500 font-bold mb-6" data-i18n="who_list">College students • Working professionals • Freelancers • Consultants</p>
-                    </div>
-                    <a href="#" class="block w-full text-center bg-brandBlue text-white py-5 rounded-2xl font-black text-xl hover:scale-[1.02] transition" data-i18n="start_btn">Start Earning Now</a>
                 </div>
             </div>
         </div>
@@ -242,8 +337,6 @@
             nav_construction: "Construction", nav_warehouse: "Warehouse",
             page_title: "Industry Specific <span class='text-brandBlue'>Solutions</span>",
             page_subtitle: "Tailored workforce management for construction and supply chain sectors.",
-            off_c_title: "Construction Workforce", off_c_desc: "On-demand skilled and unskilled labor for real estate, infrastructure, and urban projects.", off_c_btn: "Explore Sector",
-            off_w_title: "Warehouse Workforce", off_w_desc: "Specialized manpower for sorting, packing, loading, and inventory management.", off_w_btn: "Explore Sector",
             vol_tag: "Partnership Program", vol_title: "Join Adhocsy as a <span class='text-brandBlue'>Volunteer Partner</span>",
             vol_desc: "Earn monthly income by simply referring workers or companies to Adhocsy.",
             vol_f1: "No Investment", vol_f2: "No Targets",
@@ -252,8 +345,6 @@
             earn_w2: "• ₹6 per job completed by the L2 worker",
             earn_w3: "• ₹4 per job from the next referral level",
             tag_life: "Lifetime Earnings", tag_direct: "Direct to Wallet",
-            earn_c_title: "Earn by Referring Companies", earn_c1: "Get 2% of platform fees every month", earn_c2: "Earnings continue as long as the company works with Adhocsy.",
-            ex_title: "Example:", ex_res: "You earn ₹112 every month",
             who_title: "Who Can Join?", who_list: "College students • Working professionals • Freelancers • Consultants",
             start_btn: "Start Earning Now"
         },
@@ -262,8 +353,6 @@
             nav_construction: "निर्माण", nav_warehouse: "वेयरहाउस",
             page_title: "उद्योग विशिष्ट <span class='text-brandBlue'>समाधान</span>",
             page_subtitle: "निर्माण और आपूर्ति श्रृंखला क्षेत्रों के लिए विशेष कार्यबल प्रबंधन।",
-            off_c_title: "निर्माण कार्यबल", off_c_desc: "रियल एस्टेट और बुनियादी ढांचे के लिए ऑन-डिमांड कुशल और अकुशल श्रम।", off_c_btn: "सेक्टर देखें",
-            off_w_title: "वेयरहाउस कार्यबल", off_w_desc: "सॉर्टिंग, पैकिंग और लोडिंग के लिए विशेष जनशक्ति।", off_w_btn: "सेक्टर देखें",
             vol_tag: "साझेदारी कार्यक्रम", vol_title: "Adhocsy के साथ <span class='text-brandBlue'>वॉलंटियर पार्टनर</span> बनें",
             vol_desc: "श्रमिकों या कंपनियों को रेफर करके मासिक आय अर्जित करें।",
             vol_f1: "कोई निवेश नहीं", vol_f2: "कोई लक्ष्य नहीं",
@@ -272,8 +361,6 @@
             earn_w2: "• L2 श्रमिक के काम पर ₹6",
             earn_w3: "• अगले स्तर से ₹4 प्रति कार्य",
             tag_life: "जीवन भर की कमाई", tag_direct: "सीधे वॉलेट में",
-            earn_c_title: "कंपनियों को रेफर करके कमाएं", earn_c1: "हर महीने प्लेटफॉर्म फीस का 2% प्राप्त करें", earn_c2: "कमाई जारी रहती है जब तक कंपनी जुड़ी है।",
-            ex_title: "उदाहरण:", ex_res: "आप हर महीने ₹112 कमाते हैं",
             who_title: "कौन शामिल हो सकता है?", who_list: "छात्र • पेशेवर • फ्रीलांसर • सलाहकार",
             start_btn: "अभी कमाई शुरू करें"
         },
@@ -282,8 +369,6 @@
             nav_construction: "बांधकाम", nav_warehouse: "वेअरहाउस",
             page_title: "उद्योग विशिष्ट <span class='text-brandBlue'>उपाय</span>",
             page_subtitle: "बांधकाम आणि पुरवठा साखळी क्षेत्रांसाठी मनुष्यबळ व्यवस्थापन.",
-            off_c_title: "बांधकाम मनुष्यबळ", off_c_desc: "पायाभूत सुविधा प्रकल्पांसाठी कुशल आणि अकुशल कामगार.", off_c_btn: "सेक्टर पहा",
-            off_w_title: "वेअरहाउस मनुष्यबळ", off_w_desc: "सॉर्टिंग आणि पॅकिंगसाठी विशेष मनुष्यबळ.", off_w_btn: "सेक्टर पहा",
             vol_tag: "भागीदारी कार्यक्रम", vol_title: "Adhocsy सोबत <span class='text-brandBlue'>स्वयंसेवक भागीदार</span> व्हा",
             vol_desc: "कामगार किंवा कंपन्यांना रेफर करून मासिक उत्पन्न मिळवा.",
             vol_f1: "गुंतवणूक नाही", vol_f2: "लक्ष्य नाही",
@@ -292,8 +377,6 @@
             earn_w2: "• L2 कामगाराच्या कामावर ₹6",
             earn_w3: "• पुढील स्तरावरून ₹4 प्रति काम",
             tag_life: "आजीवन कमाई", tag_direct: "थेट वॉलेटमध्ये",
-            earn_c_title: "कंपन्यांना रेफर करून कमवा", earn_c1: "दरमहा प्लॅटफॉर्म फीच्या 2% मिळवा", earn_c2: "कमाई सुरू राहते जोपर्यंत कंपनी जोडलेली आहे.",
-            ex_title: "उदाहरण:", ex_res: "तुम्ही दरमहा ₹112 कमवता",
             who_title: "कोण सामील होऊ शकते?", who_list: "विद्यार्थी • व्यावसायिक • फ्रीलांसर • सल्लागार",
             start_btn: "आता कमाई सुरू करा"
         }
@@ -329,6 +412,46 @@
     document.querySelectorAll('.mobile-link').forEach(link => {
         link.addEventListener('click', () => mobileMenu.classList.remove('active'));
     });
+
+    // Panel Logic
+    function showPanel(id) {
+        document.querySelectorAll('.tab-btn').forEach(t => {
+            t.classList.remove('active', 'text-white');
+            t.classList.add('text-adhocBlue', 'dark:text-slate-300');
+        });
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+
+        const activeTab = document.querySelector(`[onclick="showPanel('${id}')"]`);
+        activeTab.classList.add('active');
+        document.getElementById(id).classList.add('active');
+    }
+
+    // Calculation Logic
+    function calcEmployee() {
+        const l1 = +document.getElementById('l1').value || 0;
+        const active = (+document.getElementById('active').value || 0) / 100;
+        const shifts = +document.getElementById('shifts').value || 0;
+
+        const total = (l1 * active * shifts * 10) + (l1 * 2 * active * shifts * 6) + (l1 * 2 * 3 * active * shifts * 4);
+        document.getElementById('employeeResult').innerText = "₹" + Math.round(total).toLocaleString();
+    }
+
+    function calcEmployer() {
+        const c = +document.getElementById('companies').value || 0;
+        const w = +document.getElementById('workers').value || 0;
+        const s = +document.getElementById('shiftValue').value || 0;
+        
+        const total = c * w * s * 0.10 * 0.02;
+        document.getElementById('employerResult').innerText = "₹" + Math.round(total).toLocaleString();
+    }
+
+    // Event Listeners for inputs
+    ['l1','active','shifts'].forEach(id => document.getElementById(id).addEventListener("input", calcEmployee));
+    ['companies','workers','shiftValue'].forEach(id => document.getElementById(id).addEventListener("input", calcEmployer));
+
+    // Init
+    calcEmployee();
+    calcEmployer();
 </script>
 </body>
 </html>
