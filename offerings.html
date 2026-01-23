@@ -26,7 +26,11 @@
     </script>
 
     <style type="text/css">
-        body { transition: background-color 0.4s ease; scroll-behavior: smooth; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.4s ease; 
+            scroll-behavior: smooth; 
+        }
         .glass-nav { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.9); }
         .dark .glass-nav { background: rgba(10, 13, 20, 0.9); border-bottom: 1px solid rgba(255,255,255,0.1); }
         .lang-btn.active { background-color: #2563eb !important; color: white !important; }
@@ -39,13 +43,12 @@
             transform: translateX(0);
         }
 
-        /* Referral Styles Integration */
         .tab-btn {
             transition: all 0.3s ease;
         }
         .tab-btn.active {
-            background: linear-gradient(90deg, #0f4c81, #1fa2a6);
-            color: white;
+            background: #2563eb;
+            color: white !important;
         }
         .panel { display: none; }
         .panel.active { display: block; animation: fadeIn 0.4s ease-out; }
@@ -56,21 +59,25 @@
         }
 
         .highlight-grad {
-            background: linear-gradient(90deg, #0f4c81, #1fa2a6);
+            background: linear-gradient(90deg, #2563eb, #0f4c81);
+        }
+
+        input, button, select, textarea {
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
     </style>
 </head>
-<body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
+<body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden font-sans">
 
 <header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100 dark:border-transparent">
     <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-3 group">
+         <a href="index.html" class="flex items-center gap-3 group">
             <div class="flex items-center gap-2">
                 <img src="logo-day.png" alt="Logo" class="h-10 dark:hidden" onerror="this.classList.add('hidden')">
                 <img src="logo-dark.png" alt="Logo" class="h-10 hidden dark:block" onerror="this.classList.remove('hidden'); this.style.opacity='0.5'">
             </div>
             <div class="flex flex-col leading-none">
-                <span class="text-2xl font-black tracking-tighter text-blue-400">ADHOCSY</span>
+                <span class="text-2xl font-black tracking-tighter text-blue-800">ADHOCSY</span>
                 <span class="text-[8px] font-bold tracking-[0.2em] text-slate-500 dark:text-slate-400 uppercase mt-0.5">On Demand Workforce</span>
             </div>
         </a>
@@ -86,9 +93,9 @@
 
         <div class="flex items-center gap-4">
             <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
-                <button onclick="changeLang('en')" id="btn-en" class="lang-btn active px-2.5 py-1.5 rounded-lg text-[9px] font-black transition">EN</button>
-                <button onclick="changeLang('hi')" id="btn-hi" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">HI</button>
-                <button onclick="changeLang('mr')" id="btn-mr" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">MR</button>
+                <button onclick="changeLang('en')" id="btn-en" class="lang-btn active px-2.5 py-1.5 rounded-lg text-[9px] font-extrabold transition">EN</button>
+                <button onclick="changeLang('hi')" id="btn-hi" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-extrabold transition text-slate-400">HI</button>
+                <button onclick="changeLang('mr')" id="btn-mr" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-extrabold transition text-slate-400">MR</button>
             </div>
             
             <button id="themeToggle" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 transition">
@@ -102,21 +109,15 @@
     </div>
 </header>
 
-<!-- Mobile Menu -->
 <div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden">
     <div class="flex justify-between items-center mb-12">
-        <div class="flex items-center gap-2">
-            <img src="logo-day.png" alt="Logo" class="h-8 dark:hidden" onerror="this.style.display='none'">
-            <img src="logo-dark.png" alt="Logo" class="h-8 hidden dark:block" onerror="this.style.display='none'">
-            <div class="flex flex-col leading-none">
-                <span class="text-lg md:text-2xl font-black tracking-tighter text-blue-800">ADHOCSY</span>
-                <span class="text-[6px] md:text-[8px] font-bold tracking-[0.2em] text-slate-500 dark:text-slate-400 uppercase mt-0.5">On Demand Workforce</span>
-            </div>
+        <div class="flex flex-col leading-none">
+            <span class="text-2xl font-extrabold tracking-tighter text-brandBlue">ADHOCSY</span>
+            <span class="text-[8px] font-bold tracking-[0.2em] text-slate-500 dark:text-slate-400 uppercase mt-0.5" data-i18n="tagline">On Demand Workforce</span>
         </div>
         <button id="closeBtn" class="text-3xl">&times;</button>
     </div>
-    
-    <nav class="flex flex-col space-y-6 text-xl font-black uppercase tracking-tighter">
+    <nav class="flex flex-col space-y-6 text-xl font-extrabold uppercase tracking-tighter">
         <a href="index.html" data-i18n="nav_home" class="mobile-link">Home</a>
         <a href="about.html" data-i18n="nav_about" class="mobile-link">About</a>
         <a href="contact.html" data-i18n="nav_contact" class="mobile-link">Contact</a>
@@ -128,175 +129,154 @@
 
 <main class="pt-32 pb-20">
     <div class="container mx-auto px-6">
-        
-        <!-- Header Section -->
         <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-6xl font-black mb-4 dark:text-white" data-i18n="page_title">Industry Specific <span class='text-brandBlue'>Solutions</span></h1>
-            <p class="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto" data-i18n="page_subtitle">Tailored workforce management for construction and supply chain sectors.</p>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 dark:text-white tracking-tight" data-i18n="page_title">Industry Specific <span class='text-brandBlue'>Solutions</span></h1>
+            <p class="text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto font-medium" data-i18n="page_subtitle">Tailored workforce management for construction and supply chain sectors.</p>
         </div>
 
-        <!-- Referral Program Main Section -->
         <section class="max-w-5xl mx-auto mb-32">
-            
-            <!-- Referral Program Title -->
             <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-black text-adhocBlue dark:text-blue-400 mb-2">Referral Program</h2>
-                <p class="text-slate-500 dark:text-slate-400">Earn monthly income while building a sustainable workforce ecosystem</p>
+                <h2 class="text-3xl md:text-4xl font-black">
+                    <span class="text-brandBlue" data-i18n="ref_title_highlight">Referral</span>
+                    <span data-i18n="ref_title_rest">Program</span>
+                </h2>
+                <p class="text-slate-500 dark:text-slate-400 font-medium mt-2" data-i18n="ref_main_subtitle">Earn monthly income while building a sustainable workforce ecosystem</p>
             </div>
 
-            <!-- TABS -->
             <div class="flex justify-center gap-4 mb-10">
-                <button onclick="showPanel('employee')" class="tab-btn active px-8 py-3 rounded-full font-bold bg-slate-100 dark:bg-slate-800 text-adhocBlue dark:text-slate-300">Employee Referral</button>
-                <button onclick="showPanel('employer')" class="tab-btn px-8 py-3 rounded-full font-bold bg-slate-100 dark:bg-slate-800 text-adhocBlue dark:text-slate-300">Employer Referral</button>
+                <button onclick="showPanel('employee')" class="tab-btn active px-8 py-3 rounded-full font-bold tracking-wide bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    <span data-i18n="tab_employee_main">Employee Referral</span>
+                </button>
+                <button onclick="showPanel('employer')" class="tab-btn px-8 py-3 rounded-full font-bold tracking-wide bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    <span data-i18n="tab_employer_main">Employer Referral</span>
+                </button>
             </div>
 
-            <!-- EMPLOYEE PANEL -->
             <div id="employee" class="panel active bg-white dark:bg-slate-900 rounded-[40px] p-8 md:p-12 shadow-xl border border-slate-100 dark:border-slate-800">
-                <div class="highlight-grad text-white p-6 rounded-2xl text-center text-xl font-bold mb-10">
+                <div class="highlight-grad text-white p-6 rounded-2xl text-center text-xl font-bold mb-10" data-i18n="emp_panel_hero">
                     Earn on every job shift completed by your referral network
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-12">
                     <div>
                         <div class="mb-8">
-                            <h3 class="text-xl font-black text-adhocBlue dark:text-blue-400 mb-4">How Employee Referral Works</h3>
-                            <ul class="space-y-3 text-slate-600 dark:text-slate-400 font-medium">
-                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> L1: ₹10 per job shift</li>
-                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> L2: ₹6 per job shift</li>
-                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> L3: ₹4 per job shift</li>
+                            <h3 class="text-xl font-extrabold text-brandBlue mb-4" data-i18n="emp_how_title">How Employee Referral Works</h3>
+                            <ul class="space-y-3 text-slate-600 dark:text-slate-400 font-semibold text-sm">
+                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> <span data-i18n="l1_rate">L1: ₹10 per job shift</span></li>
+                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> <span data-i18n="l2_rate">L2: ₹6 per job shift</span></li>
+                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> <span data-i18n="l3_rate">L3: ₹4 per job shift</span></li>
                             </ul>
                         </div>
 
                         <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-3xl">
-                            <h3 class="text-lg font-black text-adhocBlue dark:text-blue-400 mb-4">Upfront Example</h3>
-                            <div class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
-                                <p><strong>Step 1:</strong> You refer 500 employees (L1) → 100 active (20%)</p>
-                                <p><strong>Step 2:</strong> 100 L1 × 2 shifts = 200 shifts → <strong>₹2,000</strong></p>
-                                <p><strong>Step 3:</strong> L1 refers 1000 L2 → 200 active → <strong>₹2,400</strong></p>
-                                <p><strong>Step 4:</strong> L2 refers 3000 L3 → 600 active → <strong>₹4,800</strong></p>
+                            <h3 class="text-lg font-extrabold text-brandBlue mb-4" data-i18n="example_title">Upfront Example</h3>
+                            <div class="space-y-2 text-sm text-slate-600 dark:text-slate-400 font-medium">
+                                <p><strong data-i18n="step1">Step 1:</strong> <span data-i18n="step1_val">You refer 500 employees (L1) → 100 active (20%)</span></p>
+                                <p><strong data-i18n="step2">Step 2:</strong> <span data-i18n="step2_val">100 L1 × 2 shifts = 200 shifts → ₹2,000</span></p>
+                                <p><strong data-i18n="step3">Step 3:</strong> <span data-i18n="step3_val">L1 refers 1000 L2 → 200 active → ₹2,400</span></p>
+                                <p><strong data-i18n="step4">Step 4:</strong> <span data-i18n="step4_val">L2 refers 3000 L3 → 600 active → ₹4,800</span></p>
+
                                 <div class="pt-4 border-t border-slate-200 dark:border-slate-700 mt-4">
-                                    <p class="text-lg font-black text-slate-900 dark:text-white">Total Monthly Earning: <span class="text-emerald-500">₹9,200</span></p>
+                                    <p class="text-lg font-extrabold text-slate-900 dark:text-white">
+                                        <span data-i18n="total_monthly">Total Monthly Earning:</span>
+                                        <span class="text-brandBlue">₹9,200</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-[32px] border border-blue-100 dark:border-blue-800/30">
-                        <h3 class="text-xl font-black text-adhocBlue dark:text-blue-300 mb-6">ROI Calculator</h3>
+                        <h3 class="text-xl font-extrabold text-brandBlue mb-6" data-i18n="roi_title">ROI Calculator</h3>
                         <div class="space-y-6">
                             <div>
-                                <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">L1 Employees Referred</label>
-                                <input type="number" id="l1" value="500" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none focus:ring-2 ring-brandBlue transition">
+                                <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-400 mb-2" data-i18n="label_l1_ref">L1 Employees Referred</label>
+                                <input type="number" id="l1" value="500" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none focus:ring-2 ring-brandBlue transition font-bold">
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Active %</label>
-                                    <input type="number" id="active" value="20" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none">
+                                    <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-400 mb-2" data-i18n="label_active">Active %</label>
+                                    <input type="number" id="active" value="20" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none font-bold">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Shifts/Month</label>
-                                    <input type="number" id="shifts" value="2" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none">
+                                    <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-400 mb-2" data-i18n="label_shifts">Shifts/Month</label>
+                                    <input type="number" id="shifts" value="2" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none font-bold">
                                 </div>
                             </div>
-                            <div class="mt-8 bg-emerald-500 text-white p-6 rounded-2xl text-center">
-                                <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Estimated Monthly Income</p>
-                                <p class="text-4xl font-black" id="employeeResult">₹9,200</p>
+                            <div class="mt-8 bg-brandBlue text-white p-6 rounded-2xl text-center">
+                                <p class="text-[10px] font-extrabold uppercase tracking-widest opacity-90 mb-1" data-i18n="est_income">Estimated Monthly Income</p>
+                                <p class="text-4xl font-extrabold" id="employeeResult">₹9,200</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- EMPLOYER PANEL -->
             <div id="employer" class="panel bg-white dark:bg-slate-900 rounded-[40px] p-8 md:p-12 shadow-xl border border-slate-100 dark:border-slate-800">
-                <div class="highlight-grad text-white p-6 rounded-2xl text-center text-xl font-bold mb-10">
+                <div class="highlight-grad text-white p-6 rounded-2xl text-center text-xl font-bold mb-10" data-i18n="empr_panel_hero">
                     Add employers to create demand and keep the ecosystem running
                 </div>
-
-                <div class="grid md:grid-cols-2 gap-12">
+                <!-- Employer content simplified to show functionality -->
+                 <div class="grid md:grid-cols-2 gap-12">
                     <div>
-                        <div class="mb-8">
-                            <h3 class="text-xl font-black text-adhocBlue dark:text-blue-400 mb-4">How Employer Referral Works</h3>
-                            <ul class="space-y-3 text-slate-600 dark:text-slate-400 font-medium">
-                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> Platform fee: <strong>10%</strong></li>
-                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> Your earning: <strong>2%</strong> of platform fees</li>
-                                <li class="flex items-center gap-2"><span class="w-2 h-2 bg-brandBlue rounded-full"></span> Recurring monthly income</li>
-                            </ul>
-                        </div>
-
+                        <h3 class="text-xl font-extrabold text-brandBlue mb-4" data-i18n="empr_how_title">How Employer Referral Works</h3>
+                        <p class="text-slate-600 dark:text-slate-400 font-medium mb-4" data-i18n="empr_earn">Your earning: 2% of platform fees</p>
                         <div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-3xl">
-                            <h3 class="text-lg font-black text-adhocBlue dark:text-blue-400 mb-4">Upfront Example</h3>
-                            <div class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
-                                <p>100 workers × ₹700 shift = ₹70,000 Vol</p>
-                                <p>Platform fee (10%) = ₹7,000</p>
-                                <p>Your earning per company = <strong>₹140 / mo</strong></p>
-                                <p class="text-lg font-black text-slate-900 dark:text-white pt-2">10 companies = <span class="text-emerald-500">₹1,400 / month</span></p>
-                            </div>
+                            <p class="text-sm font-bold text-brandBlue mb-2" data-i18n="example_title">Example</p>
+                            <p class="text-xs text-slate-500 mb-1" data-i18n="ex_empr_1">100 workers × ₹700 shift = ₹70,000 Volume</p>
+                            <p class="text-xs text-slate-500 mb-4" data-i18n="ex_empr_2">Platform fee (10%) = ₹7,000</p>
+                            <p class="text-lg font-bold" data-i18n="ex_empr_3">Your earning: ₹140/shift</p>
                         </div>
                     </div>
-
-                    <div class="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-[32px] border border-blue-100 dark:border-blue-800/30">
-                        <h3 class="text-xl font-black text-adhocBlue dark:text-blue-300 mb-6">ROI Calculator</h3>
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Companies Added</label>
-                                <input type="number" id="companies" value="10" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Workers per Company</label>
-                                <input type="number" id="workers" value="100" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-black uppercase tracking-widest text-slate-400 mb-2">Avg Shift Value (₹)</label>
-                                <input type="number" id="shiftValue" value="700" class="w-full bg-white dark:bg-slate-900 p-4 rounded-xl border border-blue-200 dark:border-blue-800 outline-none">
-                            </div>
-                            <div class="mt-8 bg-emerald-500 text-white p-6 rounded-2xl text-center">
-                                <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Estimated Monthly Income</p>
-                                <p class="text-4xl font-black" id="employerResult">₹1,400</p>
-                            </div>
+                    <div class="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-[32px]">
+                        <label class="block text-[10px] font-extrabold text-slate-400 uppercase mb-2" data-i18n="label_comp">Companies Added</label>
+                        <input type="number" id="companies" value="10" class="w-full mb-4 bg-white dark:bg-slate-900 p-4 rounded-xl border font-bold">
+                        <label class="block text-[10px] font-extrabold text-slate-400 uppercase mb-2" data-i18n="label_workers">Workers per Company</label>
+                        <input type="number" id="workers" value="50" class="w-full mb-4 bg-white dark:bg-slate-900 p-4 rounded-xl border font-bold">
+                        <div class="mt-8 bg-brandBlue text-white p-6 rounded-2xl text-center">
+                            <p class="text-4xl font-extrabold" id="employerResult">₹1,400</p>
                         </div>
                     </div>
-                </div>
+                 </div>
             </div>
         </section>
 
-        <!-- VOLUNTEER PARTNER CTA -->
         <div class="bg-slate-50 dark:bg-slate-900/40 rounded-[50px] p-8 md:p-16 border-2 border-brandBlue/10 relative overflow-hidden">
             <div class="relative z-10 flex flex-col lg:flex-row gap-16 items-center">
                 <div class="lg:w-1/2">
-                    <span class="inline-block px-4 py-2 rounded-full bg-brandBlue/10 text-brandBlue font-black text-xs uppercase tracking-widest mb-6" data-i18n="vol_tag">Partnership Program</span>
-                    <h2 class="text-4xl md:text-5xl font-black mb-8 dark:text-white leading-tight" data-i18n="vol_title">Join Adhocsy as a <span class="text-brandBlue">Volunteer Partner</span></h2>
-                    <p class="text-lg text-slate-600 dark:text-slate-400 mb-10" data-i18n="vol_desc">Earn monthly income by simply referring workers or companies to Adhocsy. No investment. No targets. Just smart referrals.</p>
+                    <span class="inline-block px-4 py-2 rounded-full bg-brandBlue/10 text-brandBlue font-extrabold text-[10px] uppercase tracking-widest mb-6" data-i18n="vol_tag">Partnership Program</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-8 dark:text-white leading-tight tracking-tight" data-i18n="vol_title">Join Adhocsy as a <span class="text-brandBlue">Volunteer Partner</span></h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-400 mb-10 font-medium" data-i18n="vol_desc">Earn monthly income by simply referring workers or companies to Adhocsy. No investment. No targets. Just smart referrals.</p>
                     
                     <div class="grid grid-cols-2 gap-4 mb-10">
                         <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
                             <span class="text-3xl mb-2 block">🚫</span>
-                            <p class="font-bold text-sm dark:text-white" data-i18n="vol_f1">No Investment</p>
+                            <p class="font-extrabold text-xs uppercase tracking-wider dark:text-white" data-i18n="vol_f1">No Investment</p>
                         </div>
                         <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
                             <span class="text-3xl mb-2 block">🎯</span>
-                            <p class="font-bold text-sm dark:text-white" data-i18n="vol_f2">No Targets</p>
+                            <p class="font-extrabold text-xs uppercase tracking-wider dark:text-white" data-i18n="vol_f2">No Targets</p>
                         </div>
                     </div>
                     <div class="bg-white dark:bg-slate-800 p-8 rounded-[40px] border border-slate-100 dark:border-slate-700">
-                        <h3 class="text-2xl font-black mb-4 dark:text-white" data-i18n="who_title">Who Can Join?</h3>
-                        <p class="text-slate-500 font-bold mb-6" data-i18n="who_list">College students • Working professionals • Freelancers • Consultants</p>
-                        <a href="#" class="block w-full text-center bg-brandBlue text-white py-5 rounded-2xl font-black text-xl hover:scale-[1.02] transition shadow-lg shadow-brandBlue/30" data-i18n="start_btn">Start Earning Now</a>
+                        <h3 class="text-2xl font-extrabold mb-4 dark:text-white" data-i18n="who_title">Who Can Join?</h3>
+                        <p class="text-slate-500 font-bold mb-6 text-sm" data-i18n="who_list">College students • Working professionals • Freelancers • Consultants</p>
+                        <a href="contact.html" class="block w-full text-center bg-brandBlue text-white py-5 rounded-2xl font-extrabold text-xl hover:scale-[1.02] transition shadow-lg shadow-brandBlue/30" data-i18n="start_btn">Start Earning Now</a>
                     </div>
                 </div>
 
                 <div class="lg:w-1/2 w-full">
                     <div class="bg-slate-900 rounded-[40px] p-8 md:p-10 text-white shadow-2xl">
-                        <h3 class="text-2xl font-black mb-8 border-b border-slate-800 pb-6 flex items-center gap-3">
+                        <h3 class="text-2xl font-extrabold mb-8 border-b border-slate-800 pb-6 flex items-center gap-3">
                             <span class="p-3 bg-brandBlue rounded-2xl text-xl">🤝</span>
                             <span data-i18n="earn_w_title">Earn by Referring Workers</span>
                         </h3>
-                        <ul class="space-y-4 mb-10">
-                            <li class="flex items-start gap-4" data-i18n="earn_w1">• ₹10 when a worker joins using your Referral ID</li>
-                            <li class="flex items-start gap-4" data-i18n="earn_w2">• ₹6 per job completed by the L2 worker</li>
-                            <li class="flex items-start gap-4" data-i18n="earn_w3">• ₹4 per job from the next referral level</li>
+                        <ul class="space-y-4 mb-10 font-medium text-slate-300">
+                            <li class="flex items-start gap-4"><span class="text-brandBlue">•</span> <span data-i18n="earn_w1">₹10 when a worker joins using your Referral ID</span></li>
+                            <li class="flex items-start gap-4"><span class="text-brandBlue">•</span> <span data-i18n="earn_w2">₹6 per job completed by the L2 worker</span></li>
+                            <li class="flex items-start gap-4"><span class="text-brandBlue">•</span> <span data-i18n="earn_w3">₹4 per job from the next referral level</span></li>
                         </ul>
-                        <div class="flex flex-wrap gap-4 text-[10px] font-black uppercase tracking-widest text-emerald-400">
+                        <div class="flex flex-wrap gap-4 text-[9px] font-extrabold uppercase tracking-widest text-emerald-400">
                             <span class="bg-emerald-400/10 px-3 py-1.5 rounded-lg">✅ <span data-i18n="tag_life">Lifetime Earnings</span></span>
                             <span class="bg-emerald-400/10 px-3 py-1.5 rounded-lg">✅ <span data-i18n="tag_direct">Direct to Wallet</span></span>
                         </div>
@@ -307,7 +287,7 @@
     </div>
 </main>
 
-<footer id="contact" class="bg-slate-950 text-slate-500 py-20">
+<footer id="contact" class="bg-slate-950 text-slate-500 py-20 font-sans">
   <div class="container mx-auto px-6">
     <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
       <img src="logo-dark.png" class="h-10" alt="ADHOCSY" onerror="this.style.opacity='0.5'">
@@ -319,13 +299,13 @@
     </div>
 
     <div class="text-center text-sm leading-relaxed opacity-60 mb-10">
-      <p class="font-semibold text-slate-300">ADHOCSY ON DEMAND WORKFORCE PRIVATE LIMITED</p>
-      <p class="mt-2">Registered Office: JNC CONSTRUCTION, H1A/20,<br>Sector-63, Noida, Uttar Pradesh – 201301</p>
+      <p class="font-bold text-slate-300 uppercase tracking-wide" data-i18n="footer_co">ADHOCSY ON DEMAND WORKFORCE PRIVATE LIMITED</p>
+      <p class="mt-2" data-i18n="footer_addr">Registered Office: JNC CONSTRUCTION, H1A/20,<br>Sector-63, Noida, Uttar Pradesh – 201301</p>
       <p class="mt-2">CIN: U78100UP2026PTC241618</p>
     </div>
 
-    <div class="text-center text-xs font-bold tracking-[0.3em] uppercase opacity-40">
-      © 2026 ADHOCSY TECHNOLOGIES. BUILT FOR DIGNITY.
+    <div class="text-center text-[10px] font-extrabold tracking-[0.3em] uppercase opacity-40">
+      © 2026 ADHOCSY TECHNOLOGIES. <span data-i18n="built_for">BUILT FOR DIGNITY.</span>
     </div>
   </div>
 </footer>
@@ -333,52 +313,130 @@
 <script>
     const dict = {
         en: {
-           nav_home: "Home", nav_about: "About", nav_offerings: "Earnings", nav_contact: "Contact",
+            tagline: "On Demand Workforce",
+            nav_home: "Home", nav_about: "About", nav_offerings: "Earnings", nav_contact: "Contact",
             nav_construction: "Construction", nav_warehouse: "Warehouse",
             page_title: "Industry Specific <span class='text-brandBlue'>Solutions</span>",
             page_subtitle: "Tailored workforce management for construction and supply chain sectors.",
+            ref_title_highlight: "Referral", ref_title_rest: "Program",
+            ref_main_subtitle: "Earn monthly income while building a sustainable workforce ecosystem",
+            tab_employee_main: "Employee Referral", tab_employer_main: "Employer Referral",
+            emp_panel_hero: "Earn on every job shift completed by your referral network",
+            emp_how_title: "How Employee Referral Works",
+            l1_rate: "L1: ₹10 per job shift", l2_rate: "L2: ₹6 per job shift", l3_rate: "L3: ₹4 per job shift",
+            example_title: "Upfront Example",
+            step1: "Step 1:", step1_val: "You refer 500 employees (L1) → 100 active (20%)",
+            step2: "Step 2:", step2_val: "100 L1 × 2 shifts = 200 shifts → ₹2,000",
+            step3: "Step 3:", step3_val: "L1 refers 1000 L2 → 200 active → ₹2,400",
+            step4: "Step 4:", step4_val: "L2 refers 3000 L3 → 600 active → ₹4,800",
+            total_monthly: "Total Monthly Earning:",
+            roi_title: "ROI Calculator",
+            label_l1_ref: "L1 Employees Referred", label_active: "Active %", label_shifts: "Shifts/Month",
+            est_income: "Estimated Monthly Income",
+            empr_panel_hero: "Add employers to create demand and keep the ecosystem running",
+            empr_how_title: "How Employer Referral Works",
+            empr_earn: "Your earning: 2% of platform fees",
+            ex_empr_1: "100 workers × ₹700 shift = ₹70,000 Volume",
+            ex_empr_2: "Platform fee (10%) = ₹7,000",
+            ex_empr_3: "Your earning: ₹140/shift",
+            label_comp: "Companies Added", label_workers: "Workers per Company",
             vol_tag: "Partnership Program", vol_title: "Join Adhocsy as a <span class='text-brandBlue'>Volunteer Partner</span>",
-            vol_desc: "Earn monthly income by simply referring workers or companies to Adhocsy.",
+            vol_desc: "Earn monthly income by simply referring workers or companies to Adhocsy. No investment. No targets. Just smart referrals.",
             vol_f1: "No Investment", vol_f2: "No Targets",
             earn_w_title: "Earn by Referring Workers",
-            earn_w1: "• ₹10 when a worker joins using your Referral ID",
-            earn_w2: "• ₹6 per job completed by the L2 worker",
-            earn_w3: "• ₹4 per job from the next referral level",
+            earn_w1: "₹10 when a worker joins using your Referral ID",
+            earn_w2: "₹6 per job completed by the L2 worker",
+            earn_w3: "₹4 per job from the next referral level",
             tag_life: "Lifetime Earnings", tag_direct: "Direct to Wallet",
             who_title: "Who Can Join?", who_list: "College students • Working professionals • Freelancers • Consultants",
-            start_btn: "Start Earning Now"
+            start_btn: "Start Earning Now",
+            footer_co: "ADHOCSY ON DEMAND WORKFORCE PRIVATE LIMITED",
+            footer_addr: "Registered Office: JNC CONSTRUCTION, H1A/20, Sector-63, Noida, Uttar Pradesh – 201301",
+            built_for: "BUILT FOR DIGNITY."
         },
         hi: {
+            tagline: "ऑन डिमांड वर्कफोर्स",
             nav_home: "होम", nav_about: "हमारे बारे में", nav_offerings: "कमाई", nav_contact: "संपर्क",
             nav_construction: "निर्माण", nav_warehouse: "वेयरहाउस",
             page_title: "उद्योग विशिष्ट <span class='text-brandBlue'>समाधान</span>",
             page_subtitle: "निर्माण और आपूर्ति श्रृंखला क्षेत्रों के लिए विशेष कार्यबल प्रबंधन।",
+            ref_title_highlight: "रेफरल", ref_title_rest: "कार्यक्रम",
+            ref_main_subtitle: "एक मजबूत वर्कफोर्स इकोसिस्टम बनाते हुए मासिक आय अर्जित करें",
+            tab_employee_main: "कर्मचारी रेफरल", tab_employer_main: "नियोक्ता रेफरल",
+            emp_panel_hero: "आपके रेफरल नेटवर्क द्वारा पूरे किए गए हर जॉब शिफ्ट पर कमाएं",
+            emp_how_title: "कर्मचारी रेफरल कैसे काम करता है",
+            l1_rate: "L1: ₹10 प्रति जॉब शिफ्ट", l2_rate: "L2: ₹6 प्रति जॉब शिफ्ट", l3_rate: "L3: ₹4 प्रति जॉब शिफ्ट",
+            example_title: "उदाहरण",
+            step1: "चरण 1:", step1_val: "आपने 500 कर्मचारियों (L1) को रेफर किया → 100 सक्रिय (20%)",
+            step2: "चरण 2:", step2_val: "100 L1 × 2 शिफ्ट = 200 शिफ्ट → ₹2,000",
+            step3: "चरण 3:", step3_val: "L1 ने 1000 L2 को रेफर किया → 200 सक्रिय → ₹2,400",
+            step4: "चरण 4:", step4_val: "L2 ने 3000 L3 को रेफर किया → 600 सक्रिय → ₹4,800",
+            total_monthly: "कुल मासिक कमाई:",
+            roi_title: "ROI कैलकुलेटर",
+            label_l1_ref: "L1 कर्मचारी रेफर किए गए", label_active: "सक्रिय %", label_shifts: "शिफ्ट/महीना",
+            est_income: "अनुमानित मासिक आय",
+            empr_panel_hero: "डिमांड बढ़ाने और इकोसिस्टम को चलाने के लिए नियोक्ताओं को जोड़ें",
+            empr_how_title: "नियोक्ता रेफरल कैसे काम करता है",
+            empr_earn: "आपकी कमाई: प्लेटफॉर्म शुल्क का 2%",
+            ex_empr_1: "100 कर्मचारी × ₹700 शिफ्ट = ₹70,000 वॉल्यूम",
+            ex_empr_2: "प्लेटफॉर्म शुल्क (10%) = ₹7,000",
+            ex_empr_3: "आपकी कमाई: ₹140/शिफ्ट",
+            label_comp: "जुड़ी हुई कंपनियां", label_workers: "प्रति कंपनी कर्मचारी",
             vol_tag: "साझेदारी कार्यक्रम", vol_title: "Adhocsy के साथ <span class='text-brandBlue'>वॉलंटियर पार्टनर</span> बनें",
-            vol_desc: "श्रमिकों या कंपनियों को रेफर करके मासिक आय अर्जित करें।",
+            vol_desc: "श्रमिकों या कंपनियों को Adhocsy पर रेफर करके मासिक आय अर्जित करें। कोई निवेश नहीं। कोई लक्ष्य नहीं। बस स्मार्ट रेफरल।",
             vol_f1: "कोई निवेश नहीं", vol_f2: "कोई लक्ष्य नहीं",
             earn_w_title: "श्रमिकों को रेफर करके कमाएं",
-            earn_w1: "• आपकी रेफरल आईडी से जुड़ने पर ₹10",
-            earn_w2: "• L2 श्रमिक के काम पर ₹6",
-            earn_w3: "• अगले स्तर से ₹4 प्रति कार्य",
+            earn_w1: "आपकी रेफरल आईडी से जुड़ने पर ₹10",
+            earn_w2: "L2 श्रमिक द्वारा पूरे किए गए कार्य पर ₹6",
+            earn_w3: "अगले स्तर से ₹4 प्रति कार्य",
             tag_life: "जीवन भर की कमाई", tag_direct: "सीधे वॉलेट में",
-            who_title: "कौन शामिल हो सकता है?", who_list: "छात्र • पेशेवर • फ्रीलांसर • सलाहकार",
-            start_btn: "अभी कमाई शुरू करें"
+            who_title: "कौन शामिल हो सकता है?", who_list: "छात्र • कामकाजी पेशेवर • फ्रीलांसर • सलाहकार",
+            start_btn: "अभी कमाई शुरू करें",
+            footer_co: "एडहॉक्सी ऑन डिमांड वर्कफोर्स प्राइवेट लिमिटेड",
+            footer_addr: "पंजीकृत कार्यालय: JNC कंस्ट्रक्शन, H1A/20, सेक्टर-63, नोएडा, उत्तर प्रदेश – 201301",
+            built_for: "गरिमा के लिए निर्मित।"
         },
         mr: {
-           nav_home: "होम", nav_about: "आमच्याबद्दल", nav_offerings: "उत्पन्न", nav_contact: "संपर्क",
+            tagline: "ऑन डिमांड वर्कफोर्स",
+            nav_home: "होम", nav_about: "आमच्याबद्दल", nav_offerings: "उत्पन्न", nav_contact: "संपर्क",
             nav_construction: "बांधकाम", nav_warehouse: "वेअरहाउस",
             page_title: "उद्योग विशिष्ट <span class='text-brandBlue'>उपाय</span>",
             page_subtitle: "बांधकाम आणि पुरवठा साखळी क्षेत्रांसाठी मनुष्यबळ व्यवस्थापन.",
+            ref_title_highlight: "रेफरल", ref_title_rest: "कार्यक्रम",
+            ref_main_subtitle: "मजबूत वर्कफोर्स इकोसिस्टम तयार करताना मासिक उत्पन्न मिळवा",
+            tab_employee_main: "कर्मचारी रेफरल", tab_employer_main: "नियोक्ता रेफरल",
+            emp_panel_hero: "तुमच्या रेफरल नेटवर्कद्वारे पूर्ण केलेल्या प्रत्येक जॉब शिफ्टवर कमवा",
+            emp_how_title: "कर्मचारी रेफरल कसे काम करते",
+            l1_rate: "L1: ₹10 प्रति जॉब शिफ्ट", l2_rate: "L2: ₹6 प्रति जॉब शिफ्ट", l3_rate: "L3: ₹4 प्रति जॉब शिफ्ट",
+            example_title: "उदाहरण",
+            step1: "टप्पा 1:", step1_val: "तुम्ही 500 कर्मचाऱ्यांना (L1) रेफर केले → 100 सक्रिय (20%)",
+            step2: "टप्पा 2:", step2_val: "100 L1 × 2 शिफ्ट = 200 शिफ्ट → ₹2,000",
+            step3: "टप्पा 3:", step3_val: "L1 ने 1000 L2 रेफर केले → 200 सक्रिय → ₹2,400",
+            step4: "टप्पा 4:", step4_val: "L2 ने 3000 L3 रेफर केले → 600 सक्रिय → ₹4,800",
+            total_monthly: "एकूण मासिक कमाई:",
+            roi_title: "ROI कॅल्क्युलेटर",
+            label_l1_ref: "L1 कर्मचारी रेफर केले", label_active: "सक्रिय %", label_shifts: "शिफ्ट/महिना",
+            est_income: "अंदाजे मासिक उत्पन्न",
+            empr_panel_hero: "मागणी निर्माण करण्यासाठी आणि इकोसिस्टम चालवण्यासाठी नियोक्त्यांना जोडा",
+            empr_how_title: "नियोक्ता रेफरल कसे काम करते",
+            empr_earn: "तुमची कमाई: प्लॅटफॉर्म शुल्काच्या 2%",
+            ex_empr_1: "100 कामगार × ₹700 शिफ्ट = ₹70,000 वॉल्यूम",
+            ex_empr_2: "प्लॅटफॉर्म शुल्क (10%) = ₹7,000",
+            ex_empr_3: "तुमची कमाई: ₹140/शिफ्ट",
+            label_comp: "जोडलेल्या कंपन्या", label_workers: "प्रति कंपनी कामगार",
             vol_tag: "भागीदारी कार्यक्रम", vol_title: "Adhocsy सोबत <span class='text-brandBlue'>स्वयंसेवक भागीदार</span> व्हा",
-            vol_desc: "कामगार किंवा कंपन्यांना रेफर करून मासिक उत्पन्न मिळवा.",
+            vol_desc: "कामगार किंवा कंपन्यांना Adhocsy वर रेफर करून मासिक उत्पन्न मिळवा. कोणतीही गुंतवणूक नाही. कोणतेही लक्ष्य नाही. फक्त स्मार्ट रेफरल्स.",
             vol_f1: "गुंतवणूक नाही", vol_f2: "लक्ष्य नाही",
             earn_w_title: "कामगारांना रेफर करून कमवा",
-            earn_w1: "• रेफरल आयडीने जोडल्यावर ₹10",
-            earn_w2: "• L2 कामगाराच्या कामावर ₹6",
-            earn_w3: "• पुढील स्तरावरून ₹4 प्रति काम",
+            earn_w1: "तुमच्या रेफरल आयडीने जोडल्यावर ₹10",
+            earn_w2: "L2 कामगाराने पूर्ण केलेल्या कामावर ₹6",
+            earn_w3: "पुढील स्तरावरून ₹4 प्रति काम",
             tag_life: "आजीवन कमाई", tag_direct: "थेट वॉलेटमध्ये",
             who_title: "कोण सामील होऊ शकते?", who_list: "विद्यार्थी • व्यावसायिक • फ्रीलांसर • सल्लागार",
-            start_btn: "आता कमाई सुरू करा"
+            start_btn: "आता कमाई सुरू करा",
+            footer_co: "एडहॉक्सी ऑन डिमांड वर्कफोर्स प्रायव्हेट लिमिटेड",
+            footer_addr: "नोंदणीकृत कार्यालय: JNC कन्स्ट्रक्शन, H1A/20, सेक्टर-63, नोएडा, उत्तर प्रदेश – 201301",
+            built_for: "सन्मानासाठी निर्मित."
         }
     };
 
@@ -409,47 +467,39 @@
     menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
     closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
 
-    document.querySelectorAll('.mobile-link').forEach(link => {
-        link.addEventListener('click', () => mobileMenu.classList.remove('active'));
-    });
-
-    // Panel Logic
     function showPanel(id) {
-        document.querySelectorAll('.tab-btn').forEach(t => {
-            t.classList.remove('active', 'text-white');
-            t.classList.add('text-adhocBlue', 'dark:text-slate-300');
-        });
+        document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-
+        
         const activeTab = document.querySelector(`[onclick="showPanel('${id}')"]`);
         activeTab.classList.add('active');
         document.getElementById(id).classList.add('active');
     }
 
-    // Calculation Logic
     function calcEmployee() {
         const l1 = +document.getElementById('l1').value || 0;
         const active = (+document.getElementById('active').value || 0) / 100;
         const shifts = +document.getElementById('shifts').value || 0;
 
-        const total = (l1 * active * shifts * 10) + (l1 * 2 * active * shifts * 6) + (l1 * 2 * 3 * active * shifts * 4);
+        // Based on logic provided in the example
+        // L1 (100% of direct) + L2 (2x direct) + L3 (6x direct)
+        const total = (l1 * active * shifts * 10) + (l1 * 2 * active * shifts * 6) + (l1 * 6 * active * shifts * 4);
         document.getElementById('employeeResult').innerText = "₹" + Math.round(total).toLocaleString();
     }
 
     function calcEmployer() {
         const c = +document.getElementById('companies').value || 0;
         const w = +document.getElementById('workers').value || 0;
-        const s = +document.getElementById('shiftValue').value || 0;
+        const sVal = 700; // Average shift value
         
-        const total = c * w * s * 0.10 * 0.02;
+        // 2% of platform fees (which are 10% of total volume)
+        const total = c * w * sVal * 0.10 * 0.02;
         document.getElementById('employerResult').innerText = "₹" + Math.round(total).toLocaleString();
     }
 
-    // Event Listeners for inputs
     ['l1','active','shifts'].forEach(id => document.getElementById(id).addEventListener("input", calcEmployee));
-    ['companies','workers','shiftValue'].forEach(id => document.getElementById(id).addEventListener("input", calcEmployer));
+    ['companies','workers'].forEach(id => document.getElementById(id).addEventListener("input", calcEmployer));
 
-    // Init
     calcEmployee();
     calcEmployer();
 </script>
