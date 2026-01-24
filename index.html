@@ -366,19 +366,19 @@
 
 <section class="py-24 bg-white dark:bg-brandDark text-center overflow-hidden">
     <style>
-        /* Scoped styles for the presence section to avoid global pollution */
+        /* Scoped styles for the presence section */
         .map-wrapper {
             position: relative;
-            max-width: 650px; /* Slightly wider for better label breathing room */
+            max-width: 550px;
             margin: 0 auto;
-            min-height: 750px; /* Increased height to allow vertical spread */
+            min-height: 700px; /* Increased height to give labels more room to float */
         }
 
         .india-outline {
             fill: #e2e8f0;
             stroke: #94a3b8;
             stroke-width: 2;
-            transition: fill 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .dark .india-outline {
@@ -386,38 +386,57 @@
             stroke: #334155;
         }
 
+        .india-outline:hover {
+            fill: #cbd5e1;
+            stroke: #3b82f6;
+        }
+
         .state-label {
             position: absolute;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 8px 12px;
             border-radius: 8px;
             font-size: 0.875rem;
             font-weight: 700;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             border: 1px solid #e2e8f0;
             white-space: nowrap;
             z-index: 10;
-            transition: transform 0.2s ease;
-            pointer-events: none; /* Allows clicks to pass through if needed */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: float 4s ease-in-out infinite;
         }
 
         .dark .state-label {
-            background: rgba(30, 41, 59, 0.9);
+            background: rgba(30, 41, 59, 0.95);
             border-color: #475569;
             color: #f1f5f9;
         }
 
-        /* Repositioning labels with increased spacing */
-        .state-label.up { top: 15%; right: 15%; }
-        .state-label.hr { top: 8%; left: 30%; }
-        .state-label.rj { top: 28%; left: 5%; }
-        .state-label.gj { top: 45%; left: 0%; }
-        .state-label.mh { top: 60%; left: 15%; }
+        /* Hover effect for labels */
+        .state-label:hover {
+            transform: scale(1.1) translateY(-5px);
+            z-index: 20;
+            background: #fff;
+        }
 
-        /* Responsive adjustments */
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Positioning the labels with spread and delays */
+        .state-label.up { top: 20%; right: 5%; animation-delay: 0s; }
+        .state-label.hr { top: 10%; left: 25%; animation-delay: 0.5s; }
+        .state-label.rj { top: 30%; left: -10%; animation-delay: 1s; }
+        .state-label.gj { top: 50%; left: -15%; animation-delay: 1.5s; }
+        .state-label.mh { top: 65%; left: 5%; animation-delay: 2s; }
+
         @media (max-width: 640px) {
-            .map-wrapper { min-height: 600px; }
-            .state-label { font-size: 0.75rem; padding: 4px 8px; }
+            .map-wrapper { min-height: 550px; max-width: 100%; }
+            .state-label { font-size: 0.7rem; padding: 4px 8px; }
+            .state-label.rj { left: 0; }
+            .state-label.gj { left: 0; }
         }
     </style>
 
@@ -426,8 +445,8 @@
         <p class="text-slate-500 font-medium mb-12" data-i18n="presence_subtitle">25,000+ Adhocsians actively deployed nationwide</p>
       
         <div class="map-wrapper">
-            <!-- Increased viewbox height slightly for better internal padding -->
-            <svg viewBox="0 0 900 1100" class="w-full h-auto">
+            <!-- Restored original map path -->
+            <svg viewBox="0 0 900 1000" class="w-full h-auto">
                 <path class="india-outline"
                     d="M420 60 L470 100 L510 150 L560 210 L610 260 L590 320 L560 370
                      L590 420 L570 480 L530 550 L550 610 L510 690 L470 760 L440 820
@@ -438,30 +457,15 @@
                 <path class="india-outline sri-lanka" d="M470 900 L500 940 L480 980 L450 940 Z"/>
             </svg>
       
-            <!-- Labels with specific classes for absolute positioning -->
-            <div class="state-label up">
-                <span class="text-xs text-slate-400 block font-normal">Uttar Pradesh</span>
-                <span class="text-blue-600 dark:text-blue-400">7,500+</span>
-            </div>
-            <div class="state-label hr">
-                <span class="text-xs text-slate-400 block font-normal">Haryana</span>
-                <span class="text-blue-600 dark:text-blue-400">5,000+</span>
-            </div>
-            <div class="state-label rj">
-                <span class="text-xs text-slate-400 block font-normal">Rajasthan</span>
-                <span class="text-blue-600 dark:text-blue-400">2,000+</span>
-            </div>
-            <div class="state-label gj">
-                <span class="text-xs text-slate-400 block font-normal">Gujarat</span>
-                <span class="text-blue-600 dark:text-blue-400">3,500+</span>
-            </div>
-            <div class="state-label mh">
-                <span class="text-xs text-slate-400 block font-normal">Maharashtra</span>
-                <span class="text-blue-600 dark:text-blue-400">7,000+</span>
-            </div>
+            <!-- Restored original label content with new animations -->
+            <div class="state-label up">Uttar Pradesh<br>7,500+</div>
+            <div class="state-label hr">Haryana<br>5,000+</div>
+            <div class="state-label rj">Rajasthan<br>2,000+</div>
+            <div class="state-label gj">Gujarat<br>3,500+</div>
+            <div class="state-label mh">Maharashtra<br>7,000+</div>
         </div>
       
-        <div class="mt-16 text-3xl font-black dark:text-white">
+        <div class="mt-12 text-3xl font-black dark:text-white">
             <span class="text-blue-600">25,000+</span> <span data-i18n="presence_total">Adhocsians Across India</span>
         </div>
     </div>
