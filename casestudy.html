@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study – ADHOCSY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { brandBlue: '#2563eb', brandDark: '#0A0D14', accentGold: '#f59e0b' },
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+
+    <style type="text/css">
+        body { transition: background-color 0.4s ease; scroll-behavior: smooth; }
+        .glass-nav { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.9); }
+        .dark .glass-nav { background: rgba(10, 13, 20, 0.9); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .lang-btn.active { background-color: #2563eb; color: white; }
+        
+        .hero-bg {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.98) 30%, rgba(255,255,255,0.5) 100%), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+        }
+        .dark .hero-bg {
+            background-image: linear-gradient(to right, rgba(10,13,20,0.98) 30%, rgba(10,13,20,0.7) 100%), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000');
+        }
+
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(100%);
+        }
+        #mobile-menu.active { transform: translateX(0); }
+        .logo-img { height: 40px; width: auto; }
+        .step-card { transition: all 0.3s ease; border: 1px solid rgba(0,0,0,0.05); }
+        .dark .step-card { border: 1px solid rgba(255,255,255,0.05); }
+        .step-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+        
+        .quote-card { border-left: 4px solid #2563eb; }
+    </style>
+</head>
+<body class="bg-white dark:bg-brandDark text-slate-900 dark:text-slate-100 overflow-x-hidden">
+
+<header class="fixed top-0 w-full z-50 glass-nav border-b border-slate-100 dark:border-transparent">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-3 group">
+            <img src="logo-day.png" alt="ADHOCSY" id="navLogo" class="logo-img transition-all duration-300">
+            <div class="flex flex-col leading-none">
+                <span id="siteName" class="text-2xl font-black tracking-tighter text-blue-800">ADHOCSY</span>
+                <span class="text-[8px] font-bold tracking-[0.2em] text-slate-500 dark:text-slate-400 uppercase mt-0.5">On Demand Workforce</span>
+            </div>
+        </a>
+        
+        <nav class="hidden lg:flex items-center space-x-8 font-bold text-xs uppercase tracking-widest">
+            <a href="index.html" data-i18n="nav_home" class="hover:text-brandBlue transition">Home</a>
+            <a href="about.html" data-i18n="nav_about" class="hover:text-brandBlue transition">About</a>
+            <a href="case_study.html" data-i18n="nav_case" class="text-brandBlue">Case Study</a>
+            <a href="offerings.html" data-i18n="nav_offerings" class="hover:text-brandBlue transition">Earnings</a>
+            <a href="warehouse.html" data-i18n="nav_warehouse" class="hover:text-brandBlue transition">Warehouse</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+            <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+                <button onclick="changeLang('en')" id="btn-en" class="lang-btn active px-2.5 py-1.5 rounded-lg text-[9px] font-black transition">EN</button>
+                <button onclick="changeLang('hi')" id="btn-hi" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">HI</button>
+                <button onclick="changeLang('mr')" id="btn-mr" class="lang-btn px-2.5 py-1.5 rounded-lg text-[9px] font-black transition text-slate-400">MR</button>
+            </div>
+            
+            <button id="themeToggle" class="w-9 h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-yellow-400 transition">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+
+            <button id="menuBtn" class="lg:hidden text-2xl focus:outline-none p-2">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-[60] bg-white dark:bg-brandDark flex flex-col p-8 lg:hidden shadow-2xl">
+    <div class="flex justify-between items-center mb-12">
+        <div class="flex items-center gap-3">
+            <img src="logo-day.png" alt="ADHOCSY" id="mobileLogo" class="h-10 w-auto">
+            <span id="mobileSiteName" class="text-xl font-black tracking-tighter text-slate-900 dark:text-white">ADHOCSY</span>
+        </div>
+        <button id="closeBtn" class="text-4xl text-slate-400 hover:text-brandBlue">&times;</button>
+    </div>
+    <nav class="flex flex-col space-y-6 text-3xl font-black uppercase tracking-tighter">
+        <a href="index.html" class="mobile-link hover:text-brandBlue transition" data-i18n="nav_home">Home</a>
+        <a href="about.html" class="mobile-link hover:text-brandBlue transition" data-i18n="nav_about">About</a>
+        <a href="case_study.html" class="mobile-link text-brandBlue transition" data-i18n="nav_case">Case Study</a>
+        <a href="offerings.html" class="mobile-link hover:text-brandBlue transition" data-i18n="nav_offerings">Earnings</a>
+    </nav>
+</div>
+
+<!-- HERO SECTION -->
+<section class="relative min-h-[90vh] flex items-center hero-bg pt-20">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-brandBlue/10 text-brandBlue text-xs font-black uppercase tracking-widest mb-6" data-i18n="hero_tag">Deep Dive Analysis</span>
+            <h1 class="text-5xl lg:text-7xl font-black leading-tight mb-8 dark:text-white" data-i18n="hero_title">
+                India Doesn’t Have a <br><span class="text-brandBlue">Labour Shortage.</span>
+            </h1> 
+            <p class="text-2xl text-slate-700 dark:text-slate-300 mb-6 leading-relaxed font-semibold" data-i18n="hero_subtitle">
+                It Has a Labour Coordination Problem.
+            </p>
+            <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl leading-relaxed" data-i18n="hero_desc">
+                Every day, warehouses across India struggle to find reliable manpower exactly when demand peaks — while millions of workers remain willing to work but disconnected from opportunity.
+            </p>
+            <div class="bg-blue-600 text-white inline-block px-6 py-3 rounded-xl font-bold shadow-lg" data-i18n="hero_gap">
+                This gap is no longer manageable in a real-time economy.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROBLEM SECTION -->
+<section class="py-24 bg-white dark:bg-brandDark border-t border-slate-100 dark:border-slate-900">
+    <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl font-black mb-8 dark:text-white" data-i18n="prob_title">The Reality Inside Indian Warehouses</h2>
+                <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed" data-i18n="prob_desc">
+                    Modern warehouses operate under intense pressure. Throughput defines revenue. Delays directly mean losses.
+                </p>
+                <div class="grid gap-4">
+                    <div class="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+                        <i class="fas fa-users-slash text-red-500 text-2xl"></i>
+                        <span class="font-bold text-lg" data-i18n="prob_p1">8–12% workers don’t show up on an average day</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+                        <i class="fas fa-chart-line text-amber-500 text-2xl"></i>
+                        <span class="font-bold text-lg" data-i18n="prob_spike">Demand spikes suddenly during sales and campaigns</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+                        <i class="fas fa-phone-volume text-blue-500 text-2xl"></i>
+                        <span class="font-bold text-lg" data-i18n="prob_p2">Managers spend hours calling fragmented contractors</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800">
+                        <i class="fas fa-clock text-slate-400 text-2xl"></i>
+                        <span class="font-bold text-lg" data-i18n="prob_wait">No certainty until the shift has already started</span>
+                    </div>
+                </div>
+                <p class="mt-8 text-slate-500 font-medium italic" data-i18n="prob_modern">
+                    Warehouses are expected to run like modern businesses — but depend on workforce systems that are still offline.
+                </p>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-slate-900 rounded-[40px] p-10 text-white relative shadow-2xl">
+                    <h3 class="text-2xl font-black mb-6 border-b border-white/10 pb-4" data-i18n="leak_title">A Simple Transaction Reveals the Deeper Problem</h3>
+                    <p class="mb-8 opacity-70 text-sm uppercase tracking-widest">For the same shift, three very different outcomes exist.</p>
+                    <div class="space-y-8 mt-10">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-bold uppercase tracking-widest opacity-60" data-i18n="leak_paid">Warehouse Paid</span>
+                            <span class="text-4xl font-black">₹750</span>
+                        </div>
+                        <div class="flex justify-between items-center text-red-400 font-black py-6 border-y border-white/5">
+                            <span class="text-sm uppercase tracking-widest" data-i18n="leak_lost">Lost to Middle Layers</span>
+                            <span class="text-2xl">- ₹200</span>
+                        </div>
+                        <div class="flex justify-between items-center text-brandBlue">
+                            <span class="text-sm font-bold uppercase tracking-widest" data-i18n="leak_worker">Worker Received</span>
+                            <span class="text-4xl font-black text-blue-400">₹550</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-slate-100 dark:bg-slate-800 rounded-3xl border-l-4 border-red-500">
+                    <p class="text-slate-600 dark:text-slate-300 font-bold" data-i18n="leak_note">
+                        This ₹200 does not ensure attendance. It does not improve reliability. It does not create value.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ANALYSIS & WORKER VOICES -->
+<section class="py-24 bg-slate-50 dark:bg-slate-900/50">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+            <h2 class="text-4xl font-black mb-6" data-i18n="model_title">The Business Model Has Changed</h2>
+            <p class="text-lg opacity-70" data-i18n="model_desc">Warehousing has moved away from fixed contracts to pay-per-use and cost-per-unit models.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+            <div class="bg-white dark:bg-brandDark p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 text-center">
+                <i class="fas fa-boxes text-brandBlue text-3xl mb-4"></i>
+                <p class="font-bold text-sm" data-i18n="m1">Revenue depends on daily throughput</p>
+            </div>
+            <div class="bg-white dark:bg-brandDark p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 text-center">
+                <i class="fas fa-mountain text-brandBlue text-3xl mb-4"></i>
+                <p class="font-bold text-sm" data-i18n="m2">Manpower needed mainly during peak days</p>
+            </div>
+            <div class="bg-white dark:bg-brandDark p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 text-center">
+                <i class="fas fa-user-clock text-brandBlue text-3xl mb-4"></i>
+                <p class="font-bold text-sm" data-i18n="m3">Permanent staffing becomes inefficient</p>
+            </div>
+            <div class="bg-white dark:bg-brandDark p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 text-center">
+                <i class="fas fa-bolt text-brandBlue text-3xl mb-4"></i>
+                <p class="font-bold text-sm" data-i18n="m4">Offline systems cannot react fast enough</p>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-24">
+            <div class="order-2 lg:order-1">
+                <h3 class="text-3xl font-black mb-6" data-i18n="trace_title">When Work Leaves No Trace</h3>
+                <p class="text-slate-600 dark:text-slate-400 mb-8" data-i18n="trace_desc">Adhoc workers perform real work every day. Yet most of this work leaves no formal record.</p>
+                <ul class="space-y-4 text-lg font-bold">
+                    <li class="flex items-center gap-3"><i class="fas fa-times-circle text-red-500"></i> <span data-i18n="t1">No digital salary history</span></li>
+                    <li class="flex items-center gap-3"><i class="fas fa-times-circle text-red-500"></i> <span data-i18n="t2">No proof of income</span></li>
+                    <li class="flex items-center gap-3"><i class="fas fa-times-circle text-red-500"></i> <span data-i18n="t3">Limited access to loans</span></li>
+                    <li class="flex items-center gap-3"><i class="fas fa-times-circle text-red-500"></i> <span data-i18n="t4">Children’s education suffers</span></li>
+                </ul>
+            </div>
+            <div class="order-1 lg:order-2 bg-brandBlue text-white p-12 rounded-[60px] shadow-2xl">
+                <p class="text-3xl font-black italic leading-tight" data-i18n="trace_quote">"A system that cannot remember work cannot reward workers with dignity."</p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white dark:bg-brandDark p-10 rounded-3xl shadow-xl quote-card">
+                <p class="text-xl font-medium mb-6 italic leading-relaxed" data-i18n="worker_1">“काम तो रोज़ करते हैं, लेकिन कहीं लिखा नहीं होता कि हमने कितना काम किया। अगर काम का रिकॉर्ड होगा, तो हमें भी आगे बढ़ने का भरोसा मिलेगा।”</p>
+                <p class="font-black text-brandBlue uppercase tracking-widest text-xs">— Adhoc warehouse worker, Gurgaon</p>
+            </div>
+            <div class="bg-white dark:bg-brandDark p-10 rounded-3xl shadow-xl quote-card">
+                <p class="text-xl font-medium mb-6 italic leading-relaxed" data-i18n="worker_2">“अगर काम और पैसे का सही रिकॉर्ड रहेगा, तो बच्चों की पढ़ाई और घर की ज़िम्मेदारी दोनों संभालना आसान होगा।”</p>
+                <p class="font-black text-brandBlue uppercase tracking-widest text-xs">— Female adhoc warehouse worker, NCR</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PILOT RESULTS -->
+<section class="py-24">
+    <div class="container mx-auto px-6">
+        <div class="bg-slate-900 rounded-[50px] p-8 lg:p-16 text-white overflow-hidden relative">
+            <div class="relative z-10">
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 gap-8">
+                    <div>
+                        <span class="bg-white/10 text-white px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-4 inline-block">Gurgaon Fulfilment Centre</span>
+                        <h2 class="text-5xl font-black" data-i18n="pilot_title">The Pilot Results</h2>
+                    </div>
+                    <div class="bg-brandBlue p-6 rounded-3xl text-center">
+                        <span class="block text-xs uppercase tracking-widest font-bold mb-2">Operations Head Says</span>
+                        <p class="text-xl font-bold italic">“During peak days with Adhocsy, we finally felt in control.”</p>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
+                        <h4 class="text-brandBlue font-black text-xl mb-4" data-i18n="p1_t">Predictability</h4>
+                        <p class="opacity-70" data-i18n="p1_d">Better predictability of peak-day manpower during sudden spikes.</p>
+                    </div>
+                    <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
+                        <h4 class="text-brandBlue font-black text-xl mb-4" data-i18n="p2_t">Efficiency</h4>
+                        <p class="opacity-70" data-i18n="p2_d">Reduced daily firefighting by supervisors; saved hours of coordination.</p>
+                    </div>
+                    <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
+                        <h4 class="text-brandBlue font-black text-xl mb-4" data-i18n="p3_t">Worker Retention</h4>
+                        <p class="opacity-70" data-i18n="p3_d">Higher worker willingness to return for shifts due to transparent records.</p>
+                    </div>
+                </div>
+
+                <div class="bg-amber-400/10 border border-amber-400/20 p-6 rounded-2xl text-sm italic">
+                    <p data-i18n="pilot_note">Note: This pilot was conducted on a limited scale during peak-demand days at a single fulfilment centre in Gurgaon (NCR). Observations shared here reflect early operational signals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VISION & PRESS -->
+<section class="py-24 border-t border-slate-100 dark:border-slate-800">
+    <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+            <div>
+                <h2 class="text-4xl font-black mb-8" data-i18n="vision_title">Aligned With India’s Vision</h2>
+                <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8" data-i18n="vision_desc">
+                    India is actively working toward formalising gig work, enabling digital payments, and recognising value creation across the workforce. Adhocsy supports this direction by creating transparency — without forcing rigid structures.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <span class="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold uppercase tracking-widest" data-i18n="pr1">Economic Times</span>
+                    <span class="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold uppercase tracking-widest" data-i18n="pr2">BusinessWorld</span>
+                    <span class="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold uppercase tracking-widest" data-i18n="pr3">Reuters</span>
+                </div>
+            </div>
+            <div class="bg-brandBlue/5 dark:bg-brandBlue/10 p-12 rounded-[50px] text-center border-2 border-dashed border-brandBlue/20">
+                <h3 class="text-2xl font-black mb-6 text-brandBlue" data-i18n="fit_title">Where Adhocsy Fits</h3>
+                <p class="text-xl font-bold dark:text-white leading-relaxed" data-i18n="fit_desc">
+                    Helping warehouses operate smoothly, workers earn with dignity, and India move toward a formal, inclusive workforce.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="contact" class="bg-slate-950 text-slate-500 py-20">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
+      <img src="logo-dark.png" id="footerLogo" class="h-10" alt="ADHOCSY">
+      <div class="flex gap-10">
+        <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="text-3xl hover:text-white transition transform hover:scale-110"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+
+    <div class="text-center text-sm leading-relaxed opacity-60 mb-10">
+      <p class="font-semibold text-slate-300">ADHOCSY ON DEMAND WORKFORCE PRIVATE LIMITED</p>
+      <p class="mt-2">Registered Office: JNC CONSTRUCTION, H1A/20,<br>Sector-63, Noida, Uttar Pradesh – 201301</p>
+      <p class="mt-2">CIN: U78100UP2026PTC241618</p>
+    </div>
+
+    <div class="text-center text-xs font-bold tracking-[0.3em] uppercase opacity-40">
+      © 2026 ADHOCSY TECHNOLOGIES. BUILT FOR DIGNITY.
+    </div>
+  </div>
+</footer>
+
+<script>
+    const dict = {
+        en: {
+            nav_home: "Home", nav_about: "About", nav_case: "Case Study", nav_offerings: "Earnings", nav_warehouse: "Warehouse",
+            hero_tag: "Deep Dive Analysis", hero_title: "India Doesn’t Have a <br><span class='text-brandBlue'>Labour Shortage.</span>",
+            hero_subtitle: "It Has a Labour Coordination Problem.", hero_desc: "Every day, warehouses across India struggle to find reliable manpower exactly when demand peaks — while millions of workers remain willing to work but disconnected from opportunity.",
+            hero_gap: "This gap is no longer manageable in a real-time economy.",
+            prob_title: "The Reality Inside Indian Warehouses", prob_desc: "Modern warehouses operate under intense pressure. Throughput defines revenue. Delays directly mean losses.",
+            prob_p1: "8–12% workers don’t show up on an average day", prob_p2: "Managers spend hours calling fragmented contractors",
+            prob_spike: "Demand spikes suddenly during sales and campaigns", prob_wait: "No certainty until the shift has already started",
+            prob_modern: "Warehouses are expected to run like modern businesses — but depend on workforce systems that are still offline.",
+            leak_title: "A Simple Transaction Reveals the Deeper Problem", leak_paid: "Warehouse Paid", leak_lost: "Lost to Middle Layers", leak_worker: "Worker Received", leak_note: "This ₹200 does not ensure attendance. It does not improve reliability. It does not create value.",
+            model_title: "The Business Model Has Changed", model_desc: "Warehousing has moved away from fixed contracts to pay-per-use and cost-per-unit models.",
+            m1: "Revenue depends on daily throughput", m2: "Manpower needed mainly during peak days", m3: "Permanent staffing becomes inefficient", m4: "Offline systems cannot react fast enough",
+            trace_title: "When Work Leaves No Trace", trace_desc: "Adhoc workers perform real work every day. Yet most of this work leaves no formal record.",
+            trace_quote: "A system that cannot remember work cannot reward workers with dignity.",
+            t1: "No digital salary history", t2: "No proof of income", t3: "Limited access to loans", t4: "Children’s education suffers",
+            worker_1: "“काम तो रोज़ करते हैं, लेकिन कहीं लिखा नहीं होता कि हमने कितना काम किया। अगर काम का रिकॉर्ड होगा, तो हमें भी आगे बढ़ने का भरोसा मिलेगा।”",
+            worker_2: "“अगर काम और पैसे का सही रिकॉर्ड रहेगा, तो बच्चों की पढ़ाई और घर की ज़िम्मेदारी दोनों संभालना आसान होगा।”",
+            pilot_title: "The Pilot Results", p1_t: "Predictability", p1_d: "Better predictability of peak-day manpower during sudden spikes.", p2_t: "Efficiency", p2_d: "Reduced daily firefighting by supervisors; saved hours of coordination.", p3_t: "Worker Retention", p3_d: "Higher worker willingness to return for shifts due to transparent records.",
+            pilot_note: "Note: This pilot was conducted on a limited scale during peak-demand days at a single fulfilment centre in Gurgaon (NCR). Observations shared here reflect early operational signals.",
+            vision_title: "Aligned With India’s Vision", vision_desc: "India is actively working toward formalising gig work, enabling digital payments, and recognising value creation across the workforce. Adhocsy supports this direction by creating transparency — without forcing rigid structures.",
+            pr1: "Economic Times", pr2: "BusinessWorld", pr3: "Reuters",
+            fit_title: "Where Adhocsy Fits", fit_desc: "Helping warehouses operate smoothly, workers earn with dignity, and India move toward a formal, inclusive workforce."
+        },
+        hi: {
+            nav_home: "होम", nav_about: "हमारे बारे में", nav_case: "केस स्टडी", nav_offerings: "कमाई", nav_warehouse: "वेयरहाउस",
+            hero_tag: "गहन विश्लेषण", hero_title: "भारत में श्रम की <br><span class='text-brandBlue'>कमी नहीं है।</span>",
+            hero_subtitle: "यहाँ लेबर कोऑर्डिनेशन (समन्वय) की समस्या है।", hero_desc: "हर दिन, पूरे भारत में वेयरहाउस मांग बढ़ने पर विश्वसनीय जनशक्ति खोजने के लिए संघर्ष करते हैं।",
+            hero_gap: "एक वास्तविक समय की अर्थव्यवस्था में इस अंतर को अब संभालना संभव नहीं है।",
+            prob_title: "भारतीय वेयरहाउस के भीतर की वास्तविकता", prob_desc: "आधुनिक वेयरहाउस भारी दबाव में काम करते हैं। देरी का मतलब सीधा नुकसान है।",
+            prob_p1: "8-12% कर्मचारी सामान्य दिन पर नहीं आते हैं", prob_p2: "मैनेजर घंटों ठेकेदारों को कॉल करने में बिताते हैं",
+            prob_spike: "बिक्री और अभियानों के दौरान मांग अचानक बढ़ जाती है", prob_wait: "शिफ्ट शुरू होने तक कोई निश्चितता नहीं होती",
+            prob_modern: "वेयरहाउस से आधुनिक व्यवसायों की तरह चलने की उम्मीद की जाती है - लेकिन वे अभी भी ऑफलाइन सिस्टम पर निर्भर हैं।",
+            leak_title: "एक साधारण लेनदेन गहरी समस्या को उजागर करता है", leak_paid: "वेयरहाउस ने भुगतान किया", leak_lost: "बिचौलियों ने लिए", leak_worker: "वर्कर को मिले", leak_note: "यह ₹200 उपस्थिति सुनिश्चित नहीं करता है। यह विश्वसनीयता में सुधार नहीं करता है।",
+            model_title: "बिजनेस मॉडल बदल गया है", model_desc: "वेयरहाउसिंग फिक्स्ड कॉन्ट्रैक्ट्स से पे-पर-यूज़ और कॉस्ट-पर-यूनिट मॉडल की ओर बढ़ गई है।",
+            m1: "राजस्व दैनिक थ्रूपुट पर निर्भर करता है", m2: "मुख्य रूप से पीक दिनों के दौरान जनशक्ति की आवश्यकता होती है", m3: "स्थायी स्टाफिंग अक्षम हो जाती है", m4: "ऑफलाइन सिस्टम तेजी से प्रतिक्रिया नहीं दे सकते",
+            trace_title: "जब काम का कोई निशान नहीं बचता", trace_desc: "एडहॉक वर्कर हर दिन काम करते हैं। फिर भी इस काम का कोई औपचारिक रिकॉर्ड नहीं होता।",
+            trace_quote: "जो व्यवस्था काम को याद नहीं रख सकती, वह श्रमिकों को गरिमा के साथ पुरस्कृत नहीं कर सकती।",
+            t1: "कोई डिजिटल वेतन इतिहास नहीं", t2: "आय का कोई प्रमाण नहीं", t3: "ऋण तक सीमित पहुंच", t4: "बच्चों की शिक्षा प्रभावित होती है",
+            worker_1: "“काम तो रोज़ करते हैं, लेकिन कहीं लिखा नहीं होता कि हमने कितना काम किया। अगर काम का रिकॉर्ड होगा, तो हमें भी आगे बढ़ने का भरोसा मिलेगा।”",
+            worker_2: "“अगर काम और पैसे का सही रिकॉर्ड रहेगा, तो बच्चों की पढ़ाई और घर की ज़िम्मेदारी दोनों संभालना आसान होगा।”",
+            pilot_title: "पायलट परिणाम", p1_t: "पूर्वानुमेयता", p1_d: "अचानक मांग बढ़ने पर जनशक्ति की बेहतर भविष्यवाणियां।", p2_t: "दक्षता", p2_d: "पर्यवेक्षकों द्वारा दैनिक संघर्ष में कमी; समन्वय के घंटों की बचत।", p3_t: "वर्कर रिटेंशन", p3_d: "पारदर्शी रिकॉर्ड के कारण वर्कर की काम पर लौटने की अधिक इच्छा।",
+            pilot_note: "नोट: यह पायलट गुड़गांव (एनसीआर) में एक एकल पूर्ति केंद्र में सीमित पैमाने पर आयोजित किया गया था।",
+            vision_title: "भारत के विजन के साथ संरेखित", vision_desc: "भारत सक्रिय रूप से गिग वर्क को औपचारिक बनाने और डिजिटल भुगतान को सक्षम करने की दिशा में काम कर रहा है।",
+            pr1: "इकोनॉमिक टाइम्स", pr2: "बिजनेसवर्ल्ड", pr3: "रॉयटर्स",
+            fit_title: "Adhocsy कहाँ फिट बैठता है", fit_desc: "वेयरहाउस को सुचारू रूप से चलाने में मदद करना, श्रमिकों को गरिमा के साथ कमाने में मदद करना।"
+        },
+        mr: {
+            nav_home: "होम", nav_about: "आमच्याबद्दल", nav_case: "केस स्टडी", nav_offerings: "उत्पन्न", nav_warehouse: "वेअरहाउस",
+            hero_tag: "सखोल विश्लेषण", hero_title: "भारतात मजुरांची <br><span class='text-brandBlue'>कमतरता नाही.</span>",
+            hero_subtitle: "येथे लेबर कोऑर्डिनेशनची (समन्वय) समस्या आहे.", hero_desc: "दररोज, संपूर्ण भारतातील वेअरहाउसेस मागणी वाढल्यावर विश्वसनीय मनुष्यबळ शोधण्यासाठी संघर्ष करतात.",
+            hero_gap: "रिअल-टाइम अर्थव्यवस्थेत हे अंतर आता व्यवस्थापित करणे शक्य नाही.",
+            prob_title: "भारतीय वेअरहाउस मधील वास्तविकता", prob_desc: "आधुनिक वेअरहाउसेस प्रचंड दबावाखाली काम करतात. विलंबाचा अर्थ थेट नुकसान आहे.",
+            prob_p1: "8-12% कामगार सामान्य दिवशी कामावर येत नाहीत", prob_p2: "व्यवस्थापक तासनतास कंत्राटदारांना फोन करण्यात घालवतात",
+            prob_spike: "विक्री आणि मोहिमांदरम्यान मागणी अचानक वाढते", prob_wait: "शिफ्ट सुरू होईपर्यंत कोणतीही खात्री नसते",
+            prob_modern: "वेअरहाउसेस आधुनिक व्यवसायांप्रमाणे चालणे अपेक्षित आहे - परंतु ते अद्याप ऑफलाइन सिस्टमवर अवलंबून आहेत.",
+            leak_title: "एक साधा व्यवहार सखोल समस्या उघड करतो", leak_paid: "वेअरहाउसने दिलेले", leak_lost: "मध्यस्थांनी घेतलेले", leak_worker: "कामगाराला मिळाले", leak_note: "हे ₹200 उपस्थिती सुनिश्चित करत नाही. हे विश्वासार्हता सुधारत नाही.",
+            model_title: "व्यवसाय मॉडेल बदलले आहे", model_desc: "वेअरहाउसिंग फिक्स्ड कॉन्ट्रॅक्ट्सपासून पे-पर-यूझ आणि कॉस्ट-पर-युनिट मॉडेलकडे वळले आहे.",
+            m1: "महसूल दैनिक थ्रूपुटवर अवलंबून असतो", m2: "मुख्यत्वे पीक दिवसात मनुष्यबळाची गरज असते", m3: "कायमस्वरूपी स्टाफिंग अकार्यक्षम होते", m4: "ऑफलाइन सिस्टम वेगाने प्रतिसाद देऊ शकत नाहीत",
+            trace_title: "जेव्हा कामाचा कोणताही मागमूस उरत नाही", trace_desc: "एडहॉक कामगार दररोज काम करतात. तरीही या कामाची कोणतीही अधिकृत नोंद नसते.",
+            trace_quote: "जी यंत्रणा कामाची नोंद ठेवू शकत नाही, ती कामगारांना प्रतिष्ठेने पुरस्कृत करू शकत नाही.",
+            t1: "डिजिटल पगार इतिहास नाही", t2: "उत्पन्नाचा पुरावा नाही", t3: "कर्जासाठी मर्यादित प्रवेश", t4: "मुलांचे शिक्षण प्रभावित होते",
+            worker_1: "“काम तो रोज़ करते हैं, लेकिन कहीं लिखा नहीं होता कि हमने कितना काम किया...”",
+            worker_2: "“अगर काम और पैसे का सही रिकॉर्ड रहेगा...”",
+            pilot_title: "पायलट निकाल", p1_t: "अंदाज", p1_d: "मागणी वाढल्यावर मनुष्यबळाचा चांगला अंदाज.", p2_t: "कार्यक्षमता", p2_d: "पर्यवेक्षकांचा दैनंदिन ताण कमी झाला; समन्वयाचे तास वाचले.", p3_t: "कामगार टिकवून ठेवणे", p3_d: "पारदर्शक नोंदींमुळे कामगारांची कामावर परतण्याची अधिक इच्छा.",
+            pilot_note: "टीप: हा पायलट गुडगावमधील एकाच पूर्तता केंद्रात मर्यादित प्रमाणात घेण्यात आला होता.",
+            vision_title: "भारताच्या व्हिजनशी सुसंगत", vision_desc: "भारत सक्रियपणे गिग वर्क अधिकृत करण्यासाठी आणि डिजिटल पेमेंट सक्षम करण्यासाठी काम करत आहे.",
+            pr1: "इकॉनॉमिक टाइम्स", pr2: "बिझनेसवर्ल्ड", pr3: "रॉयटर्स",
+            fit_title: "Adhocsy कुठे बसते", fit_desc: "वेअरहाउसेस सुरळीतपणे चालवण्यास आणि कामगारांना प्रतिष्ठेने कमावण्यास मदत करणे."
+        }
+    };
+
+    function changeLang(lang) {
+        const t = dict[lang];
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key]) el.innerHTML = t[key];
+        });
+        document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.remove('active', 'bg-brandBlue', 'text-white');
+            b.classList.add('text-slate-400');
+        });
+        const activeBtn = document.getElementById(`btn-${lang}`);
+        activeBtn.classList.add('active', 'bg-brandBlue', 'text-white');
+        activeBtn.classList.remove('text-slate-400');
+    }
+
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const navLogo = document.getElementById('navLogo');
+    const mobileLogo = document.getElementById('mobileLogo');
+
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        const logoSrc = isDark ? 'logo-dark.png' : 'logo-day.png';
+        navLogo.src = logoSrc;
+        mobileLogo.src = logoSrc;
+    });
+
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+    closeBtn.addEventListener('click', () => mobileMenu.classList.remove('active'));
+</script>
+
+</body>
+</html>
