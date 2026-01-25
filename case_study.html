@@ -238,49 +238,174 @@
             </div>
             <div class="bg-white dark:bg-brandDark p-10 rounded-3xl shadow-xl quote-card">
                 <p class="text-xl font-medium mb-6 italic leading-relaxed" data-i18n="worker_2">“अगर काम और पैसे का सही रिकॉर्ड रहेगा, तो बच्चों की पढ़ाई और घर की ज़िम्मेदारी दोनों संभालना आसान होगा।”</p>
-                <p class="font-black text-brandBlue uppercase tracking-widest text-xs">— Female adhoc warehouse worker, NCR</p>
+                <p class="font-black text-brandBlue uppercase tracking-widest text-xs">— Adhoc warehouse worker, NCR</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- PILOT RESULTS -->
-<section class="py-24">
-    <div class="container mx-auto px-6">
-        <div class="bg-slate-900 rounded-[50px] p-8 lg:p-16 text-white overflow-hidden relative">
-            <div class="relative z-10">
-                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 gap-8">
-                    <div>
-                        <span class="bg-white/10 text-white px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase mb-4 inline-block">Gurgaon Fulfilment Centre</span>
-                        <h2 class="text-5xl font-black" data-i18n="pilot_title">The Pilot Results</h2>
-                    </div>
-                    <div class="bg-brandBlue p-6 rounded-3xl text-center">
-                        <span class="block text-xs uppercase tracking-widest font-bold mb-2">Operations Head Says</span>
-                        <p class="text-xl font-bold italic">“During peak days with Adhocsy, we finally felt in control.”</p>
-                    </div>
-                </div>
+<!-- PILOT STORY SECTION -->
+<section class="py-24 bg-white dark:bg-brandDark border-t border-slate-100 dark:border-slate-800">
+  <div class="container mx-auto px-6">
+    <div class="bg-slate-50 dark:bg-slate-900 rounded-[60px] p-8 lg:p-20 relative border border-slate-100 dark:border-slate-800 overflow-hidden">
 
-                <div class="grid lg:grid-cols-3 gap-8 mb-16">
-                    <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
-                        <h4 class="text-brandBlue font-black text-xl mb-4" data-i18n="p1_t">Predictability</h4>
-                        <p class="opacity-70" data-i18n="p1_d">Better predictability of peak-day manpower during sudden spikes.</p>
-                    </div>
-                    <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
-                        <h4 class="text-brandBlue font-black text-xl mb-4" data-i18n="p2_t">Efficiency</h4>
-                        <p class="opacity-70" data-i18n="p2_d">Reduced daily firefighting by supervisors; saved hours of coordination.</p>
-                    </div>
-                    <div class="bg-white/5 p-8 rounded-3xl border border-white/10">
-                        <h4 class="text-brandBlue font-black text-xl mb-4" data-i18n="p3_t">Worker Retention</h4>
-                        <p class="opacity-70" data-i18n="p3_d">Higher worker willingness to return for shifts due to transparent records.</p>
-                    </div>
-                </div>
+      <!-- Soft background accents -->
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-brandBlue/5 rounded-full blur-[120px]"></div>
+      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-brandBlue/5 rounded-full blur-[120px]"></div>
 
-                <div class="bg-amber-400/10 border border-amber-400/20 p-6 rounded-2xl text-sm italic">
-                    <p data-i18n="pilot_note">Note: This pilot was conducted on a limited scale during peak-demand days at a single fulfilment centre in Gurgaon (NCR). Observations shared here reflect early operational signals.</p>
-                </div>
-            </div>
+      <!-- Header -->
+      <div class="relative z-10 mb-24">
+        <span class="bg-brandBlue/10 text-brandBlue px-5 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6 inline-flex items-center gap-2">
+          <span class="w-2 h-2 bg-brandBlue rounded-full"></span>
+          <span data-i18n="pilot_location">Gurgaon Fulfilment Centre (NCR)</span>
+        </span>
+
+        <h2 class="text-5xl lg:text-7xl font-black mb-6 italic tracking-tight text-slate-900 dark:text-white" data-i18n="pilot_title">
+          Pilot Story
+        </h2>
+
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed" data-i18n="pilot_intro_long">
+          A detailed account of how a Gurgaon fulfilment centre tested Adhocsy during peak demand — and what changed on the ground.
+        </p>
+      </div>
+
+      <!-- Context -->
+      <div class="mb-24 relative z-10">
+        <h3 class="text-sm font-black uppercase tracking-widest text-brandBlue mb-6" data-i18n="pilot_context">
+          Context
+        </h3>
+        <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="pilot_context_p1">
+          A mid-size fulfilment centre in Gurgaon handles outbound shipments for multiple e-commerce brands.
+        </p>
+        <p class="text-slate-600 dark:text-slate-400 mb-4" data-i18n="pilot_context_p2">
+          Daily volume fluctuates sharply due to sales, delayed inbounds, and campaign traffic.
+        </p>
+        <p class="text-slate-600 dark:text-slate-400" data-i18n="pilot_context_p3">
+          The warehouse operates on a cost-per-unit model — revenue depends entirely on daily throughput.
+        </p>
+      </div>
+
+      <!-- Problem -->
+      <div class="mb-24 relative z-10 bg-white dark:bg-brandDark p-12 rounded-[48px] border border-slate-100 dark:border-slate-800">
+        <h3 class="text-sm font-black uppercase tracking-widest text-red-500 mb-6" data-i18n="pilot_problem_title">
+          The Problem Before Adhocsy
+        </h3>
+
+        <p class="text-slate-700 dark:text-slate-300 mb-6 font-medium" data-i18n="pilot_problem_intro">
+          Every morning started with uncertainty.
+        </p>
+
+        <ul class="space-y-3 mb-8">
+          <li class="text-slate-600 dark:text-slate-400" data-i18n="pilot_problem_1">8–12% workers did not show up on average</li>
+          <li class="text-slate-600 dark:text-slate-400" data-i18n="pilot_problem_2">Supervisors spent 2–3 hours daily calling contractors</li>
+          <li class="text-slate-600 dark:text-slate-400" data-i18n="pilot_problem_3">Last-minute manpower came at a premium</li>
+          <li class="text-slate-600 dark:text-slate-400" data-i18n="pilot_problem_4">Worker payouts were opaque and inconsistent</li>
+          <li class="text-slate-600 dark:text-slate-400" data-i18n="pilot_problem_5">Dispatch delays during peak days were common</li>
+        </ul>
+
+        <blockquote class="border-l-4 border-brandBlue pl-6 italic text-slate-700 dark:text-slate-300" data-i18n="pilot_problem_quote">
+          “We were managing labour every day instead of managing operations.”
+        </blockquote>
+      </div>
+
+      <!-- Pilot Setup -->
+      <div class="mb-24 relative z-10">
+        <h3 class="text-sm font-black uppercase tracking-widest text-brandBlue mb-6" data-i18n="pilot_setup_title">
+          The Pilot Setup
+        </h3>
+        <p class="text-slate-600 dark:text-slate-400 mb-6" data-i18n="pilot_setup_intro">
+          The warehouse ran a limited pilot with Adhocsy for peak-demand days.
+        </p>
+
+        <ul class="space-y-3 text-slate-600 dark:text-slate-400 mb-6">
+          <li data-i18n="pilot_setup_1">Used only for adhoc shifts</li>
+          <li data-i18n="pilot_setup_2">Focused on outbound picking & loading</li>
+          <li data-i18n="pilot_setup_3">Activated during sales and volume spikes</li>
+          <li data-i18n="pilot_setup_4">Existing full-time staff remained unchanged</li>
+        </ul>
+
+        <p class="text-slate-600 dark:text-slate-400 font-medium" data-i18n="pilot_setup_note">
+          No system overhaul. No contract replacement. Just a controlled test.
+        </p>
+      </div>
+
+      <!-- What Changed -->
+      <div class="mb-24 relative z-10">
+        <h3 class="text-sm font-black uppercase tracking-widest text-brandBlue mb-10" data-i18n="pilot_changes_title">
+          What Changed During the Pilot
+        </h3>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white dark:bg-brandDark p-8 rounded-[32px] border border-slate-100 dark:border-slate-800">
+            <h4 class="font-bold mb-3" data-i18n="pilot_changes_ops">Operational impact</h4>
+            <ul class="text-sm space-y-2 text-slate-600 dark:text-slate-400">
+              <li data-i18n="pilot_changes_ops_1">Faster access to nearby workers</li>
+              <li data-i18n="pilot_changes_ops_2">Reduced dependency on contractors</li>
+              <li data-i18n="pilot_changes_ops_3">Better attendance predictability</li>
+            </ul>
+          </div>
+
+          <div class="bg-white dark:bg-brandDark p-8 rounded-[32px] border border-slate-100 dark:border-slate-800">
+            <h4 class="font-bold mb-3" data-i18n="pilot_changes_mgr">Manager experience</h4>
+            <ul class="text-sm space-y-2 text-slate-600 dark:text-slate-400">
+              <li data-i18n="pilot_changes_mgr_1">Less time spent sourcing labour</li>
+              <li data-i18n="pilot_changes_mgr_2">Clear shift acceptance visibility</li>
+              <li data-i18n="pilot_changes_mgr_3">More focus on dispatch timelines</li>
+            </ul>
+          </div>
+
+          <div class="bg-white dark:bg-brandDark p-8 rounded-[32px] border border-slate-100 dark:border-slate-800">
+            <h4 class="font-bold mb-3" data-i18n="pilot_changes_worker">Worker response</h4>
+            <ul class="text-sm space-y-2 text-slate-600 dark:text-slate-400">
+              <li data-i18n="pilot_changes_worker_1">Clear pay shown before shift</li>
+              <li data-i18n="pilot_changes_worker_2">On-time, traceable payments</li>
+              <li data-i18n="pilot_changes_worker_3">Higher willingness to return</li>
+            </ul>
+          </div>
         </div>
+      </div>
+
+      <!-- Outcome -->
+      <div class="mb-24 bg-brandBlue/5 dark:bg-brandBlue/10 p-12 rounded-[50px] border border-brandBlue/20 relative z-10">
+        <h3 class="text-3xl font-black mb-6 text-slate-900 dark:text-white" data-i18n="pilot_outcome">
+          The Outcome
+        </h3>
+
+        <p class="text-slate-600 dark:text-slate-400 mb-6" data-i18n="pilot_outcome_desc">
+          The pilot did not solve everything — but it removed the biggest daily uncertainty.
+        </p>
+
+        <ul class="space-y-3 text-slate-600 dark:text-slate-400 mb-8">
+          <li data-i18n="pilot_outcome_1">Peak-day manpower was easier to manage</li>
+          <li data-i18n="pilot_outcome_2">Operational stress reduced noticeably</li>
+          <li data-i18n="pilot_outcome_3">Worker trust improved</li>
+          <li data-i18n="pilot_outcome_4">The system felt more predictable</li>
+        </ul>
+
+        <blockquote class="border-l-4 border-brandBlue pl-6 italic text-slate-700 dark:text-slate-300" data-i18n="pilot_outcome_quote">
+          “We finally felt in control during peak days.”
+        </blockquote>
+      </div>
+
+      <!-- Why It Matters -->
+      <div class="bg-amber-400/5 border border-amber-400/20 p-12 rounded-[40px] relative z-10">
+        <h3 class="text-sm font-black uppercase tracking-widest text-amber-600 mb-6" data-i18n="pilot_why_title">
+          Why This Pilot Matters
+        </h3>
+
+        <ul class="space-y-3 text-amber-800 dark:text-amber-300 mb-6">
+          <li data-i18n="pilot_why_1">No incentives were forced</li>
+          <li data-i18n="pilot_why_2">No processes were broken</li>
+          <li data-i18n="pilot_why_3">No unrealistic promises were made</li>
+        </ul>
+
+        <p class="text-amber-800 dark:text-amber-300 font-medium" data-i18n="pilot_why_conclusion">
+          When labour availability becomes visible, operations become calmer.
+        </p>
+      </div>
+
     </div>
+  </div>
 </section>
 
 <!-- VISION & PRESS -->
@@ -293,9 +418,25 @@
                     India is actively working toward formalising gig work, enabling digital payments, and recognising value creation across the workforce. Adhocsy supports this direction by creating transparency — without forcing rigid structures.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <span class="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold uppercase tracking-widest" data-i18n="pr1">Economic Times</span>
-                    <span class="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold uppercase tracking-widest" data-i18n="pr2">BusinessWorld</span>
-                    <span class="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold uppercase tracking-widest" data-i18n="pr3">Reuters</span>
+                     <a href="https://economictimes.indiatimes.com/jobs/hr-policies-trends/indias-blue-collar-crunch-skills-shortage-deepens-as-attrition-and-absenteeism-rise/articleshow/121170262.cms"
+     target="_blank"
+     rel="noopener"
+     class="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-brandBlue/10 hover:text-brandBlue transition"
+     data-i18n="pr1">
+    Economic Times
+  </a>
+                    <a href="https://www.businessworld.in/article/india-s-warehousing-sector-faces-growing-pains-amid-rapid-expansion-575028"
+     class="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold uppercase tracking-widest
+            hover:bg-brandBlue/10 hover:text-brandBlue transition"
+     data-i18n="pr2">
+    BusinessWorld
+  </a>
+                    <a href="https://www.reuters.com/world/india/indias-human-rights-body-calls-scrutiny-amazon-warehouse-labour-practices-2024-06-19/"
+     class="px-4 py-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-xs font-bold uppercase tracking-widest
+            hover:bg-brandBlue/10 hover:text-brandBlue transition"
+     data-i18n="pr3">
+    Reuters
+  </a>
                 </div>
             </div>
             <div class="bg-brandBlue/5 dark:bg-brandBlue/10 p-12 rounded-[50px] text-center border-2 border-dashed border-brandBlue/20">
@@ -354,7 +495,66 @@
             pilot_note: "Note: This pilot was conducted on a limited scale during peak-demand days at a single fulfilment centre in Gurgaon (NCR). Observations shared here reflect early operational signals.",
             vision_title: "Aligned With India’s Vision", vision_desc: "India is actively working toward formalising gig work, enabling digital payments, and recognising value creation across the workforce. Adhocsy supports this direction by creating transparency — without forcing rigid structures.",
             pr1: "Economic Times", pr2: "BusinessWorld", pr3: "Reuters",
-            fit_title: "Where Adhocsy Fits", fit_desc: "Helping warehouses operate smoothly, workers earn with dignity, and India move toward a formal, inclusive workforce."
+            fit_title: "Where Adhocsy Fits", fit_desc: "Helping warehouses operate smoothly, workers earn with dignity, and India move toward a formal, inclusive workforce.",
+             pilot_location: "Gurgaon Fulfilment Centre (NCR)",
+
+  pilot_title: "Pilot Story",
+  pilot_intro_long: "A detailed account of how a Gurgaon fulfilment centre tested Adhocsy during peak demand — and what changed on the ground.",
+
+  pilot_context: "Context",
+  pilot_context_p1: "A mid-size fulfilment centre in Gurgaon handles outbound shipments for multiple e-commerce brands.",
+  pilot_context_p2: "Daily volume fluctuates sharply due to sales, delayed inbounds, and campaign traffic.",
+  pilot_context_p3: "The warehouse operates on a cost-per-unit model — revenue depends entirely on daily throughput.",
+
+  pilot_problem_title: "The Problem Before Adhocsy",
+  pilot_problem_intro: "Every morning started with uncertainty.",
+  pilot_problem_1: "8–12% workers did not show up on average",
+  pilot_problem_2: "Supervisors spent 2–3 hours daily calling contractors",
+  pilot_problem_3: "Last-minute manpower came at a premium",
+  pilot_problem_4: "Worker payouts were opaque and inconsistent",
+  pilot_problem_5: "Dispatch delays during peak days were common",
+  pilot_problem_quote: "We were managing labour every day instead of managing operations.",
+
+  pilot_setup_title: "The Pilot Setup",
+  pilot_setup_intro: "The warehouse ran a limited pilot with Adhocsy for peak-demand days.",
+  pilot_setup_1: "Used only for adhoc shifts",
+  pilot_setup_2: "Focused on outbound picking & loading",
+  pilot_setup_3: "Activated during sales and volume spikes",
+  pilot_setup_4: "Existing full-time staff remained unchanged",
+  pilot_setup_note: "No system overhaul. No contract replacement. Just a controlled test.",
+
+  pilot_changes_title: "What Changed During the Pilot",
+
+  pilot_changes_ops: "Operational impact",
+  pilot_changes_ops_1: "Faster access to nearby workers",
+  pilot_changes_ops_2: "Reduced dependency on contractors",
+  pilot_changes_ops_3: "Better attendance predictability",
+
+  pilot_changes_mgr: "Manager experience",
+  pilot_changes_mgr_1: "Less time spent sourcing labour",
+  pilot_changes_mgr_2: "Clear shift acceptance visibility",
+  pilot_changes_mgr_3: "More focus on dispatch timelines",
+
+  pilot_changes_worker: "Worker response",
+  pilot_changes_worker_1: "Clear pay shown before shift",
+  pilot_changes_worker_2: "On-time, traceable payments",
+  pilot_changes_worker_3: "Higher willingness to return",
+
+  pilot_outcome: "The Outcome",
+  pilot_outcome_desc: "The pilot did not solve everything — but it removed the biggest daily uncertainty.",
+  pilot_outcome_1: "Peak-day manpower was easier to manage",
+  pilot_outcome_2: "Operational stress reduced noticeably",
+  pilot_outcome_3: "Worker trust improved",
+  pilot_outcome_4: "The system felt more predictable",
+  pilot_outcome_quote: "We finally felt in control during peak days.",
+
+  pilot_why_title: "Why This Pilot Matters",
+  pilot_why_1: "No incentives were forced",
+  pilot_why_2: "No processes were broken",
+  pilot_why_3: "No unrealistic promises were made",
+  pilot_why_conclusion: "When labour availability becomes visible, operations become calmer."
+           
+
         },
         hi: {
             nav_home: "होम", nav_about: "हमारे बारे में", nav_case: "केस स्टडी", nav_offerings: "कमाई", nav_construction: "निर्माण", nav_warehouse: "वेयरहाउस",
@@ -377,7 +577,67 @@
             pilot_note: "नोट: यह पायलट गुड़गांव (एनसीआर) में एक एकल पूर्ति केंद्र में सीमित पैमाने पर आयोजित किया गया था।",
             vision_title: "भारत के विजन के साथ संरेखित", vision_desc: "भारत सक्रिय रूप से गिग वर्क को औपचारिक बनाने और डिजिटल भुगतान को सक्षम करने की दिशा में काम कर रहा है।",
             pr1: "इकोनॉमिक टाइम्स", pr2: "बिजनेसवर्ल्ड", pr3: "रॉयटर्स",
-            fit_title: "Adhocsy कहाँ फिट बैठता है", fit_desc: "वेयरहाउस को सुचारू रूप से चलाने में मदद करना, श्रमिकों को गरिमा के साथ कमाने में मदद करना।"
+            fit_title: "Adhocsy कहाँ फिट बैठता है", fit_desc: "वेयरहाउस को सुचारू रूप से चलाने में मदद करना, श्रमिकों को गरिमा के साथ कमाने में मदद करना।",
+             pilot_location: "गुरुग्राम फुलफिलमेंट सेंटर (एनसीआर)",
+
+  pilot_title: "पायलट स्टोरी",
+  pilot_intro_long: "यह विवरण बताता है कि गुरुग्राम के एक फुलफिलमेंट सेंटर ने पीक डिमांड के दौरान Adhocsy को कैसे परखा — और ज़मीनी स्तर पर क्या बदला।",
+
+  pilot_context: "परिस्थिति",
+  pilot_context_p1: "गुरुग्राम का एक मध्यम आकार का फुलफिलमेंट सेंटर कई ई-कॉमर्स ब्रांड्स के लिए आउटबाउंड शिपमेंट संभालता है।",
+  pilot_context_p2: "सेल, देरी से आने वाले इनबाउंड और कैंपेन ट्रैफिक के कारण रोज़ाना वॉल्यूम में तेज़ उतार-चढ़ाव होता है।",
+  pilot_context_p3: "वेयरहाउस कॉस्ट-पर-यूनिट मॉडल पर काम करता है — यानी राजस्व पूरी तरह दैनिक थ्रूपुट पर निर्भर करता है।",
+
+  pilot_problem_title: "Adhocsy से पहले की समस्या",
+  pilot_problem_intro: "हर सुबह अनिश्चितता के साथ शुरू होती थी।",
+  pilot_problem_1: "औसतन 8–12% कर्मचारी काम पर नहीं आते थे",
+  pilot_problem_2: "सुपरवाइज़र रोज़ 2–3 घंटे ठेकेदारों को कॉल करते थे",
+  pilot_problem_3: "अंतिम समय पर मंगाया गया स्टाफ महंगा पड़ता था",
+  pilot_problem_4: "वर्कर भुगतान स्पष्ट और एकसमान नहीं था",
+  pilot_problem_5: "पीक दिनों में डिस्पैच में देरी आम थी",
+  pilot_problem_quote: "हम हर दिन ऑपरेशंस के बजाय लेबर को संभाल रहे थे।",
+
+  pilot_setup_title: "पायलट की व्यवस्था",
+  pilot_setup_intro: "वेयरहाउस ने पीक-डिमांड दिनों के लिए Adhocsy के साथ एक सीमित पायलट चलाया।",
+  pilot_setup_1: "केवल एडहॉक शिफ्ट्स के लिए उपयोग",
+  pilot_setup_2: "आउटबाउंड पिकिंग और लोडिंग पर फोकस",
+  pilot_setup_3: "सेल और वॉल्यूम स्पाइक्स के दौरान सक्रिय",
+  pilot_setup_4: "मौजूदा फुल-टाइम स्टाफ में कोई बदलाव नहीं",
+  pilot_setup_note: "कोई सिस्टम बदलाव नहीं। कोई कॉन्ट्रैक्ट नहीं बदला गया। केवल एक नियंत्रित परीक्षण।",
+
+  pilot_changes_title: "पायलट के दौरान क्या बदला",
+
+  pilot_changes_ops: "ऑपरेशनल प्रभाव",
+  pilot_changes_ops_1: "नज़दीकी वर्कर्स तक तेज़ पहुंच",
+  pilot_changes_ops_2: "ठेकेदारों पर निर्भरता कम हुई",
+  pilot_changes_ops_3: "हाजिरी की बेहतर पूर्वानुमेयता",
+
+  pilot_changes_mgr: "मैनेजर का अनुभव",
+  pilot_changes_mgr_1: "लेबर सोर्सिंग में कम समय लगा",
+  pilot_changes_mgr_2: "शिफ्ट स्वीकारने की स्पष्ट जानकारी",
+  pilot_changes_mgr_3: "डिस्पैच टाइमलाइन पर अधिक फोकस",
+
+  pilot_changes_worker: "वर्कर की प्रतिक्रिया",
+  pilot_changes_worker_1: "शिफ्ट से पहले स्पष्ट भुगतान जानकारी",
+  pilot_changes_worker_2: "समय पर और ट्रेसेबल भुगतान",
+  pilot_changes_worker_3: "दोबारा काम करने की अधिक इच्छा",
+
+  pilot_outcome: "परिणाम",
+  pilot_outcome_desc: "पायलट ने सब कुछ हल नहीं किया — लेकिन रोज़ की सबसे बड़ी अनिश्चितता दूर कर दी।",
+  pilot_outcome_1: "पीक-डे मैनपावर संभालना आसान हुआ",
+  pilot_outcome_2: "ऑपरेशनल तनाव में स्पष्ट कमी आई",
+  pilot_outcome_3: "वर्कर्स का भरोसा बढ़ा",
+  pilot_outcome_4: "सिस्टम अधिक पूर्वानुमेय लगा",
+  pilot_outcome_quote: "पीक दिनों में हमें नियंत्रण महसूस हुआ।",
+
+  pilot_why_title: "यह पायलट क्यों महत्वपूर्ण है",
+  pilot_why_1: "कोई इंसेंटिव ज़बरदस्ती नहीं दिया गया",
+  pilot_why_2: "कोई प्रक्रिया नहीं तोड़ी गई",
+  pilot_why_3: "कोई अवास्तविक वादे नहीं किए गए",
+  pilot_why_conclusion: "जब लेबर उपलब्धता स्पष्ट होती है, तो ऑपरेशंस शांत हो जाते हैं।"
+
+           
+             
         },
         mr: {
             nav_home: "होम", nav_about: "आमच्याबद्दल", nav_case: "केस स्टडी", nav_offerings: "उत्पन्न",  nav_construction: "बांधकाम", nav_warehouse: "वेअरहाउस",
@@ -400,9 +660,67 @@
             pilot_note: "टीप: हा पायलट गुडगावमधील एकाच पूर्तता केंद्रात मर्यादित प्रमाणात घेण्यात आला होता.",
             vision_title: "भारताच्या व्हिजनशी सुसंगत", vision_desc: "भारत सक्रियपणे गिग वर्क अधिकृत करण्यासाठी आणि डिजिटल पेमेंट सक्षम करण्यासाठी काम करत आहे.",
             pr1: "इकॉनॉमिक टाइम्स", pr2: "बिझनेसवर्ल्ड", pr3: "रॉयटर्स",
-            fit_title: "Adhocsy कुठे बसते", fit_desc: "वेअरहाउसेस सुरळीतपणे चालवण्यास आणि कामगारांना प्रतिष्ठेने कमावण्यास मदत करणे."
+            fit_title: "Adhocsy कुठे बसते", fit_desc: "वेअरहाउसेस सुरळीतपणे चालवण्यास आणि कामगारांना प्रतिष्ठेने कमावण्यास मदत करणे.",
+             pilot_location: "गुरुग्राम फुलफिलमेंट सेंटर (एनसीआर)",
+
+  pilot_title: "पायलट स्टोरी",
+  pilot_intro_long: "गुरुग्राममधील एका फुलफिलमेंट सेंटरने पीक डिमांड दरम्यान Adhocsy कसा वापरला — आणि प्रत्यक्ष कामकाजात काय बदल झाला याचा तपशील.",
+
+  pilot_context: "परिस्थिती",
+  pilot_context_p1: "गुरुग्राममधील मध्यम आकाराचे फुलफिलमेंट सेंटर अनेक ई-कॉमर्स ब्रँडसाठी आउटबाउंड शिपमेंट हाताळते.",
+  pilot_context_p2: "सेल, उशिरा येणारे इनबाउंड आणि कॅम्पेन ट्रॅफिकमुळे दररोजचा वॉल्यूम मोठ्या प्रमाणात बदलतो.",
+  pilot_context_p3: "वेअरहाउस कॉस्ट-पर-युनिट मॉडेलवर काम करते — म्हणजे महसूल पूर्णपणे दररोजच्या थ्रूपुटवर अवलंबून असतो.",
+
+  pilot_problem_title: "Adhocsy पूर्वीची समस्या",
+  pilot_problem_intro: "प्रत्येक सकाळ अनिश्चिततेने सुरू होत असे.",
+  pilot_problem_1: "सरासरी 8–12% कामगार हजर राहत नव्हते",
+  pilot_problem_2: "सुपरवायझर दररोज 2–3 तास कंत्राटदारांना फोन करत असत",
+  pilot_problem_3: "अचानक घेतलेले मनुष्यबळ महाग पडत होते",
+  pilot_problem_4: "कामगारांचे पेमेंट स्पष्ट आणि सुसंगत नव्हते",
+  pilot_problem_5: "पीक दिवसांमध्ये डिस्पॅचला उशीर होत असे",
+  pilot_problem_quote: "आम्ही दररोज ऑपरेशन्सपेक्षा लेबरच मॅनेज करत होतो.",
+
+  pilot_setup_title: "पायलटची रचना",
+  pilot_setup_intro: "वेअरहाउसने पीक-डिमांड दिवसांसाठी Adhocsy सोबत मर्यादित पायलट चालवला.",
+  pilot_setup_1: "फक्त एडहॉक शिफ्टसाठी वापर",
+  pilot_setup_2: "आउटबाउंड पिकिंग आणि लोडिंगवर लक्ष",
+  pilot_setup_3: "सेल आणि वॉल्यूम स्पाइक्सदरम्यान सक्रिय",
+  pilot_setup_4: "विद्यमान फुल-टाइम स्टाफमध्ये बदल नाही",
+  pilot_setup_note: "कोणताही सिस्टीम बदल नाही. कोणतेही कॉन्ट्रॅक्ट बदलले नाही. फक्त नियंत्रित चाचणी.",
+
+  pilot_changes_title: "पायलटदरम्यान झालेले बदल",
+
+  pilot_changes_ops: "ऑपरेशनल परिणाम",
+  pilot_changes_ops_1: "जवळच्या कामगारांपर्यंत जलद पोहोच",
+  pilot_changes_ops_2: "कंत्राटदारांवरील अवलंबन कमी झाले",
+  pilot_changes_ops_3: "हजेरीचा अधिक अचूक अंदाज",
+
+  pilot_changes_mgr: "मॅनेजरचा अनुभव",
+  pilot_changes_mgr_1: "लेबर शोधण्यात कमी वेळ लागला",
+  pilot_changes_mgr_2: "शिफ्ट स्वीकारण्याची स्पष्ट माहिती",
+  pilot_changes_mgr_3: "डिस्पॅच टाइमलाइनवर अधिक लक्ष",
+
+  pilot_changes_worker: "कामगारांचा प्रतिसाद",
+  pilot_changes_worker_1: "शिफ्टपूर्वी स्पष्ट वेतन माहिती",
+  pilot_changes_worker_2: "वेळेवर आणि ट्रेसेबल पेमेंट",
+  pilot_changes_worker_3: "पुन्हा काम करण्याची जास्त तयारी",
+
+  pilot_outcome: "निकाल",
+  pilot_outcome_desc: "पायलटने सर्व समस्या सोडवल्या नाहीत — पण रोजची सर्वात मोठी अनिश्चितता दूर केली.",
+  pilot_outcome_1: "पीक-डे मनुष्यबळ व्यवस्थापन सोपे झाले",
+  pilot_outcome_2: "ऑपरेशनल ताण लक्षणीयरीत्या कमी झाला",
+  pilot_outcome_3: "कामगारांचा विश्वास वाढला",
+  pilot_outcome_4: "सिस्टम अधिक पूर्वानुमेय वाटू लागली",
+  pilot_outcome_quote: "पीक दिवसांमध्ये आम्हाला नियंत्रण असल्याची जाणीव झाली.",
+
+  pilot_why_title: "हा पायलट का महत्त्वाचा आहे",
+  pilot_why_1: "कोणतीही प्रलोभने लादली गेली नाहीत",
+  pilot_why_2: "कोणतीही प्रक्रिया मोडली नाही",
+  pilot_why_3: "कोणतीही अवास्तव आश्वासने दिली नाहीत",
+  pilot_why_conclusion: "जेव्हा लेबर उपलब्धता स्पष्ट होते, तेव्हा ऑपरेशन्स अधिक शांत होतात."
         }
     };
+
 
     function changeLang(lang) {
         const t = dict[lang];
