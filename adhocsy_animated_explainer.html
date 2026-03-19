@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans','Segoe UI',sans-serif;background:#04060f;overflow:hidden}
+canvas{display:block}
+#wrap{position:relative;width:100%;max-width:720px;margin:0 auto;background:#04060f}
+#c{display:block;width:100%;height:auto}
+#ui{position:absolute;bottom:0;left:0;right:0;padding:12px 20px;background:rgba(4,6,15,.7);backdrop-filter:blur(8px);display:flex;align-items:center;gap:12px;border-top:1px solid rgba(255,255,255,.07)}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:all .25s;flex-shrink:0}
+.dot.on{background:#18b96b;transform:scale(1.3)}
+#prog{flex:1;height:3px;background:rgba(255,255,255,.1);border-radius:2px;cursor:pointer;position:relative}
+#prog-fill{height:100%;background:linear-gradient(90deg,#0f3cc9,#18b96b);border-radius:2px;width:0%;transition:width .15s}
+#play-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:white;flex-shrink:0}
+#scene-lbl{font-size:.72rem;color:rgba(255,255,255,.45);min-width:140px;text-align:right}
+</style>
+</head>
+<body>
+<div id="wrap">
+<canvas id="c" width="720" height="405"></canvas>
+<div id="ui">
+  <button id="play-btn" onclick="togglePlay()">▶</button>
+  <div id="prog" onclick="seek(event)"><div id="prog-fill"></div></div>
+  <div style="display:flex;gap:6px;align-items:center" id="dots"></div>
+  <div id="scene-lbl">Scene 1 / 6</div>
+</div>
+</div>
+
+<script>
+const W=720,H=405;
+const c=document.getElementById('c');
+const ctx=c.getContext('2d');
+
+// ── SCENES ────────────────────────────────────────────────────────
+const SCENES=[
+  {dur:280, label:'The Problem',       draw:drawProblem},
+  {dur:280, label:'The Worker',        draw:drawWorker},
+  {dur:280, label:'The Employer',      draw:drawEmployer},
+  {dur:280, label:'How It Works',      draw:drawFlow},
+  {dur:280, label:'Referral Earnings', draw:drawReferral},
+  {dur:280, label:'The Mission',       draw:drawMission},
+];
+
+let frame=0, playing=true, lastTime=0, totalFrames=0;
+SCENES.forEach(s=>s.start=totalFrames, totalFrames+=SCENES.reduce((a,b,i)=>{
+  let acc=0;SCENES.slice(0,i).forEach(x=>acc+=x.dur);return acc},0));
+// Fix starts
+let acc=0;SCENES.forEach(s=>{s.start=acc;acc+=s.dur});
+totalFrames=acc;
+
+// ── HELPERS ──────────────────────────────────────────────────────
+function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
+function lerp(a,b,t){return a+(b-a)*t}
+function clamp(v,mn,mx){return Math.max(mn,Math.min(mx,v))}
+function alpha(t){return Math.min(1,t*3)}
+function roundRect(x,y,w,h,r,fill,stroke){
+  ctx.beginPath();ctx.roundRect(x,y,w,h,r);
+  if(fill){ctx.fillStyle=fill;ctx.fill();}
+  if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}
+}
+function text(str,x,y,size,color,align='left',weight='400'){
+  ctx.font=`${weight} ${size}px 'DM Sans','Segoe UI',sans-serif`;
+  ctx.fillStyle=color;ctx.textAlign=align;ctx.textBaseline='alphabetic';
+  ctx.fillText(str,x,y);
+}
+function line(x1,y1,x2,y2,color,w=1.5,dash=[]){
+  ctx.save();ctx.strokeStyle=color;ctx.lineWidth=w;
+  ctx.setLineDash(dash);ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.restore();
+}
+
+// Background gradient
+function bg(col1='#04060f',col2='#07122b'){
+  const g=ctx.createLinearGradient(0,0,W,H);
+  g.addColorStop(0,col1);g.addColorStop(1,col2);
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+}
+
+// Grid dots
+function gridDots(opacity=.04){
+  ctx.fillStyle=`rgba(255,255,255,${opacity})`;
+  for(let x=40;x<W;x+=40)for(let y=40;y<H;y+=40){
+    ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);ctx.fill();
+  }
+}
+
+function personIcon(x,y,sz,col,t=1){
+  ctx.save();ctx.globalAlpha=t;
+  ctx.fillStyle=col;
+  ctx.beginPath();ctx.arc(x,y-sz*.55,sz*.28,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(x-sz*.35,y+sz*.5);
+  ctx.quadraticCurveTo(x-sz*.35,y,x,y);
+  ctx.quadraticCurveTo(x+sz*.35,y,x+sz*.35,y+sz*.5);
+  ctx.fill();
+  ctx.restore();
+}
+
+function phoneIcon(x,y,sz,col,t=1){
+  ctx.save();ctx.globalAlpha=t;
+  roundRect(x-sz*.3,y-sz*.5,sz*.6,sz,8,col,'rgba(255,255,255,.2)');
+  ctx.fillStyle='rgba(255,255,255,.3)';ctx.beginPath();
+  ctx.arc(x,y+sz*.32,sz*.06,0,Math.PI*2);ctx.fill();
+  ctx.restore();
+}
+
+function checkmark(x,y,r,col,t=1){
+  ctx.save();ctx.globalAlpha=t;
+  ctx.strokeStyle=col;ctx.lineWidth=3;ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.beginPath();
+  ctx.moveTo(x-r*.5,y);ctx.lineTo(x-r*.1,y+r*.4);ctx.lineTo(x+r*.5,y-r*.4);
+  ctx.stroke();ctx.restore();
+}
+
+function rupeeSymbol(x,y,sz,col,t=1){
+  ctx.save();ctx.globalAlpha=t;
+  ctx.font=`700 ${sz}px 'DM Sans',sans-serif`;
+  ctx.fillStyle=col;ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillText('₹',x,y);ctx.restore();
+}
+
+function arrow(x1,y1,x2,y2,col,t=1,w=2){
+  ctx.save();ctx.globalAlpha=t;
+  const angle=Math.atan2(y2-y1,x2-x1);
+  ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=w;ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(x2,y2);
+  ctx.lineTo(x2-14*Math.cos(angle-0.4),y2-14*Math.sin(angle-0.4));
+  ctx.lineTo(x2-14*Math.cos(angle+0.4),y2-14*Math.sin(angle+0.4));
+  ctx.closePath();ctx.fill();
+  ctx.restore();
+}
+
+function pulse(x,y,r,col,phase){
+  const p=(Math.sin(phase)*0.5+0.5);
+  ctx.save();
+  ctx.strokeStyle=col;ctx.lineWidth=2;ctx.globalAlpha=p*.6;
+  ctx.beginPath();ctx.arc(x,y,r+p*12,0,Math.PI*2);ctx.stroke();
+  ctx.globalAlpha=p*.2;
+  ctx.beginPath();ctx.arc(x,y,r+p*24,0,Math.PI*2);ctx.stroke();
+  ctx.restore();
+}
+
+// ── SCENE 1: THE PROBLEM ─────────────────────────────────────────
+function drawProblem(t, f){
+  bg('#04060f','#10040f');
+  gridDots(.03);
+  const p=ease(clamp(t*2,0,1));
+  
+  // Title
+  ctx.save();ctx.globalAlpha=alpha(t);
+  text('300M+ workers in India.',40,64,28,'rgba(255,255,255,.9)','left','700');
+  ctx.restore();
+  
+  ctx.save();ctx.globalAlpha=alpha(clamp((t-.15)*4,0,1));
+  text('Millions of shifts unfilled every day.',40,100,18,'rgba(255,255,255,.45)');
+  ctx.restore();
+
+  // Worker icons scattered, some grey (absent)
+  const workers=[
+    [120,180],[200,160],[280,190],[360,170],[440,185],[520,165],[600,175],
+    [140,250],[220,240],[300,255],[380,245],[460,250],[540,240],[620,255],
+    [160,320],[240,310],[320,325],[400,315],[480,320],[560,310],[640,315],
+  ];
+  workers.forEach(([wx,wy],i)=>{
+    const delay=i*0.025;
+    const wt=ease(clamp((t-delay)*3,0,1));
+    const absent=i%4===2;
+    const col=absent?'rgba(239,68,68,.5)':'rgba(24,185,107,.7)';
+    const sz=22;
+    personIcon(wx,wy,sz,col,wt*alpha(t));
+    if(absent && wt>0.5){
+      ctx.save();ctx.globalAlpha=wt*alpha(t)*0.8;
+      ctx.strokeStyle='#ef4444';ctx.lineWidth=2;ctx.lineCap='round';
+      ctx.beginPath();ctx.moveTo(wx-8,wy-sz*.2);ctx.lineTo(wx+8,wy+sz*.2);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(wx+8,wy-sz*.2);ctx.lineTo(wx-8,wy+sz*.2);ctx.stroke();
+      ctx.restore();
+    }
+  });
+
+  // Big stat
+  ctx.save();ctx.globalAlpha=ease(clamp((t-.5)*2,0,1));
+  roundRect(40,340,280,46,10,'rgba(239,68,68,.12)','rgba(239,68,68,.3)');
+  text('8–12% absent every single day',50,370,14,'#f87171','left','500');
+  ctx.restore();
+
+  ctx.save();ctx.globalAlpha=ease(clamp((t-.6)*2,0,1));
+  roundRect(340,340,320,46,10,'rgba(245,158,11,.12)','rgba(245,158,11,.3)');
+  text('Employers spend 3+ hrs chasing labour',350,370,13,'#fbbf24','left','500');
+  ctx.restore();
+}
+
+// ── SCENE 2: THE WORKER ──────────────────────────────────────────
+function drawWorker(t, f){
+  bg('#022b1c','#04060f');
+  gridDots(.025);
+
+  ctx.save();ctx.globalAlpha=alpha(t);
+  text("If you're a worker —",40,60,22,'rgba(255,255,255,.5)','left','400');
+  text('Adhocsy puts YOU in control.',40,96,32,'#18b96b','left','700');
+  ctx.restore();
+
+  const items=[
+    {icon:'₹', label:'Earn per shift', sub:'Paid within 24 hours', col:'#18b96b', delay:0.1},
+    {icon:'📍', label:'Work near you', sub:'Cluster-based matching', col:'#0f3cc9', delay:0.2},
+    {icon:'🛡', label:'Worker protection', sub:'Covered on every shift', col:'#f59e0b', delay:0.3},
+    {icon:'📱', label:'Build your identity', sub:'Verified work history', col:'#a78bfa', delay:0.4},
+  ];
+
+  items.forEach(({icon,label,sub,col,delay},i){
+    const it=ease(clamp((t-delay)*3,0,1));
+    const col2=i%2===0?220:460;
+    const row=i<2?170:280;
+    ctx.save();ctx.globalAlpha=it;
+    roundRect(col2,row-40,220,90,14,'rgba(255,255,255,.04)','rgba(255,255,255,.08)');
+    ctx.font='24px sans-serif';ctx.textAlign='left';ctx.textBaseline='middle';
+    ctx.fillText(icon,col2+16,row);
+    text(label,col2+50,row-10,16,col,'left','700');
+    text(sub,col2+50,row+12,12,'rgba(255,255,255,.4)');
+    ctx.restore();
+  });
+
+  // Big phone
+  const pt=ease(clamp((t-.1)*1.5,0,1));
+  ctx.save();ctx.globalAlpha=pt;
+  roundRect(580,130,110,175,16,'rgba(15,60,201,.2)','rgba(15,60,201,.4)');
+  text('ADHOCSY',635,168,10,'rgba(255,255,255,.5)','center','700');
+  // Shift cards on phone
+  [[635,195,'Picker Shift'],[635,225,'₹ Earned'],[635,255,'✓ Verified']].forEach(([px,py,lbl])=>{
+    roundRect(px-60,py-12,120,22,6,'rgba(255,255,255,.07)');
+    text(lbl,px,py+3,10,'rgba(255,255,255,.7)','center');
+  });
+  ctx.restore();
+}
+
+// ── SCENE 3: THE EMPLOYER ────────────────────────────────────────
+function drawEmployer(t, f){
+  bg('#07122b','#04060f');
+  gridDots(.025);
+
+  ctx.save();ctx.globalAlpha=alpha(t);
+  text("If you're an employer —",40,60,22,'rgba(255,255,255,.5)','left','400');
+  text('Scale your workforce instantly.',40,96,32,'#0f3cc9','left','700');
+  // Blue glow
+  const g=ctx.createRadialGradient(680,100,10,680,100,200);
+  g.addColorStop(0,'rgba(15,60,201,.15)');g.addColorStop(1,'rgba(15,60,201,0)');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  ctx.restore();
+
+  const perks=[
+    {t1:'Post shifts',t2:'In under 2 minutes',delay:.1},
+    {t1:'OTP attendance',t2:'Zero paper',delay:.2},
+    {t1:'Pay per shift',t2:'No payroll overhead',delay:.3},
+    {t1:'Live dashboard',t2:'Real-time headcount',delay:.4},
+  ];
+
+  perks.forEach(({t1,t2,delay},i)=>{
+    const pt=ease(clamp((t-delay)*3,0,1));
+    const row=150+i*60;
+    ctx.save();ctx.globalAlpha=pt;
+    // Check mark circle
+    ctx.fillStyle='rgba(24,185,107,.15)';ctx.beginPath();ctx.arc(60,row,18,0,Math.PI*2);ctx.fill();
+    checkmark(60,row,18,'#18b96b',1);
+    text(t1,90,row-6,17,'rgba(255,255,255,.9)','left','700');
+    text(t2,90,row+12,13,'rgba(255,255,255,.4)');
+    // Progress bar
+    roundRect(380,row-8,260,4,2,'rgba(255,255,255,.05)');
+    roundRect(380,row-8,260*pt,4,2,'rgba(15,60,201,.7)');
+    ctx.restore();
+  });
+
+  // Stat: 28% cost saved
+  ctx.save();ctx.globalAlpha=ease(clamp((t-.5)*2,0,1));
+  roundRect(380,320,260,60,14,'rgba(24,185,107,.1)','rgba(24,185,107,.25)');
+  text('28%',440,355,32,'#18b96b','left','700');
+  text('avg cost reduction reported',500,348,12,'rgba(255,255,255,.5)');
+  text('in pilot deployments',500,364,12,'rgba(255,255,255,.5)');
+  ctx.restore();
+}
+
+// ── SCENE 4: HOW IT WORKS ────────────────────────────────────────
+function drawFlow(t, f){
+  bg('#04060f','#07122b');
+  gridDots(.03);
+
+  ctx.save();ctx.globalAlpha=alpha(t);
+  text('How it works — 5 simple steps',W/2,52,22,'rgba(255,255,255,.7)','center','700');
+  ctx.restore();
+
+  const steps=[
+    {icon:'📋',label:'Employer posts shift',col:'#0f3cc9'},
+    {icon:'⚡',label:'Workers nearby matched',col:'#7c3aed'},
+    {icon:'🔐',label:'OTP gate entry',col:'#18b96b'},
+    {icon:'✅',label:'Shift completed',col:'#f59e0b'},
+    {icon:'💰',label:'Auto payout 24h',col:'#18b96b'},
+  ];
+
+  const spacing=128;
+  const startX=56;
+  const midY=200;
+
+  steps.forEach(({icon,label,col},i)=>{
+    const delay=i*0.1;
+    const st=ease(clamp((t-delay)*4,0,1));
+    const x=startX+i*spacing;
+
+    // Arrow between steps
+    if(i>0){
+      const at=ease(clamp((t-(i-1)*0.1-.08)*5,0,1));
+      const prevX=startX+(i-1)*spacing;
+      ctx.save();ctx.globalAlpha=at;
+      arrow(prevX+30,midY,x-30,midY,'rgba(255,255,255,.25)',1,1.5);
+      ctx.restore();
+    }
+
+    ctx.save();ctx.globalAlpha=st;
+
+    // Circle
+    ctx.fillStyle=col+Math.round(st*0.25*255).toString(16).padStart(2,'0');
+    ctx.beginPath();ctx.arc(x,midY,30,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle=col;ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,midY,30,0,Math.PI*2);ctx.stroke();
+
+    // Pulse on active step
+    const phase=f*0.05+i*1.2;
+    if(st>0.9) pulse(x,midY,32,col,phase);
+
+    // Icon
+    ctx.font='20px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(icon,x,midY);
+
+    // Label
+    ctx.save();
+    const words=label.split(' ');
+    words.forEach((w,wi)=>{
+      text(w,x,midY+52+wi*17,12,'rgba(255,255,255,.65)','center');
+    });
+    ctx.restore();
+
+    // Step number
+    text((i+1).toString(),x-28,midY-22,11,col,'left','700');
+
+    ctx.restore();
+  });
+
+  // Timeline
+  ctx.save();ctx.globalAlpha=ease(clamp((t-.7)*3,0,1));
+  roundRect(40,320,640,50,10,'rgba(255,255,255,.03)','rgba(255,255,255,.06)');
+  ['Employer posts','⟶  Workers accept','⟶  OTP check-in','⟶  Work done','⟶  Payout sent'].forEach((s,i)=>{
+    text(s,60+i*124,349,10,'rgba(255,255,255,.35)');
+  });
+  ctx.restore();
+}
+
+// ── SCENE 5: REFERRAL ────────────────────────────────────────────
+function drawReferral(t, f){
+  bg('#07122b','#04060f');
+  gridDots(.02);
+
+  ctx.save();ctx.globalAlpha=alpha(t);
+  text('Referral earnings — passive income forever',W/2,52,20,'rgba(255,255,255,.7)','center','700');
+  ctx.restore();
+
+  // Tree: You → L1 × 3 → L2 × 3 each
+  const you={x:360,y:90};
+  const l1s=[{x:160,y:190},{x:360,y:190},{x:560,y:190}];
+  const l2s=[[{x:100,y:310},{x:200,y:310}],[{x:300,y:310},{x:420,y:310}],[{x:500,y:310},{x:620,y:310}]];
+
+  // YOU node
+  const yt=ease(clamp(t*4,0,1));
+  ctx.save();ctx.globalAlpha=yt;
+  roundRect(you.x-50,you.y-24,100,48,24,'rgba(15,60,201,.3)','#0f3cc9');
+  personIcon(you.x,you.y-2,28,'rgba(255,255,255,.9)');
+  text('YOU',you.x,you.y+28,11,'rgba(255,255,255,.7)','center','700');
+  ctx.restore();
+
+  l1s.forEach(({x,y},i)=>{
+    const delay=0.1+i*0.07;
+    const lt=ease(clamp((t-delay)*4,0,1));
+    ctx.save();ctx.globalAlpha=lt;
+    // Arrow from you
+    arrow(you.x+(x-you.x)*.15,you.y+18,x+(you.x-x)*.15,y-24,'rgba(15,60,201,.5)',lt);
+    // Node
+    roundRect(x-40,y-24,80,48,24,'rgba(24,185,107,.2)','#18b96b');
+    personIcon(x,y-2,24,'#18b96b');
+    text('₹10/shift',x,y+28,10,'#18b96b','center','700');
+    ctx.restore();
+
+    l2s[i].forEach(({x:x2,y:y2},j)=>{
+      const delay2=delay+0.07+j*0.04;
+      const l2t=ease(clamp((t-delay2)*4,0,1));
+      ctx.save();ctx.globalAlpha=l2t;
+      arrow(x+(x2-x)*.2,y+22,x2+(x-x2)*.2,y2-20,'rgba(245,158,11,.4)',l2t,.8);
+      roundRect(x2-32,y2-20,64,40,20,'rgba(245,158,11,.12)','rgba(245,158,11,.5)');
+      personIcon(x2,y2-4,18,'rgba(245,158,11,.8)');
+      text('₹6',x2,y2+18,9,'#fbbf24','center','700');
+      ctx.restore();
+    });
+  });
+
+  // Total
+  ctx.save();ctx.globalAlpha=ease(clamp((t-.65)*3,0,1));
+  text('₹9,200 / month — just from referrals',W/2,390,14,'rgba(255,255,255,.6)','center','500');
+  ctx.restore();
+}
+
+// ── SCENE 6: MISSION ─────────────────────────────────────────────
+function drawMission(t, f){
+  bg('#04060f','#0a1a0a');
+  gridDots(.025);
+
+  // India map outline (simplified)
+  ctx.save();ctx.globalAlpha=ease(clamp(t*2,0,1))*.12;
+  ctx.strokeStyle='#18b96b';ctx.lineWidth=1;
+  ctx.beginPath();
+  // Very simplified India silhouette
+  ctx.moveTo(280,40);ctx.lineTo(330,35);ctx.lineTo(380,45);ctx.lineTo(420,70);
+  ctx.lineTo(440,110);ctx.lineTo(435,150);ctx.lineTo(420,180);ctx.lineTo(430,220);
+  ctx.lineTo(410,260);ctx.lineTo(390,300);ctx.lineTo(360,340);ctx.lineTo(340,360);
+  ctx.lineTo(320,350);ctx.lineTo(300,310);ctx.lineTo(280,280);ctx.lineTo(260,250);
+  ctx.lineTo(240,220);ctx.lineTo(230,180);ctx.lineTo(220,140);ctx.lineTo(240,100);
+  ctx.lineTo(260,70);ctx.closePath();ctx.stroke();
+  ctx.restore();
+
+  // City dots — 5 active, 5 coming soon
+  const cities=[
+    {x:295,y:148,name:'Delhi-NCR',active:true},
+    {x:252,y:285,name:'Mumbai',active:true},
+    {x:305,y:330,name:'Bengaluru',active:true},
+    {x:310,y:245,name:'Hyderabad',active:true},
+    {x:262,y:168,name:'Jaipur',active:true},
+    {x:270,y:300,name:'Pune',active:false},
+    {x:320,y:370,name:'Chennai',active:false},
+    {x:240,y:210,name:'Ahmedabad',active:false},
+    {x:365,y:220,name:'Kolkata',active:false},
+    {x:247,y:270,name:'Surat',active:false},
+  ];
+
+  cities.forEach(({x,y,name,active},i)=>{
+    const delay=0.08+i*0.06;
+    const ct=ease(clamp((t-delay)*4,0,1));
+    const col=active?'#18b96b':'rgba(255,255,255,.3)';
+    ctx.save();ctx.globalAlpha=ct;
+    if(active){
+      const phase=f*0.06+i;
+      const p=Math.sin(phase)*0.5+0.5;
+      ctx.strokeStyle=col;ctx.lineWidth=1;ctx.globalAlpha=ct*p*.4;
+      ctx.beginPath();ctx.arc(x,y,8+p*8,0,Math.PI*2);ctx.stroke();
+      ctx.globalAlpha=ct;
+    }
+    ctx.fillStyle=col;ctx.beginPath();ctx.arc(x,y,active?5:3,0,Math.PI*2);ctx.fill();
+    text(name,x+9,y+4,10,active?'rgba(255,255,255,.75)':'rgba(255,255,255,.35)');
+    ctx.restore();
+  });
+
+  // Right side text
+  ctx.save();ctx.globalAlpha=alpha(t);
+  text('ADHOCSY',470,120,36,'#0f3cc9','left','800');
+  text('OnDemand Workforce',470,150,14,'rgba(255,255,255,.4)','left','500');
+  ctx.restore();
+
+  ctx.save();ctx.globalAlpha=ease(clamp((t-.2)*2,0,1));
+  const lines2=[
+    {l:'Work.',c:'#18b96b'},{l:'Trust.',c:'#0f3cc9'},{l:'Dignity.',c:'#f59e0b'}
+  ];
+  lines2.forEach(({l,c},i)=>{
+    const lt=ease(clamp((t-.25-i*.1)*3,0,1));
+    ctx.save();ctx.globalAlpha=lt;
+    text(l,470,200+i*44,32,c,'left','700');
+    ctx.restore();
+  });
+  ctx.restore();
+
+  ctx.save();ctx.globalAlpha=ease(clamp((t-.6)*2,0,1));
+  text('Startup India Recognised · Pilot April 2026',470,340,12,'rgba(255,255,255,.35)','left');
+  roundRect(470,356,250,28,8,'rgba(24,185,107,.1)','rgba(24,185,107,.3)');
+  text('adhocsy.com',595,375,12,'#18b96b','center','700');
+  ctx.restore();
+}
+
+// ── PLAYBACK ─────────────────────────────────────────────────────
+function currentScene(){
+  for(let i=SCENES.length-1;i>=0;i--) if(frame>=SCENES[i].start) return i;
+  return 0;
+}
+
+function getT(){
+  const si=currentScene();
+  const s=SCENES[si];
+  return (frame-s.start)/s.dur;
+}
+
+function render(){
+  ctx.clearRect(0,0,W,H);
+  const si=currentScene();
+  const s=SCENES[si];
+  const t=clamp((frame-s.start)/s.dur,0,1);
+  s.draw(t,frame);
+
+  // Scene transition fade
+  const tEnd=clamp((t-.85)/.15,0,1);
+  if(tEnd>0){
+    ctx.fillStyle=`rgba(4,6,15,${ease(tEnd)})`;
+    ctx.fillRect(0,0,W,H);
+  }
+  const tStart=clamp(t/.1,0,1);
+  if(tStart<1){
+    ctx.fillStyle=`rgba(4,6,15,${1-ease(tStart)})`;
+    ctx.fillRect(0,0,W,H);
+  }
+
+  // Update UI
+  document.getElementById('prog-fill').style.width=(frame/totalFrames*100)+'%';
+  document.getElementById('scene-lbl').textContent=`${s.label}`;
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===si));
+}
+
+function tick(now){
+  if(playing){
+    if(now-lastTime>33){
+      frame=(frame+1)%totalFrames;
+      lastTime=now;
+      render();
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+function togglePlay(){
+  playing=!playing;
+  document.getElementById('play-btn').textContent=playing?'⏸':'▶';
+}
+
+function seek(e){
+  const r=e.currentTarget.getBoundingClientRect();
+  const pct=(e.clientX-r.left)/r.width;
+  frame=Math.floor(pct*totalFrames);
+  render();
+}
+
+// Build dots
+const dotsEl=document.getElementById('dots');
+SCENES.forEach((_,i)=>{
+  const d=document.createElement('div');
+  d.className='dot'+(i===0?' on':'');
+  d.onclick=()=>{frame=SCENES[i].start;render();};
+  dotsEl.appendChild(d);
+});
+
+render();
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>
